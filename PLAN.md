@@ -178,3 +178,12 @@ punchlist-pay/
 - [ ] AG Grid: grouping, status renderers, master/detail, live update after webhook
 - [ ] README reproduce steps verified from a clean clone; MIT license; `docs/submission.md` written
 - [ ] Video ≤ 3:00 on YouTube (public), shows the working build, no third-party music
+
+## Decisions
+
+- **2026-11-09 · Agent Toolkit → own tools.** `@paypal/agent-toolkit` 1.11.0 exposes `create_order`/`get_order`/`pay_order` but no authorize-then-capture and no Payouts. Pre-decided fallback taken: `lib/paypal/*` is wrapped as the Dispatcher's own strict tool `create_authorize_order`, executed server-side when the model calls it (`lib/agents/negotiation.ts`). The transcript still shows the agent moving money.
+- **2026-11-09 · Persistence.** Drizzle on Postgres when `DATABASE_URL` is set, otherwise embedded PGlite on disk (`data/pglite`) with the same schema and migrations. Migrations and the seed run at app boot, so Render needs no `drizzle-kit push` step.
+- **2026-11-09 · Webhooks are optional.** `GET /api/ledger` reconciles pending orders and payouts with PayPal at most every 3 s (`lib/reconcile.ts`), so the demo settles without a webhook subscription. Signed webhooks are handled when `PAYPAL_WEBHOOK_ID` is set.
+- **2026-11-09 · Funding needs a human.** The PM approves the authorize-intent order with the PayPal JS SDK button (`components/fund-button.tsx`) or the approve link; `POST /api/work-orders/:id/fund/confirm` authorizes it. Capture happens on the first non-deposit payout.
+- **2026-11-09 · Missing keys degrade, never pretend.** With no PayPal keys the money rail is simulated (`FIXTURE-*` ids, `X-Punchlist-Mode: fixture`). With no Anthropic key the agents are scripted (`model: fixture/*`). Live agent errors fall back to the scripted versions and log the error.
+- **2026-11-09 · Model.** Agents default to `claude-sonnet-5-5` for speed (override `CLAUDE_MODEL`), structured outputs for Dispatcher/Verifier, strict tools for negotiation, server-side refusal fallback on.

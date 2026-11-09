@@ -1,11 +1,47 @@
-# UI-only Render blueprint. TODO(api): Provision Drizzle/Postgres and PayPal/Claude services from PLAN.md.
+# Render blueprint: Next.js web service + Render Postgres. Migrations and the demo seed run at app boot
+# (lib/db/client.ts), so no separate migrate step is needed. Secrets are `sync: false`: set them in the dashboard.
+databases:
+  - name: punchlist-pay-db
+    plan: free
+    databaseName: punchlist
+    user: punchlist
+
 services:
   - type: web
-    name: punchlist-pay-ui
+    name: punchlist-pay
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start -- -p $PORT
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: punchlist-pay-db
+          property: connectionString
+      - key: PAYPAL_ENV
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: CONTRACTOR_EMAIL_MIKE
+        sync: false
+      - key: CONTRACTOR_EMAIL_SARA
+        sync: false
+      - key: CONTRACTOR_EMAIL_LEO
+        sync: false
+      - key: APP_URL
+        sync: false
+      # Free plan has no persistent disk; proof photos live on the instance and vanish on redeploy.
+      # On a paid plan add a disk mounted at /var/data/uploads and point UPLOAD_DIR at it.
+      - key: UPLOAD_DIR
+        value: uploads

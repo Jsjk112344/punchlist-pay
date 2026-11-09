@@ -1,44 +1,102 @@
-# Punchlist Pay — Front end
+# Punchlist Pay
 
-A fixture-first Next.js 15 UI for the PayPal AI Hackathon. Designed to make **promised → proven → paid** visible across the PM ledger, work-order story and a 390px contractor flow.
+A property manager's work-order desk where Claude agents scope a job, negotiate it with the contractor's agent, verify photo proof, and pay the contractor through PayPal within seconds of a pass. Built for the PayPal AI Hackathon 2026.
 
-## Start (under 10 minutes)
+**Promised → proven → paid:** request → work order → agent negotiation → PM funds with PayPal → check-in (deposit payout) → after-photo + receipt → Claude vision verdict → capture + balance payout. Fail or low confidence escalates to the PM, and nothing is paid.
+
+## Reproduce in 10 minutes
 
 ```bash
+git clone https://github.com/Jsjk112344/punchlist-pay && cd punchlist-pay
 npm install
-npm run dev
+cp .env.example .env.local    # fill in what you have; everything is optional
+npm run dev                   # http://localhost:3000
 ```
 
-Open `http://localhost:3000/?fixture=1` and choose **Property manager** or **Mike's Plumbing**. Open both in the same browser origin to demonstrate cross-window fixture updates. `npm run smoke` validates fixture amounts and review conditions. `npm run typecheck` validates TypeScript; `npm run build` builds the app.
+- `http://localhost:3000/?fixture=0` runs against the real backend (API routes + database).
+- `http://localhost:3000/?fixture=1` is the fully offline browser demo (localStorage only).
 
-## Routes
+With an empty `.env.local` the backend still runs end to end: an embedded Postgres (PGlite) is created under `data/pglite` and seeded, the agents are scripted, and the money rail is simulated. Every simulated id starts with `FIXTURE-` and every API response carries `X-Punchlist-Mode: fixture`. Add keys to make each layer real. `GET /api/health` shows which layers are live.
 
-- `/` — two-role sign-in switcher (no auth)
-- `/dashboard?fixture=1` — PM dashboard, new request, ledger, property grouping
-- `/work-orders/wo-1042?fixture=1` — funded kitchen-sink job; negotiation + money rail
-- `/work-orders/wo-1041?fixture=1` — cleaning job: wrong unit, low trust, **Request redo**
-- `/m/mike?fixture=1` — contractor jobs and full mobile payout path
-- `/m/mike?job=wo-1042&fixture=1` — direct phone demo state
+### PayPal sandbox setup
 
-## Fixture mode vs live mode
+1. Sign in at developer.paypal.com and open **Testing Tools → Sandbox Accounts**.
+2. Keep or create one **Business** account. This is the platform: it owns the REST app, receives order funds and sends payouts.
+3. Create one more account (personal is fine) to act as the **property manager** who approves orders.
+4. Create three **Personal** accounts for the contractors. Put their emails in `CONTRACTOR_EMAIL_MIKE`, `_SARA` and `_LEO`.
+5. Open **Apps & Credentials**, make sure the toggle says **Sandbox**, and create an app owned by the Business account. Copy the client id into `PAYPAL_CLIENT_ID` and `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, and the secret into `PAYPAL_CLIENT_SECRET`.
+6. Prove the rails by hand before anything else:
 
-`?fixture=1` is **sandbox demonstration data**, not a PayPal transaction. All payment IDs prefixed with `FIXTURE-` are synthetic. The seeded sample PayPal-looking object IDs are also fictional and **not evidence of PayPal sandbox activity**. Fixture state persists in localStorage; dashboard and phone poll same-origin changes. The `Reset demo` action returns to the initial 7 job fixtures.
+```bash
+npm run paypal:smoke -- sb-contractor@personal.example.com
+```
 
-`?fixture=0` calls the endpoint names and request bodies from `PLAN.md` using **fixture route stubs** bundled in `app/api/` until the real backend replaces them: `POST /api/work-orders` with `{text}`, `POST /api/work-orders/:id/negotiate` with `{contractor_id}`, multipart `POST /api/work-orders/:id/proofs`, `POST /api/work-orders/:id/verify`, `POST /api/work-orders/:id/decision` with `{action}`, `POST /api/payouts` with `{work_order_id,amount_cents,kind}`, and `GET /api/ledger` every 3s. The route stubs return `X-Punchlist-Mode: fixture`; they do **not** process real PayPal payments or call Claude. The client preserves the PLAN.md request/response contract. Response-envelope details, EXIF capture, Claude verification, signature checking, and PayPal authorization/capture/payout writes are marked `TODO(api)` pending the real back end. The backend owns all authorization/capture/payout logic. **Never show a paid state in live mode without a confirmed ledger update.**
+It gets a token, creates an authorize order, waits while you approve it as the PM, then authorizes, captures, sends a payout and polls it.
 
-## System boundaries
+7. Optional: add a webhook for `https://<your-host>/api/paypal/webhook` with the events below and put its id in `PAYPAL_WEBHOOK_ID`. Without it, the 3-second ledger poll settles everything.
 
-- `lib/types.ts`: view model projected from the `PLAN.md` schema, not a replacement for Drizzle models.
-- `lib/api.ts`: typed client wrappers for the exact existing routes and payloads.
-- `lib/store.ts`: fixture-only event store and cross-tab refresh.
-- `lib/demo.ts`: deterministic, explicitly simulated check-in and payout transitions.
-- `fixtures/`: scene data, negotiation transcript, verifier pass/fail, vector proof illustrations.
-- `components/`: shadcn-style controls, AG Grid Quartz, evidence/verdict/money layouts.
+### Claude
 
-AG Grid **Community** does not include Enterprise row grouping or Enterprise master/detail. This UI uses synthetic group header rows and **full-width detail rows**, both available in Community. CSV export is native Community functionality. Only status/verdict/money changes animate.
+Put an API key in `ANTHROPIC_API_KEY`. Agents use `claude-sonnet-5-5` by default; set `CLAUDE_MODEL` to change it.
 
-## Safety and limits
+### Checks
 
-The real backend must enforce the PLAN guardrail: no automatic payment on a **fail** or confidence **below 0.8**; verify PayPal webhooks and use idempotency keys for each write. The UI does not claim that local fixture payouts represent a sandbox response. These vector “photos” are visual fixtures. Replace them with real EXIF-preserving phone images for the actual demo.
+```bash
+npm run typecheck
+npm run smoke         # fixture-data checks, then the full backend story offline on a fresh database
+npm run test:unit     # PayPal client (mocked fetch), agents (mocked Claude), persistence
+npm run smoke:live    # same story against PayPal sandbox + Claude from .env.local; pauses for PM approval
+```
 
-This archive contains the requested source, route-contract fixture stubs, 7 seeded work orders, vector proof fixtures, 10-line UI component map, timestamped demo script, and a Playwright screenshot runner (`scripts/capture.py`). The original `PLAN.md` lives in your file library; its API contracts are reflected in this code, but the original file is not copied into the ZIP. **Not verified in a running Next.js browser here:** package installation is blocked by unavailable npm registry access; therefore `docs/assets/` deliberately contains no falsely attributed app screenshots. Run the demo-script checklist at 1440×900 and 390×844 after installing dependencies.
+## Which PayPal APIs and why
+
+| API | Used for |
+|---|---|
+| Orders v2, intent `AUTHORIZE` | The Dispatcher agent creates the order at the agreed price. The PM approves it in the PayPal button, so funds are held, not taken. |
+| Payments v2 authorize / capture / void | Authorize on approval. Capture once, right before the first non-deposit payout. |
+| Payouts v1 | Deposit on check-in, balance or partial after a passing verdict. `sender_batch_id` is `<work order>:<kind>`, so a retry can never pay twice. |
+| Webhooks + verify-webhook-signature | `CHECKOUT.ORDER.APPROVED`, `PAYMENT.AUTHORIZATION.CREATED`, `PAYMENT.CAPTURE.COMPLETED`, `PAYMENT.PAYOUTSBATCH.SUCCESS`, `PAYMENT.PAYOUTS-ITEM.SUCCEEDED/FAILED`. Unsigned requests get a 400 and change nothing. Events are de-duplicated by id. |
+| JS SDK Buttons | The PM's funding step on the work-order page. |
+
+Every write sends `PayPal-Request-Id`. A payout is shown as paid only after PayPal confirms it through the API response, the poll or a webhook.
+
+## Where the AI decides, and where it can't
+
+- **Dispatcher** turns plain English into a title, unit, budget, deadline and exactly three criteria. Each criterion must be checkable from a photo, a receipt or a timestamp. Vague words like "workmanlike" are rejected.
+- **Negotiation** is two separate Claude conversations, Dispatcher and Contractor, each with its own instructions and the contractor's real rates. It runs at most four turns, two sentences each, and every turn is a tool call: counter, agree or walk away. On agreement the Dispatcher calls its own `create_authorize_order` tool, and the server executes that call against PayPal.
+- **Verifier** looks at the check-in, after-photo and receipt images with the contract criteria and returns a verdict per criterion, with quoted evidence and a confidence.
+
+The leash, enforced in code regardless of what the model says:
+
+- No automatic payment on a `fail` or on confidence below 0.8. The job escalates to the PM.
+- A missing check-in, or a proof photo whose EXIF time predates check-in, is a fail.
+- A partial payout can never exceed the remaining balance. A deposit must equal the agreed percentage and needs a check-in photo.
+- Verdicts are cached by a hash of the proof set, so re-running verify never re-bills or flips a result.
+- Money only moves after a human funded the order. "Approve anyway" is an explicit PM override that is logged with the original verdict.
+
+## Architecture
+
+```
+app/api/*          thin route handlers (shapes unchanged from the UI contract)
+lib/flows.ts       every state transition: create, negotiate, fund, proof, verify, payout, decide
+lib/agents/*       Claude: dispatcher, negotiation, verifier, strict tools, prompts/*.md
+lib/paypal/*       REST client (token cache, idempotency), orders, payouts, webhooks
+lib/money.ts       live PayPal rail or the explicitly simulated FIXTURE rail
+lib/reconcile.ts   3s poll + webhook handler that settle orders and payouts
+lib/db/*           Drizzle schema + repo returning the UI view model; Postgres or PGlite
+db/seed.ts         1 PM org, 2 properties, 3 contractors, 6 paid jobs, 1 escalated
+```
+
+Proof photos are stored under `UPLOAD_DIR` and served from `/api/files/<name>`. EXIF capture time is read with `exifr`; when it is missing the upload time is used and the Verifier is told.
+
+## Deploy on Render
+
+`render.yaml` creates the web service and a Postgres database. Set the `sync: false` secrets in the dashboard and `APP_URL` to the service URL. Migrations and the seed run at boot. On the free plan, uploaded photos live on the instance and disappear on redeploy.
+
+## Fixture mode
+
+`?fixture=1` is sandbox demonstration data in the browser, not a PayPal transaction. Seeded database rows use `SEED-` ids for the same reason. The proof images in `public/fixtures/` are vector illustrations with PNG copies for the Verifier. Replace them with real phone photos that keep EXIF for the demo.
+
+## License
+
+MIT
