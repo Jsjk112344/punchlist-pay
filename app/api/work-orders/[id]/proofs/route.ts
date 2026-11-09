@@ -1,15 +1,20 @@
-import {NextRequest,NextResponse} from "next/server";
-import {addProof,verifyFixture,orderById,fixtureHeaders} from "@/lib/server-fixtures";
+import {NextRequest} from "next/server";
+import {recordProof,verifyWorkOrder,FlowError} from "@/lib/flows";
+import {ok,fail,handleError} from "@/lib/http";
 import type {ProofKind} from "@/lib/types";
 export const runtime="nodejs";
+export const dynamic="force-dynamic";
+export const maxDuration=120;
+// multipart {kind,file} → {proof}. kind=checkin releases the deposit; kind=after auto-triggers verify (PLAN.md).
 export async function POST(req:NextRequest,{params}:{params:Promise<{id:string}>}){
- const {id}=await params;if(!orderById(id))return NextResponse.json({error:"Not found"},{status:404,headers:fixtureHeaders});
- const form=await req.formData();const kind=form.get("kind");const file=form.get("file");
- if(!["checkin","after","receipt"].includes(String(kind))||!(file instanceof File))return NextResponse.json({error:"kind and file required"},{status:400,headers:fixtureHeaders});
- if(file.size>6*1024*1024)return NextResponse.json({error:"File too large"},{status:413,headers:fixtureHeaders});
- // TODO(api): Persist photo to object storage and read true EXIF metadata rather than upload time.
- const bytes=new Uint8Array(await file.arrayBuffer());const url=`data:${file.type||"application/octet-stream"};base64,${Buffer.from(bytes).toString("base64")}`;
- const proof=addProof(id,kind as ProofKind,url)!;
- if(kind==="after")verifyFixture(id); // PLAN.md: 'after' auto-triggers verification.
- return NextResponse.json({proof},{headers:fixtureHeaders});
+ const {id}=await params;
+ const form=await req.formData().catch(()=>null);const kind=form?.get("kind");const file=form?.get("file");
+ if(!["checkin","after","receipt"].includes(String(kind))||!(file instanceof File))return fail("kind and file required",400);
+ if(file.size>8*1024*1024)return fail("File too large",413);
+ if(file.type&&!file.type.startsWith("image/"))return fail("Proof must be an image",415);
+ try{
+  const proof=await recordProof(id,kind as ProofKind,file);
+  if(kind==="after"){try{await verifyWorkOrder(id)}catch(e){if(!(e instanceof FlowError))console.error("[proofs] auto-verify",e instanceof Error?e.message:e)}}
+  return ok({proof});
+ }catch(e){return handleError(e,"Proof upload")}
 }

@@ -6,5 +6,5 @@ export function shortDate(iso?:string) {if(!iso)return "—";return new Date(iso
 export function paidCents(o:WorkOrder){return o.payouts.filter(p=>p.status==="paid").reduce((n,p)=>n+p.amount_cents,0)}
 export function agreedCents(o:WorkOrder){return o.contract?.price_cents??o.budget_cents}
 export function heldCents(o:WorkOrder){return Math.max(0,agreedCents(o)-paidCents(o))}
-export function labelForStatus(s:WorkOrderStatus){if(s==="paid")return "Paid";if(s==="funded")return "Funded";if(s==="in_progress")return "In progress";if(["under_review","escalated","disputed"].includes(s))return "Needs review"; if(s==="redo_requested")return "In progress";return "In progress"}
+export function labelForStatus(s:WorkOrderStatus){if(s==="paid")return "Paid";if(s==="funded")return "Funded";if(s==="in_progress")return "In progress";if(["under_review","escalated","disputed"].includes(s))return "Needs review"; if(s==="redo_requested")return "In progress";if(s==="negotiating")return "Awaiting funding";if(s==="draft")return "Draft";return "In progress"}
 export function fixtureLink(path:string,fixture:boolean){return `${path}${path.includes("?")?"&":"?"}fixture=${fixture?"1":"0"}`}

@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useMemo,useState} from "react";
+import {useCallback,useEffect,useMemo,useState} from "react";
 import Link from "next/link";
 import {ArrowLeft,ArrowUpRight,Check,ChevronDown,ChevronRight,Clock3,FileCheck2,LockKeyhole,WalletCards,X} from "lucide-react";
 import {useOrders,updateOrder} from "@/lib/store";
@@ -11,6 +11,7 @@ import {StatusPill} from "./status-pill";
 import {ProofStrip} from "./proof-strip";
 import {VerdictCard} from "./verdict-card";
 import {PayoutTimeline} from "./payout-timeline";
+import {FundButton} from "./fund-button";
 import {Button} from "./ui/button";
 import {agreedCents,money,paidCents,fixtureLink} from "@/lib/format";
 function StorySection({title,summary,children,initialOpen=false}:{title:string;summary?:string;children:React.ReactNode;initialOpen?:boolean}){
@@ -25,6 +26,7 @@ function Thread({turns,replay}:{turns:TranscriptTurn[];replay:boolean}){
 export function WorkOrderClient({id,fixture,play}:{id:string;fixture:boolean;play:boolean}){
  const fixtureOrders=useOrders();const[remoteOrders,setRemoteOrders]=useState<WorkOrder[]>([]);const[error,setError]=useState("");const[working,setWorking]=useState(false);
  useEffect(()=>{if(fixture)return;let active=true;const poll=async()=>{try{const rows=await getLedger(false);if(active)setRemoteOrders(rows)}catch(e){if(active)setError(e instanceof Error?e.message:"Could not load work order")}};void poll();const timer=setInterval(poll,3000);return()=>{active=false;clearInterval(timer)}},[fixture]);
+ const refresh=useCallback(async()=>{try{setRemoteOrders(await getLedger(false))}catch{}},[]);
  const order=(fixture?fixtureOrders:remoteOrders).find(x=>x.id===id);
  const phase=order?.status==="paid"?4:order?.status==="escalated"||order?.status==="under_review"||order?.status==="disputed"?3:order?.status==="in_progress"||order?.status==="redo_requested"?2:1;
  async function decision(action:"approve"|"redo"){if(!order)return;setWorking(true);setError("");try{await decide(order.id,action,fixture);
@@ -41,7 +43,8 @@ export function WorkOrderClient({id,fixture,play}:{id:string;fixture:boolean;pla
  <StorySection key={`${order.id}-proof-${phase}`} title="Proof" summary={`${order.proofs.length} ${order.proofs.length===1?"upload":"uploads"}`} initialOpen={phase>=2&&phase<=3}><ProofStrip proofs={order.proofs}/></StorySection>
  {order.verdict&&<section><div className="mb-3 flex items-center justify-between px-1"><h2 className="text-[15px] font-bold tracking-tight">Verdict</h2><div className="text-[12px] font-semibold text-muted">Evidence + decision</div></div><div className="grid gap-4 xl:grid-cols-[minmax(0,.9fr)_minmax(0,1.15fr)]"><div className="panel p-4"><div className="label mb-4">Submitted proof</div><div className="grid grid-cols-2 gap-3">{order.proofs.filter(p=>p.kind!=="checkin").map(p=><div key={p.id} className="min-w-0"><div className="mb-1.5 text-[11px] font-semibold capitalize text-muted">{p.kind}</div><img src={p.url} alt={`${p.kind} proof`} className="aspect-[4/3] w-full rounded-lg border border-border object-cover"/></div>)}</div></div><VerdictCard order={order} onApprove={()=>void decision("approve")} onRedo={()=>void decision("redo")} working={working}/></div></section>}
  {order.payouts.length>0&&<StorySection key={`${order.id}-payout-${phase}`} title="Payouts" summary={`${money(paidCents(order))} paid`} initialOpen={phase>=4}><PayoutTimeline order={order}/></StorySection>}
- {phase===1&&<div className="panel flex items-center gap-3 px-5 py-4 text-[13px] text-muted"><Clock3 size={18}/>Waiting for contractor check-in</div>}
+ {!fixture&&order.status==="negotiating"&&order.contract?.paypal_order_id&&!order.contract.paypal_auth_id&&<FundButton order={order} onFunded={refresh}/>}
+ {phase===1&&order.status!=="negotiating"&&order.status!=="draft"&&<div className="panel flex items-center gap-3 px-5 py-4 text-[13px] text-muted"><Clock3 size={18}/>Waiting for contractor check-in</div>}
  {phase===2&&<div className="panel flex items-center gap-3 px-5 py-4 text-[13px] text-muted"><FileCheck2 size={18}/>Waiting for proof</div>}
  {phase===3&&!order.verdict&&<div className="panel flex items-center gap-3 px-5 py-4 text-[13px] text-muted"><Clock3 size={18}/>Verification pending</div>}
  </div><MoneyRail order={order}/></div></main></div>;
