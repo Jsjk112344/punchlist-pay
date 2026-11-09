@@ -27,7 +27,7 @@ export function payoutFixture(work_order_id:string,amount_cents:number,kind:Payo
  const existing=o.payouts.find(p=>p.kind===kind);if(existing)return existing;
  const total=o.contract.price_cents;const already=o.payouts.reduce((sum,p)=>p.status==="paid"?sum+p.amount_cents:sum,0);
  if(amount_cents<=0||amount_cents>total-already)return null;
- const p:Payout={id:`pay-${work_order_id}-${kind}`,work_order_id,contractor_id:o.contractor_id,kind,amount_cents,paypal_batch_id:`FIXTURE-${work_order_id}-${kind}`.toUpperCase(),paypal_item_id:`FIXTURE-ITEM-${kind}`,status:"paid",paid_at:new Date().toISOString()};
+ const p:Payout={id:`pay-${work_order_id}-${kind}`,work_order_id,contractor_id:o.contractor_id??o.contract.contractor_id,kind,amount_cents,paypal_batch_id:`FIXTURE-${work_order_id}-${kind}`.toUpperCase(),paypal_item_id:`FIXTURE-ITEM-${kind}`,status:"paid",paid_at:new Date().toISOString()};
  const next=[...o.payouts,p];const done=next.filter(x=>x.status==="paid").reduce((n,x)=>n+x.amount_cents,0)>=total;
  saveOrder({...o,payouts:next,status:done?"paid":"in_progress",updated_at:new Date().toISOString()});return p;
 }
