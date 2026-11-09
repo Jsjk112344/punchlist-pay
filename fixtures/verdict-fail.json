@@ -1,0 +1,1 @@
+{"verdict":"fail","confidence":0.96,"criteria":[{"id":"c1","met":false,"evidence":"Door shows unit 4C; expected 4B"},{"id":"c2","met":false,"evidence":"EXIF predates check-in"},{"id":"c3","met":true,"evidence":"Submitted within deadline"}],"amount_to_release_cents":0,"model":"fixture/claude-vision"}

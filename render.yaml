@@ -1,0 +1,11 @@
+# UI-only Render blueprint. TODO(api): Provision Drizzle/Postgres and PayPal/Claude services from PLAN.md.
+services:
+  - type: web
+    name: punchlist-pay-ui
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production

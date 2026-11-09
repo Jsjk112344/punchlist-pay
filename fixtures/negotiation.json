@@ -1,0 +1,7 @@
+[
+ {"id":"t1","role":"dispatcher","text":"Kitchen sink leak, Unit 4B. Budget $220, today.","offer_cents":22000},
+ {"id":"t2","role":"contractor","text":"After-hours callout. I can do $260.","offer_cents":26000},
+ {"id":"t3","role":"dispatcher","text":"$240 if finished by 4 PM.","offer_cents":24000},
+ {"id":"t4","role":"contractor","text":"Agreed. I’ll take it.","offer_cents":24000},
+ {"id":"t5","role":"system","text":"Order authorized","offer_cents":24000}
+]

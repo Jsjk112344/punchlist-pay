@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{color-scheme:light;background:#f8fafc}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;color:#172336;background:#f8fafc;font-family:Inter,Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:2px solid #2259d5;outline-offset:3px}
+.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+.amount{font-variant-numeric:tabular-nums;letter-spacing:-.045em;font-weight:650}
+.shell{width:min(1280px,calc(100% - 64px));margin:0 auto}
+.panel{border:1px solid #e5eaf0;background:white;border-radius:14px;box-shadow:0 1px 3px rgba(18,35,61,.045)}
+.label{font-size:11px;line-height:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#718094}
+.icon-ring{display:inline-flex;align-items:center;justify-content:center;border-radius:999px}
+.evidence-img{width:100%;height:100%;object-fit:cover}
+.pp-ledger{--ag-background-color:#fff;--ag-foreground-color:#172336;--ag-header-background-color:#fbfcfe;--ag-header-foreground-color:#667386;--ag-border-color:#e7ebf0;--ag-row-hover-color:#f5f8ff;--ag-selected-row-background-color:#eef3ff;--ag-font-family:Inter,Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--ag-font-size:13px;--ag-cell-horizontal-padding:16px;--ag-row-height:56px;--ag-header-height:48px;--ag-wrapper-border-radius:12px}
+.pp-ledger .ag-header-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.075em}
+.pp-ledger .ag-cell{display:flex;align-items:center}
+.pp-ledger .ag-full-width-row{background:#fbfcff}
+.pp-ledger .ag-root-wrapper{border-radius:12px;border:1px solid #e6eaf0;overflow:hidden}
+.pp-ledger .ag-row-hover{cursor:pointer}
+.pp-ledger .ag-cell-focus:not(.ag-cell-range-selected):focus-within{border-color:#2259d5!important}
+@media(max-width:800px){.shell{width:min(100% - 32px,1280px)}.mobile-bottom{padding-bottom:106px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

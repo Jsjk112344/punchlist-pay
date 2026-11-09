@@ -1,0 +1,5 @@
+import {forwardRef} from "react";
+import type {ButtonHTMLAttributes} from "react";
+import {clsx} from "clsx";
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{variant?:"primary"|"secondary"|"ghost"|"outline"|"danger";size?:"default"|"sm"|"lg"}
+export const Button=forwardRef<HTMLButtonElement,ButtonProps>(function Button({variant="primary",size="default",className,children,...props},ref){return <button ref={ref} className={clsx("inline-flex shrink-0 items-center justify-center gap-2 rounded-[9px] font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-45",size==="default"?"h-10 px-4 text-sm":size==="sm"?"h-8 px-3 text-xs":"h-12 px-5 text-[15px]",variant==="primary"?"bg-accent text-white hover:bg-[#194cbf]":variant==="secondary"?"bg-accent-soft text-accent hover:bg-[#e1eaff]":variant==="ghost"?"text-muted hover:bg-[#f0f3f7]":variant==="danger"?"bg-[#fcecec] text-[#9a2f31] hover:bg-[#f9dcdc]":"border border-border bg-white text-ink hover:bg-[#f6f8fb]",className)} {...props}>{children}</button>});

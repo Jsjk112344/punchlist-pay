@@ -1,0 +1,12 @@
+import ordersJSON from "@/fixtures/work-orders.json";
+import dispatchJSON from "@/fixtures/dispatch.json";
+import negotiationJSON from "@/fixtures/negotiation.json";
+import verdictPassJSON from "@/fixtures/verdict-pass.json";
+import verdictFailJSON from "@/fixtures/verdict-fail.json";
+import type {WorkOrder,DraftRequest,TranscriptTurn,Verdict} from "./types";
+export const seedOrders:WorkOrder[] = ordersJSON as WorkOrder[];
+export const seedDraft = dispatchJSON as DraftRequest;
+export const seedNegotiation = negotiationJSON as TranscriptTurn[];
+export const seedPass = verdictPassJSON as Verdict;
+export const seedFail = verdictFailJSON as Verdict;
+export const properties = [{id:"all",name:"All properties"},{id:"p-1",name:"Alder House"},{id:"p-2",name:"Birch Court"}];
