@@ -44,3 +44,11 @@ export function modeHeaders(extra: Record<string, string> = {}): Record<string, 
 export const AUTO_PAY_MIN_CONFIDENCE = 0.8;
 export const DEFAULT_DEPOSIT_PCT = 20;
 export const MAX_NEGOTIATION_TURNS = 4;
+
+/** Demo timezone (PLAN.md timeline is in ET). Agents get "now" with this offset so "today" and "4 PM" mean local time. */
+export const DEMO_TZ = process.env.DEMO_TZ || "America/New_York";
+export function localNowIso(date: Date = new Date(), timeZone: string = DEMO_TZ): string {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23", timeZoneName: "longOffset" }).formatToParts(date).map(p => [p.type, p.value]));
+  const offset = (parts.timeZoneName ?? "GMT").replace("GMT", "") || "+00:00";
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}${offset}`;
+}

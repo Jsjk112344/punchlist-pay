@@ -13,7 +13,7 @@ export const counterTool: Tool = {
     type: "object",
     properties: {
       text: { type: "string", description: "What you say out loud, at most two sentences." },
-      offer_cents: { type: "integer", minimum: 0, description: "Your proposed total price for the job, in US cents." },
+      offer_cents: { type: "integer", description: "Your proposed total price for the job, in US cents (a positive whole number)." },
       deadline: { type: ["string", "null"], description: "Proposed completion deadline as an ISO 8601 timestamp with offset, or null to keep the current one." },
     },
     required: ["text", "offer_cents", "deadline"],
@@ -29,9 +29,9 @@ export const agreeTool: Tool = {
     type: "object",
     properties: {
       text: { type: "string", description: "What you say out loud, at most two sentences." },
-      price_cents: { type: "integer", minimum: 0, description: "Agreed total price in US cents." },
+      price_cents: { type: "integer", description: "Agreed total price in US cents (a positive whole number)." },
       deadline: { type: "string", description: "Agreed completion deadline as an ISO 8601 timestamp with offset." },
-      deposit_pct: { type: "integer", minimum: 0, maximum: 100, description: "Deposit released at check-in, as a percentage of the price." },
+      deposit_pct: { type: "integer", description: "Deposit released at check-in, as a whole percentage of the price from 0 to 100." },
     },
     required: ["text", "price_cents", "deadline", "deposit_pct"],
     additionalProperties: false,
@@ -60,7 +60,7 @@ export const createAuthorizeOrderTool: Tool = {
   input_schema: {
     type: "object",
     properties: {
-      amount_cents: { type: "integer", minimum: 1, description: "Amount to hold, in US cents. Must equal the agreed price." },
+      amount_cents: { type: "integer", description: "Amount to hold, in US cents. Must equal the agreed price." },
       description: { type: "string", description: "One line shown on the PayPal order, e.g. 'Kitchen sink leak · Unit 4B · Mike's Plumbing'." },
     },
     required: ["amount_cents", "description"],
@@ -106,12 +106,11 @@ export const dispatcherOutputSchema = {
     title: { type: "string", description: "Short job title, at most 40 characters." },
     unit: { type: "string", description: "Unit label exactly as written in the request or matched from the known units, e.g. '4B'." },
     property_id: { type: ["string", "null"], description: "property_id of the matched known unit, or null when the request does not match a known unit." },
-    budget_cents: { type: "integer", minimum: 100, description: "Budget in US cents, at or below any cap the request states." },
+    budget_cents: { type: "integer", description: "Budget in US cents (at least 100), at or below any cap the request states." },
     deadline: { type: "string", description: "ISO 8601 timestamp with offset." },
     criteria: {
       type: "array",
-      minItems: 3,
-      maxItems: 3,
+      description: "Exactly 3 acceptance criteria.",
       items: {
         type: "object",
         properties: {
@@ -132,11 +131,10 @@ export function verifierOutputSchema(criterionIds: string[]) {
     type: "object",
     properties: {
       verdict: { type: "string", enum: ["pass", "partial", "fail"] },
-      confidence: { type: "number", minimum: 0, maximum: 1 },
+      confidence: { type: "number", description: "Confidence from 0 to 1." },
       criteria: {
         type: "array",
-        minItems: criterionIds.length,
-        maxItems: criterionIds.length,
+        description: "One entry per contract criterion id, each exactly once.",
         items: {
           type: "object",
           properties: {
@@ -148,7 +146,7 @@ export function verifierOutputSchema(criterionIds: string[]) {
           additionalProperties: false,
         },
       },
-      amount_to_release_cents: { type: "integer", minimum: 0 },
+      amount_to_release_cents: { type: "integer", description: "Cents to release now; 0 when failing." },
     },
     required: ["verdict", "confidence", "criteria", "amount_to_release_cents"],
     additionalProperties: false,

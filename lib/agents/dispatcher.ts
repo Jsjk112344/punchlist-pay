@@ -42,8 +42,15 @@ export function validateDraft(raw: unknown, text: string, ctx: DispatcherContext
 
 /** Valid ISO in → canonical ISO out (offset preserved as written). Anything else → 18:00 on the day of `now`, in now's offset. */
 export function normalizeDeadline(candidate: string, now: string): string {
-  if (candidate && Number.isFinite(Date.parse(candidate))) return candidate;
-  return defaultDeadline(now);
+  const chosen = candidate && Number.isFinite(Date.parse(candidate)) ? candidate : defaultDeadline(now);
+  return Date.parse(chosen) > Date.parse(now) + 30 * 60000 ? chosen : laterToday(now);
+}
+/** A deadline that already passed (e.g. "today 6 PM" requested at 10 PM) becomes now + 2h, rounded up to the hour, in now's offset. */
+export function laterToday(now: string): string {
+  const offset = /([+-]\d{2}:\d{2}|Z)$/.exec(now)?.[1] ?? "Z";
+  const offMin = offset === "Z" ? 0 : (offset[0] === "-" ? -1 : 1) * (Number(offset.slice(1, 3)) * 60 + Number(offset.slice(4, 6)));
+  const target = new Date(Math.ceil((Date.parse(now) + 2 * 3600000) / 3600000) * 3600000 + offMin * 60000);
+  return `${target.toISOString().slice(0, 19)}${offset === "Z" ? "Z" : offset}`;
 }
 export function defaultDeadline(now: string): string {
   const m = /^(\d{4}-\d{2}-\d{2})T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})?$/.exec(now);

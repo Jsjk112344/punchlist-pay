@@ -3,7 +3,7 @@ import type Anthropic from "@anthropic-ai/sdk";
 import type { ContractorProfile, Criterion, NegotiationResult, TranscriptTurn, WorkOrder } from "@/lib/types";
 import { callModel, fillPrompt, readPrompt, textOf, toolUsesOf } from "./client";
 import { contractorTools, dispatcherTools, fundingTools, parseAgree, parseCounter, parseCreateAuthorizeOrder, parseWalkAway } from "./tools";
-import { defaultDeadline } from "./dispatcher";
+import { defaultDeadline, normalizeDeadline } from "./dispatcher";
 
 export interface NegotiationHooks {
   /** Called for every turn as soon as it exists so the route can stream it. */
@@ -34,7 +34,7 @@ export async function runNegotiation(ctx: NegotiationContext, hooks: Negotiation
   const maxTurns = Math.max(1, ctx.max_turns);
   let agreed: Extract<Action, { kind: "agree" }> | null = null;
   let walked: Extract<Action, { kind: "walk_away" }> | null = null;
-  let lastDeadline = defaultDeadline(ctx.now);
+  let lastDeadline = normalizeDeadline(defaultDeadline(ctx.now), ctx.now);
 
   for (let n = 1; n <= maxTurns && !agreed && !walked; n++) {
     const role: Role = n % 2 === 1 ? "dispatcher" : "contractor";
@@ -48,7 +48,7 @@ export async function runNegotiation(ctx: NegotiationContext, hooks: Negotiation
     });
     const action = interpretTurn(msg, n === maxTurns);
     if (action.kind === "counter" && action.deadline) lastDeadline = action.deadline;
-    if (action.kind === "agree" && !Number.isFinite(Date.parse(action.deadline))) action.deadline = lastDeadline;
+    if (action.kind === "agree") action.deadline = Number.isFinite(Date.parse(action.deadline)) ? normalizeDeadline(action.deadline, ctx.now) : lastDeadline;
     const turn: TranscriptTurn = {
       id: `t${n}`, role, text: action.text, timestamp: new Date().toISOString(),
       offer_cents: action.kind === "agree" ? action.price_cents : action.kind === "counter" ? action.offer_cents : undefined,
@@ -75,7 +75,7 @@ function dispatcherSystem(ctx: NegotiationContext): string {
   const o = ctx.order;
   return fillPrompt(readPrompt("negotiator-dispatcher.md"), {
     title: o.title, description: o.description, unit: o.unit, property: o.property_name, budget: money(o.budget_cents), budget_cents: o.budget_cents,
-    ceiling: money(Math.round(o.budget_cents * 1.15)), ceiling_cents: Math.round(o.budget_cents * 1.15), deadline: defaultDeadline(ctx.now), deposit_pct: ctx.deposit_pct,
+    ceiling: money(Math.round(o.budget_cents * 1.15)), ceiling_cents: Math.round(o.budget_cents * 1.15), deadline: normalizeDeadline(defaultDeadline(ctx.now), ctx.now), deposit_pct: ctx.deposit_pct,
     criteria: o.criteria.map((c) => `- ${c.text} (${c.check})`).join("\n") || "- (none listed)", contractor_name: ctx.contractor.name, trade: ctx.contractor.trade,
     now: ctx.now, max_turns: ctx.max_turns,
   });

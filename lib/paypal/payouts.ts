@@ -13,8 +13,11 @@ interface BatchItem { payout_item_id: string; transaction_status?: string; time_
 interface CreatePayoutResponse { batch_header: BatchHeader; links?: { href: string; rel: string }[] }
 interface PayoutBatchResponse { batch_header: BatchHeader; items?: BatchItem[] }
 
-/** sender_batch_id = `${work_order_id}:${kind}` so a retry returns the existing batch instead of paying twice. */
-export function senderBatchId(work_order_id: string, kind: PayoutKind): string { return `${work_order_id}:${kind}`; }
+/**
+ * sender_batch_id = `${work_order_id}:${kind}[:${scope}]` so a retry returns the existing batch instead of paying twice.
+ * Pass the PayPal order id as scope: work-order ids repeat across databases, and an unscoped id would resolve to another run's payout.
+ */
+export function senderBatchId(work_order_id: string, kind: PayoutKind, scope?: string): string { return scope ? `${work_order_id}:${kind}:${scope}` : `${work_order_id}:${kind}`; }
 
 const PAID_ITEM = new Set(["SUCCESS"]);
 const FAILED_ITEM = new Set(["FAILED", "RETURNED", "BLOCKED", "REFUNDED", "REVERSED", "CANCELED"]);
@@ -66,10 +69,10 @@ export function existingBatchIdFromError(body: unknown): string | undefined {
 }
 
 /** POST /v1/payments/payouts. A duplicate sender_batch_id must resolve to the existing batch, not throw. */
-export async function sendPayout(args: { work_order_id: string; kind: PayoutKind; receiver_email: string; amount_cents: number; note?: string }): Promise<PayoutResult> {
+export async function sendPayout(args: { work_order_id: string; kind: PayoutKind; receiver_email: string; amount_cents: number; note?: string; scope?: string }): Promise<PayoutResult> {
   if (!Number.isSafeInteger(args.amount_cents) || args.amount_cents <= 0) throw new PayPalError("amount_cents must be a positive integer", 0, null);
   if (!args.receiver_email || !args.receiver_email.includes("@")) throw new PayPalError("receiver_email must be an email address", 0, null);
-  const sender_batch_id = senderBatchId(args.work_order_id, args.kind);
+  const sender_batch_id = senderBatchId(args.work_order_id, args.kind, args.scope);
   const body = {
     sender_batch_header: {
       sender_batch_id,

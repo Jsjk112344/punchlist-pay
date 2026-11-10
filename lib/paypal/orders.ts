@@ -1,5 +1,6 @@
 // Orders v2 (intent AUTHORIZE) + Payments v2 authorizations. Owner: lib/paypal.
 // Shapes confirmed against developer.paypal.com/api/orders/v2/schema.json and /api/payments/v2/schema.json.
+import { randomUUID } from "node:crypto";
 import { env } from "@/lib/config";
 import { amountToCents, centsToAmount, paypalRequest, PayPalError } from "./client";
 
@@ -29,7 +30,8 @@ function firstAuthorization(order: OrderResponse | undefined): PaymentRef | unde
 function firstCapture(order: OrderResponse | undefined): PaymentRef | undefined { return order?.purchase_units?.[0]?.payments?.captures?.[0]; }
 
 /** POST /v2/checkout/orders with intent AUTHORIZE. PayPal-Request-Id = `${work_order_id}:order`. */
-export async function createAuthorizeOrder(args: { work_order_id: string; amount_cents: number; description: string; return_url?: string; cancel_url?: string }): Promise<CreatedOrder> {
+/** request_id defaults to a fresh `${work_order_id}:order:<uuid>`: work-order ids repeat across databases (tests, reseeds), PayPal request ids must not. */
+export async function createAuthorizeOrder(args: { work_order_id: string; amount_cents: number; description: string; return_url?: string; cancel_url?: string; request_id?: string }): Promise<CreatedOrder> {
   if (!Number.isSafeInteger(args.amount_cents) || args.amount_cents <= 0) throw new PayPalError("amount_cents must be a positive integer", 0, null);
   const fallback = `${env.appUrl}/dashboard?fixture=0`;
   const body = {
@@ -52,7 +54,7 @@ export async function createAuthorizeOrder(args: { work_order_id: string; amount
       },
     },
   };
-  const order = await paypalRequest<OrderResponse>("POST", "/v2/checkout/orders", { body, requestId: `${args.work_order_id}:order` });
+  const order = await paypalRequest<OrderResponse>("POST", "/v2/checkout/orders", { body, requestId: args.request_id ?? `${args.work_order_id}:order:${randomUUID()}` });
   const approve_url = approveLink(order.links, order.id);
   if (!approve_url) throw new PayPalError("PayPal order response had no approve link", 0, { id: order.id, status: order.status });
   return { order_id: order.id, status: order.status, approve_url };

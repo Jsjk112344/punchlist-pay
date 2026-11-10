@@ -7,7 +7,7 @@ import type { PayoutKind, PayoutStatus } from "@/lib/types";
 
 export interface CreateOrderArgs { work_order_id: string; amount_cents: number; description: string }
 export interface CreateOrderResult { order_id: string; approve_url?: string; status: string; authorized: boolean; authorization_id?: string }
-export interface PayoutArgs { work_order_id: string; kind: PayoutKind; receiver_email: string; amount_cents: number; note?: string }
+export interface PayoutArgs { work_order_id: string; kind: PayoutKind; receiver_email: string; amount_cents: number; note?: string; scope?: string }
 export interface PayoutRailResult { batch_id: string; item_id: string; status: PayoutStatus; paid_at?: string }
 
 export interface MoneyRail {
@@ -28,7 +28,7 @@ const liveRail: MoneyRail = {
     return { order_id: created.order_id, approve_url: created.approve_url, status: created.status, authorized: false };
   },
   async authorize({ order_id }) { const a = await orders.authorizeOrder(order_id); return { authorization_id: a.authorization_id, amount_cents: a.amount_cents }; },
-  async capture({ work_order_id, authorization_id, amount_cents }) { const c = await orders.captureAuthorization(authorization_id, amount_cents, `${work_order_id}:capture`); return { capture_id: c.capture_id, status: c.status }; },
+  async capture({ authorization_id, amount_cents }) { const c = await orders.captureAuthorization(authorization_id, amount_cents, `${authorization_id}:capture`); return { capture_id: c.capture_id, status: c.status }; },
   async voidAuthorization({ authorization_id }) { await orders.voidAuthorization(authorization_id); },
   async payout(args) { const p = await payouts.sendPayout(args); return { batch_id: p.batch_id, item_id: p.item_id, status: p.status, paid_at: p.paid_at }; },
   async payoutStatus(batch_id) { const p = await payouts.getPayoutBatch(batch_id); return { batch_id: p.batch_id, item_id: p.item_id, status: p.status, paid_at: p.paid_at }; },

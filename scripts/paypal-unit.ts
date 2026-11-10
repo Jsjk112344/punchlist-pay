@@ -91,7 +91,7 @@ await test("createAuthorizeOrder: body, idempotency header, approve url, token c
   queue = [tokenOk, (c) => {
     assert.match(c.url, /\/v2\/checkout\/orders$/);
     assert.equal(c.headers.authorization, "Bearer tok-1");
-    assert.equal(c.headers["paypal-request-id"], "wo-1042:order");
+    assert.match(c.headers["paypal-request-id"], /^wo-1042:order:[0-9a-f-]{36}$/);
     assert.equal(c.headers.prefer, "return=representation");
     const b = c.body as { intent: string; purchase_units: { reference_id: string; custom_id: string; amount: { currency_code: string; value: string } }[]; payment_source: { paypal: { experience_context: Record<string, string> } } };
     assert.equal(b.intent, "AUTHORIZE");

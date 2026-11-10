@@ -1,7 +1,7 @@
 // Business flows shared by the API routes and the smoke tests. Routes stay thin; every state change lives here.
 // Money moves only through lib/money.ts; agents only through lib/agents (with lib/fallbacks when Claude is unavailable).
 import { createHash } from "node:crypto";
-import { AUTO_PAY_MIN_CONFIDENCE, DEFAULT_DEPOSIT_PCT, MAX_NEGOTIATION_TURNS, claudeConfigured } from "@/lib/config";
+import { AUTO_PAY_MIN_CONFIDENCE, DEFAULT_DEPOSIT_PCT, MAX_NEGOTIATION_TURNS, claudeConfigured, localNowIso } from "@/lib/config";
 import * as repo from "@/lib/db/repo";
 import { ensureDb } from "@/lib/db/client";
 import { moneyRail, depositCents, type CreateOrderResult } from "@/lib/money";
@@ -33,7 +33,7 @@ export async function mustGet(id: string): Promise<WorkOrder> {
 export async function createWorkOrderFromText(text: string): Promise<WorkOrder> {
   await ensureDb();
   const units = await repo.listUnits();
-  const ctx = { units: units.map(u => ({ unit: u.unit, property_name: u.property_name, property_id: u.property_id })), now: new Date().toISOString() };
+  const ctx = { units: units.map(u => ({ unit: u.unit, property_name: u.property_name, property_id: u.property_id })), now: localNowIso() };
   let draft: DispatcherDraft; let agent = "fixture/heuristic-dispatcher";
   if (claudeConfigured()) {
     try { draft = await draftWorkOrder(text, ctx); agent = "claude"; }
@@ -72,7 +72,7 @@ export async function negotiateWorkOrder(id: string, contractor_id: string, onTu
       return { order_id: created.order_id, approve_url: created.approve_url, status: created.status };
     },
   };
-  const ctx = { order: { ...order, status: "negotiating" as const, contractor_id }, contractor, deposit_pct: contractor.profile.typical_deposit_pct ?? DEFAULT_DEPOSIT_PCT, max_turns: MAX_NEGOTIATION_TURNS, now: new Date().toISOString() };
+  const ctx = { order: { ...order, status: "negotiating" as const, contractor_id }, contractor, deposit_pct: contractor.profile.typical_deposit_pct ?? DEFAULT_DEPOSIT_PCT, max_turns: MAX_NEGOTIATION_TURNS, now: localNowIso() };
 
   let run: NegotiationRun; let agent = "fixture/scripted-negotiation";
   if (claudeConfigured()) {
@@ -185,7 +185,7 @@ export async function releasePayout(id: string, amount_cents: number, kind: Payo
       await markCaptured(id, cap.capture_id);
     }
   }
-  const result = await moneyRail().payout({ work_order_id: id, kind, receiver_email: contractor.paypal_email, amount_cents, note: `${order.title} · Unit ${order.unit} · ${kind}` });
+  const result = await moneyRail().payout({ work_order_id: id, kind, receiver_email: contractor.paypal_email, amount_cents, note: `${order.title} · Unit ${order.unit} · ${kind}`, scope: c.paypal_order_id });
   const payout: Payout = { id: existing?.id ?? `pay-${id}-${kind}`, work_order_id: id, contractor_id: c.contractor_id, amount_cents, kind, paypal_batch_id: result.batch_id, paypal_item_id: result.item_id, status: result.status, paid_at: result.paid_at };
   await repo.upsertPayout(payout);
   await repo.addEvent(id, `payout.${result.status}`, { kind, amount_cents, batch_id: result.batch_id, mode: moneyRail().mode, override: Boolean(opts.override) });
@@ -236,7 +236,7 @@ export async function verifyWorkOrder(id: string): Promise<Verdict> {
       const img = await loadImageForVision(p.url);
       if (img) images.push({ kind: p.kind, data: img.data, media_type: img.media_type, exif_ts: p.exif_ts, exif_missing: Boolean(p.exif_missing) });
     }
-    const input: VerifierInput = { order: { ...order, criteria }, images, checkin_ts: checkin?.exif_ts, remaining_cents: remaining, now: new Date().toISOString() };
+    const input: VerifierInput = { order: { ...order, criteria }, images, checkin_ts: checkin?.exif_ts, remaining_cents: remaining, now: localNowIso() };
     let raw: unknown;
     if (claudeConfigured() && images.some(i => i.kind === "after")) {
       try { const r = await verifyProofs(input); verdict = r.verdict; raw = r.raw; }
