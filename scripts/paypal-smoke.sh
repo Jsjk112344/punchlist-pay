@@ -17,7 +17,9 @@ if [ "${PAYPAL_ENV:-sandbox}" != "sandbox" ]; then echo "Refusing to run: PAYPAL
 
 BASE="https://api-m.sandbox.paypal.com"
 RUN="smoke-$(date +%s)"
-HTTP_CODE=""
+CODE_FILE="$(mktemp)"; trap 'rm -f "$CODE_FILE"' EXIT
+# api() runs inside $(...), a subshell, so the status code goes through a file rather than a variable.
+http_code() { cat "$CODE_FILE"; }
 
 pass() { printf 'PASS  %s\n' "$1"; }
 fail() { printf 'FAIL  %s\n' "$1"; exit 1; }
@@ -52,7 +54,7 @@ api() {
   if [ -n "$rid" ]; then args+=(-H "PayPal-Request-Id: $rid"); fi
   if [ -n "$body" ]; then args+=(-d "$body"); fi
   out="$(curl "${args[@]}")"
-  code="${out##*$'\n'}"; HTTP_CODE="$code"
+  code="${out##*$'\n'}"; printf '%s' "$code" > "$CODE_FILE"
   printf '%s' "${out%$'\n'*}"
 }
 
@@ -73,8 +75,8 @@ JSON
 )
 ORDER_RES="$(api POST /v2/checkout/orders "$ORDER_BODY" "$RUN:order")"
 ORDER_ID="$(printf '%s' "$ORDER_RES" | jget '.id')"
-if [ "$HTTP_CODE" != "201" ] && [ "$HTTP_CODE" != "200" ] || [ -z "$ORDER_ID" ] || [ "$ORDER_ID" = "null" ]; then
-  echo "$ORDER_RES" | head -c 600; echo; fail "2 create order: HTTP $HTTP_CODE"; fi
+if [ "$(http_code)" != "201" ] && [ "$(http_code)" != "200" ] || [ -z "$ORDER_ID" ] || [ "$ORDER_ID" = "null" ]; then
+  echo "$ORDER_RES" | head -c 600; echo; fail "2 create order: HTTP $(http_code)"; fi
 APPROVE_URL="$(printf '%s' "$ORDER_RES" | jget '.links[] | select(.rel=="payer-action") | .href')"
 if [ -z "$APPROVE_URL" ] || [ "$APPROVE_URL" = "null" ]; then APPROVE_URL="$(printf '%s' "$ORDER_RES" | jget '.links[] | select(.rel=="approve") | .href')"; fi
 if [ -z "$APPROVE_URL" ] || [ "$APPROVE_URL" = "null" ]; then APPROVE_URL="https://www.sandbox.paypal.com/checkoutnow?token=$ORDER_ID"; fi
@@ -89,14 +91,14 @@ read -r -p "  Press Enter after you have approved the payment (PAY_NOW) ... " _
 # 3. Authorize
 AUTH_RES="$(api POST "/v2/checkout/orders/$ORDER_ID/authorize" '{}' "$RUN:authorize")"
 AUTH_ID="$(printf '%s' "$AUTH_RES" | jget '.purchase_units[0].payments.authorizations[0].id')"
-if [ -z "$AUTH_ID" ] || [ "$AUTH_ID" = "null" ]; then echo "$AUTH_RES" | head -c 600; echo; fail "3 authorize: HTTP $HTTP_CODE (did the PM approve the order?)"; fi
+if [ -z "$AUTH_ID" ] || [ "$AUTH_ID" = "null" ]; then echo "$AUTH_RES" | head -c 600; echo; fail "3 authorize: HTTP $(http_code) (did the PM approve the order?)"; fi
 pass "3 authorize: authorization $AUTH_ID (status $(printf '%s' "$AUTH_RES" | jget '.purchase_units[0].payments.authorizations[0].status'))"
 
 # 4. Capture the full authorization
 CAP_RES="$(api POST "/v2/payments/authorizations/$AUTH_ID/capture" '{"final_capture":true}' "$RUN:capture")"
 CAP_ID="$(printf '%s' "$CAP_RES" | jget '.id')"
 CAP_STATUS="$(printf '%s' "$CAP_RES" | jget '.status')"
-if [ -z "$CAP_ID" ] || [ "$CAP_ID" = "null" ]; then echo "$CAP_RES" | head -c 600; echo; fail "4 capture: HTTP $HTTP_CODE"; fi
+if [ -z "$CAP_ID" ] || [ "$CAP_ID" = "null" ]; then echo "$CAP_RES" | head -c 600; echo; fail "4 capture: HTTP $(http_code)"; fi
 case "$CAP_STATUS" in
   COMPLETED) pass "4 capture: $CAP_ID COMPLETED" ;;
   PENDING)   warn "4 capture: $CAP_ID PENDING (sandbox sometimes settles later; proceeding)" ;;
@@ -111,7 +113,7 @@ JSON
 )
 PAYOUT_RES="$(api POST /v1/payments/payouts "$PAYOUT_BODY" "$RUN:payout")"
 BATCH_ID="$(printf '%s' "$PAYOUT_RES" | jget '.batch_header.payout_batch_id')"
-if [ -z "$BATCH_ID" ] || [ "$BATCH_ID" = "null" ]; then echo "$PAYOUT_RES" | head -c 600; echo; fail "5 payout: HTTP $HTTP_CODE (is Payouts enabled on the sandbox business account?)"; fi
+if [ -z "$BATCH_ID" ] || [ "$BATCH_ID" = "null" ]; then echo "$PAYOUT_RES" | head -c 600; echo; fail "5 payout: HTTP $(http_code) (is Payouts enabled on the sandbox business account?)"; fi
 pass "5 payout: batch $BATCH_ID (batch_status $(printf '%s' "$PAYOUT_RES" | jget '.batch_header.batch_status'))"
 
 # 6. Poll the batch up to 10 times
