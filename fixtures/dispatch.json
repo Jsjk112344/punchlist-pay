@@ -4,7 +4,7 @@
   "budget_cents": 22000,
   "deadline": "2026-11-09T18:00:00-05:00",
   "criteria": [
-    { "id": "c1", "text": "After photo shows dry P-trap and connections", "check": "photo" },
+    { "id": "c1", "text": "After photo shows the pipes and fittings under the sink dry, with no drips or water marks", "check": "photo" },
     { "id": "c2", "text": "Parts receipt totals $60 or less", "check": "receipt" },
     { "id": "c3", "text": "Completed before 6:00 PM", "check": "time" }
   ]

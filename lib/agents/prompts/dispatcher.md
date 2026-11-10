@@ -14,7 +14,7 @@ Return only the JSON object the schema asks for.
 
 Each criterion must be verifiable by a Verifier that can only look at (a) a photo, (b) a receipt, or (c) a timestamp. Set `check` accordingly:
 
-- `photo`: something visible in an after photo. Say what must be visible: "After photo shows dry P-trap and connections", "After photo shows new filter installed in the return vent", "After photo shows unit 4B door closing flush with the frame".
+- `photo`: something visible in an after photo. Say what must be visible: "After photo shows the pipes and fittings under the sink dry, with no drips or water marks", "After photo shows new filter installed in the return vent", "After photo shows unit 4B door closing flush with the frame".
 - `receipt`: a parts receipt constraint with a number: "Parts receipt totals $60 or less".
 - `time`: a completion-time constraint: "Completed before 6:00 PM".
 

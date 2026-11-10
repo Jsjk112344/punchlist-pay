@@ -72,7 +72,7 @@ function extraPaidOrders(): WorkOrder[] {
   return [
     mk("wo-1034", "p-2", "Birch Court", "3B", "Unclog bathtub drain", "Bathtub draining slowly; clear the trap and test flow.", seedContractors[0], 13500, "2026-11-05T14:10:00-05:00", "2026-11-05T17:00:00-05:00",
       [{ id: "c1", text: "After photo shows tub draining with no standing water", check: "photo" }, { id: "c2", text: "Parts receipt totals $25 or less", check: "receipt" }, { id: "c3", text: "Completed before 5:00 PM", check: "time" }],
-      [{ id: "c1", met: true, evidence: "Tub empty, drain clear" }, { id: "c2", met: true, evidence: "Receipt total $8.49" }, { id: "c3", met: true, evidence: "Completed 2:06 PM" }], "/fixtures/sink-after.svg"),
+      [{ id: "c1", met: true, evidence: "Tub empty, drain clear" }, { id: "c2", met: true, evidence: "Receipt total $8.49" }, { id: "c3", met: true, evidence: "Completed 2:06 PM" }], "/fixtures/sink-after.jpg"),
     mk("wo-1033", "p-1", "Alder House", "6A", "Patch drywall in hallway", "Patch and paint the fist-sized hole beside the hallway closet.", seedContractors[2], 21000, "2026-11-04T16:35:00-05:00", "2026-11-04T18:00:00-05:00",
       [{ id: "c1", text: "After photo shows patch sanded and painted to match", check: "photo" }, { id: "c2", text: "Materials receipt totals $40 or less", check: "receipt" }, { id: "c3", text: "Completed before 6:00 PM", check: "time" }],
       [{ id: "c1", met: true, evidence: "Patch flush, paint matches wall" }, { id: "c2", met: true, evidence: "Receipt total $27.80" }, { id: "c3", met: true, evidence: "Completed 4:31 PM" }], "/fixtures/door-4b.svg"),

@@ -17,10 +17,10 @@ assert.equal(fail.amount_to_release_cents,0);assert.equal(fail.criteria.filter(x
 const created=makeOrder("4B kitchen sink leaking under the cabinet, fix today, under $250");
 assert.equal(created.budget_cents,22000);
 assert.equal(authorizeFixture(created.id,"mike")?.price_cents,24000);
-addProof(created.id,"checkin","/fixtures/sink-before.svg");
+addProof(created.id,"checkin","/fixtures/sink-before.jpg");
 assert.equal(orderById(created.id)?.payouts[0]?.amount_cents,4800);
 addProof(created.id,"receipt","/fixtures/receipt.svg");
-addProof(created.id,"after","/fixtures/sink-after.svg");
+addProof(created.id,"after","/fixtures/sink-after.jpg");
 assert.equal(verifyFixture(created.id)?.confidence,0.93);
 assert.equal(orderById(created.id)?.status,"paid");
 assert.equal(orderById(created.id)?.payouts.at(-1)?.amount_cents,19200);
