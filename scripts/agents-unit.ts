@@ -184,7 +184,7 @@ async function testHardRules() {
 async function testVerifierCall() {
   const fake = fakeClient([{ ...json({ verdict: "pass", confidence: 0.93, amount_to_release_cents: 19200, criteria: [{ id: "c1", met: true, evidence: "Dry P-trap and connections visible" }, { id: "c2", met: true, evidence: "Receipt total $41.07" }, { id: "c3", met: true, evidence: "EXIF 15:52 before 16:00" }] }), model: "claude-sonnet-5-5-test" } as unknown as BetaMessage]);
   const funded: WorkOrder = { ...order, status: "in_progress", contract: { contractor_id: "mike", price_cents: 24000, deposit_pct: 20, deadline: "2026-11-09T16:00:00-05:00", criteria: order.criteria } };
-  const { verdict, raw } = await verifyProofs({ order: funded, images: [img("checkin", "2026-11-09T15:11:00-05:00"), img("after", "2026-11-09T15:52:00-05:00"), img("receipt", "2026-11-09T15:38:00-05:00", true)], checkin_ts: "2026-11-09T15:11:00-05:00", remaining_cents: 19200, now: "2026-11-09T15:53:00-05:00" });
+  const { verdict, raw } = await verifyProofs({ order: funded, images: [img("checkin", "2026-11-09T15:11:00-05:00"), img("after", "2026-11-09T15:52:00-05:00"), img("receipt", "2026-11-09T15:38:00-05:00", true)], checkin_ts: "2026-11-09T15:11:00-05:00", remaining_cents: 19200, now: "2026-11-09T15:53:00-05:00", references: false });
   assert.equal(verdict.verdict, "pass"); assert.equal(verdict.amount_to_release_cents, 19200); assert.equal(verdict.model, "claude-sonnet-5-5-test"); assert.ok(raw && typeof raw === "object");
   const p = fake.calls[0]; assert.equal(p.output_config?.effort, "medium"); assert.equal(p.max_tokens, 4096);
   const schema = p.output_config?.format?.schema as { properties: { criteria: { items: { properties: { id: { enum: string[] } } } } } };
@@ -193,6 +193,15 @@ async function testVerifierCall() {
   assert.deepEqual(content.map((b) => b.type), ["text", "image", "text", "image", "text", "image", "text"]);
   assert.match(content[0].text!, /check-in photo, EXIF 2026-11-09T15:11:00-05:00/); assert.match(content[4].text!, /receipt, EXIF missing \(upload time used\)/);
   assert.equal(content[1].source?.media_type, "image/jpeg"); assert.match(content[6].text!, /Check-in timestamp: 2026-11-09T15:11:00-05:00/); assert.match(content[6].text!, /- c2: Parts receipt totals \$60 or less \[check: receipt\]/);
+  // with references on (the default), labelled good/bad examples for the trade come first and the proof layout follows unchanged
+  const fake2 = fakeClient([{ ...json({ verdict: "pass", confidence: 0.93, amount_to_release_cents: 19200, criteria: [{ id: "c1", met: true, evidence: "x" }, { id: "c2", met: true, evidence: "y" }, { id: "c3", met: true, evidence: "z" }] }), model: "m" } as unknown as BetaMessage]);
+  await verifyProofs({ order: funded, images: [img("after", "2026-11-09T15:52:00-05:00")], checkin_ts: "2026-11-09T15:11:00-05:00", remaining_cents: 19200, now: "2026-11-09T15:53:00-05:00" });
+  const withRefs = fake2.calls[0].messages[0].content as { type: string; text?: string; cache_control?: unknown }[];
+  assert.match(withRefs[0].text!, /^REFERENCE EXAMPLES/);
+  const end = withRefs.findIndex((b) => b.text?.startsWith("END OF REFERENCE EXAMPLES"));
+  assert.ok(end > 0 && withRefs[end].cache_control, "reference block ends with a cache breakpoint");
+  assert.ok(withRefs.slice(1, end).some((b) => /Reference \(GOOD, plumbing\)/.test(b.text ?? "")) && withRefs.slice(1, end).some((b) => /Reference \(BAD, plumbing\)/.test(b.text ?? "")));
+  assert.match(withRefs[end + 1].text!, /after photo/);
   console.log("✓ verifier request + response");
 }
 

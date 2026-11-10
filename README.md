@@ -66,7 +66,7 @@ Every write sends `PayPal-Request-Id`. A payout is shown as paid only after PayP
 - **Negotiation** is two separate Claude conversations, Dispatcher and Contractor, each with its own instructions and the contractor's real rates. It runs at most four turns, two sentences each, and every turn is a tool call: counter, agree or walk away. On agreement the Dispatcher calls its own `create_authorize_order` tool, and the server executes that call against PayPal.
 - **Verifier** looks at the check-in, after-photo and receipt images with the contract criteria and returns a verdict per criterion, with quoted evidence and a confidence.
 
-The Verifier also sees labelled reference photos for the job's trade before the proof: one good and one bad example each for cleaning, drywall, hinges and grout, and a bad example for plumbing. They come from `fixtures/reference/` (openly licensed Wikimedia Commons images, see `ATTRIBUTION.md`). Claude can't be fine-tuned through the API, so this is how it learns what finished work looks like. `npm run eval:verifier` scores the Verifier on 24 held-out photos with and without the references.
+The Verifier also sees labelled reference photos for the job's trade before the proof: one good and one bad example each for cleaning, plumbing, drywall, hinges and grout. They come from `fixtures/reference/` (openly licensed Wikimedia Commons and Unsplash images, see `ATTRIBUTION.md`). Claude can't be fine-tuned through the API, so this is how it learns what finished work looks like. `npm run eval:verifier` scores the Verifier on 58 held-out photos with and without the references.
 
 The leash, enforced in code regardless of what the model says:
 

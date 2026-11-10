@@ -1,6 +1,6 @@
 {
  "version": 1,
- "about": "Labelled reference photos from Wikimedia Commons. role=reference images are shown to the Verifier as calibration examples; role=eval images are held out for scripts/verifier-eval.ts.",
+ "about": "Labelled reference photos from Wikimedia Commons and Unsplash. role=reference images are shown to the Verifier as calibration examples; role=eval images are held out for scripts/verifier-eval.ts.",
  "items": [
   {
    "id": "cleaning-good-7-12",
@@ -660,6 +660,706 @@
     "page": "https://commons.wikimedia.org/wiki/File:Hopewell_Lofts_apartment_door.jpg",
     "license": "CC BY-SA 4.0",
     "author": "AgnosticPreachersKid"
+   }
+  },
+  {
+   "id": "plumbing-good-u10-21",
+   "file": "plumbing-good-u10-21.jpg",
+   "trade": "plumbing",
+   "label": "good",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Dry white supply pipe and elbows fixed to the wall, no drips or stains.",
+   "unit": null,
+   "source": {
+    "title": "a white pipe in a room",
+    "page": "https://unsplash.com/photos/a-white-pipe-in-a-room-ECy7N7MJzs0?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Ryo Kawasaki"
+   }
+  },
+  {
+   "id": "plumbing-good-u10-29",
+   "file": "plumbing-good-u10-29.jpg",
+   "trade": "plumbing",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Painted pipe and valve, dry, no drips or corrosion.",
+   "unit": null,
+   "source": {
+    "title": "white pipe",
+    "page": "https://unsplash.com/photos/white-pipe-9uJ9kFIepaA?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Jon Tyson"
+   }
+  },
+  {
+   "id": "plumbing-good-u10-5",
+   "file": "plumbing-good-u10-5.jpg",
+   "trade": "plumbing",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Run of white pipes and bends, dry and intact.",
+   "unit": null,
+   "source": {
+    "title": "white metal pipe in grayscale photography",
+    "page": "https://unsplash.com/photos/white-metal-pipe-in-grayscale-photography-esqkP6KFqeg?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Oriol Hausmann"
+   }
+  },
+  {
+   "id": "plumbing-bad-u7-20",
+   "file": "plumbing-bad-u7-20.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Water dripping from the tap; rust at the joint and pipe clamp.",
+   "unit": null,
+   "source": {
+    "title": "black and brown faucet",
+    "page": "https://unsplash.com/photos/black-and-brown-faucet-v-8o8vGMg3s?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Alexandre Lecocq"
+   }
+  },
+  {
+   "id": "plumbing-bad-u7-11",
+   "file": "plumbing-bad-u7-11.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Heavily corroded valve with water running down the pipe.",
+   "unit": null,
+   "source": {
+    "title": "Close-up of an old, rusty faucet dripping water",
+    "page": "https://unsplash.com/photos/close-up-of-an-old-rusty-faucet-dripping-water-5jJ4Nux6Ros?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Malama Mushitu"
+   }
+  },
+  {
+   "id": "plumbing-bad-u7-22",
+   "file": "plumbing-bad-u7-22.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Rusted pipe end with water dripping out.",
+   "unit": null,
+   "source": {
+    "title": "a metal pipe with water coming out of it",
+    "page": "https://unsplash.com/photos/a-metal-pipe-with-water-coming-out-of-it-0bmUHpcd2AU?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Chelsey Marques"
+   }
+  },
+  {
+   "id": "plumbing-bad-u7-29",
+   "file": "plumbing-bad-u7-29.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Rusty pipe pouring water onto wet paving.",
+   "unit": null,
+   "source": {
+    "title": "a rusty pipe with water coming out of it",
+    "page": "https://unsplash.com/photos/a-rusty-pipe-with-water-coming-out-of-it-4QF8yL5KsNM?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Maxim Tolchinskiy"
+   }
+  },
+  {
+   "id": "plumbing-bad-u7-2",
+   "file": "plumbing-bad-u7-2.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the pipes and fittings dry and sound, with no drips, leaks or corrosion",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Water spraying out of a brass fitting.",
+   "unit": null,
+   "source": {
+    "title": "water drop on brass pipe",
+    "page": "https://unsplash.com/photos/water-drop-on-brass-pipe-n2ZufifTbSo?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Elimende Inagella"
+   }
+  },
+  {
+   "id": "grout-good-u9-6",
+   "file": "grout-good-u9-6.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "White subway tiles with even, continuous red grout lines.",
+   "unit": null,
+   "source": {
+    "title": "a close up of a white and red brick wall",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-white-and-red-brick-wall-RG2ztRT-KBs?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Mick Haupt"
+   }
+  },
+  {
+   "id": "grout-good-u9-21",
+   "file": "grout-good-u9-21.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Marble hex mosaic with uniform dark grout, no gaps.",
+   "unit": null,
+   "source": {
+    "title": "a close up of a white marble mosaic tile",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-white-marble-mosaic-tile-M-Tsnm7LoC8?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Ted Balmer"
+   }
+  },
+  {
+   "id": "grout-good-u9-14",
+   "file": "grout-good-u9-14.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Hex floor tiles with complete, even grout.",
+   "unit": null,
+   "source": {
+    "title": "a close up of a tiled floor with hexagonal tiles",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-tiled-floor-with-hexagonal-tiles-rYe0pSNm34o?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Ted Balmer"
+   }
+  },
+  {
+   "id": "grout-good-u9-5",
+   "file": "grout-good-u9-5.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Finished blue tiled shower with even grout lines.",
+   "unit": null,
+   "source": {
+    "title": "blue wall bricks",
+    "page": "https://unsplash.com/photos/blue-wall-bricks-VCKYuQ6R-28?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Bence Balla-Schottner"
+   }
+  },
+  {
+   "id": "grout-bad-u9-18",
+   "file": "grout-bad-u9-18.jpg",
+   "trade": "grout",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Three tiles missing; combed adhesive exposed, no grout.",
+   "unit": null,
+   "source": {
+    "title": "Reddish-brown hexagonal floor tiles with three missing, showing adhesive",
+    "page": "https://unsplash.com/photos/reddish-brown-hexagonal-floor-tiles-with-three-missing-showing-adhesive-i0jObf6aM9o?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Sebastian Schuster"
+   }
+  },
+  {
+   "id": "grout-bad-u9-19",
+   "file": "grout-bad-u9-19.jpg",
+   "trade": "grout",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Trowel with wet mortar on a tile; work in progress.",
+   "unit": null,
+   "source": {
+    "title": "brown wooden stick on brown wooden table",
+    "page": "https://unsplash.com/photos/brown-wooden-stick-on-brown-wooden-table-FqAyHJpNhJA?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Haneen Krimly"
+   }
+  },
+  {
+   "id": "grout-bad-u9-30",
+   "file": "grout-bad-u9-30.jpg",
+   "trade": "grout",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Stained, weathered tiles with dirty, eroded joints.",
+   "unit": null,
+   "source": {
+    "title": "Close-up of weathered terracotta tiles with water stains",
+    "page": "https://unsplash.com/photos/close-up-of-weathered-terracotta-tiles-with-water-stains-QbVr5vjzPRg?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Zoshua Colah"
+   }
+  },
+  {
+   "id": "grout-bad-u3-28",
+   "file": "grout-bad-u3-28.jpg",
+   "trade": "grout",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Mosaic with chipped tiles and missing, discoloured grout.",
+   "unit": null,
+   "source": {
+    "title": "a white and brown tiled wall and floor",
+    "page": "https://unsplash.com/photos/a-white-and-brown-tiled-wall-and-floor-N4ZshVaKayY?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Vitor Paladini"
+   }
+  },
+  {
+   "id": "hinge-good-u5-10",
+   "file": "hinge-good-u5-10.jpg",
+   "trade": "hinge",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door hinge installed and in sound condition, with no rust, paint-over or damage",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean silver butt hinge set straight on the door edge.",
+   "unit": null,
+   "source": {
+    "title": "Silver hinge on dark wooden door and textured white wall",
+    "page": "https://unsplash.com/photos/silver-hinge-on-dark-wooden-door-and-textured-white-wall-4wx8GDyp3zY?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Izzudin Habib"
+   }
+  },
+  {
+   "id": "hinge-good-u5-2",
+   "file": "hinge-good-u5-2.jpg",
+   "trade": "hinge",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door hinge installed and in sound condition, with no rust, paint-over or damage",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Decorative hinge installed flush, clean, no damage.",
+   "unit": null,
+   "source": {
+    "title": "A decorative dark metal door hinge with intricate swirl patterns on a bright orange door",
+    "page": "https://unsplash.com/photos/decorative-metal-hinge-on-orange-door-82ZnRauVXCg?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "lesha tuman"
+   }
+  },
+  {
+   "id": "hinge-bad-u5-9",
+   "file": "hinge-bad-u5-9.jpg",
+   "trade": "hinge",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door hinge installed and in sound condition, with no rust, paint-over or damage",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Heavily rusted strap hinge on weathered wood.",
+   "unit": null,
+   "source": {
+    "title": "a close up of a metal hook on a wooden fence",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-metal-hook-on-a-wooden-fence-dI4BNzIn6w8?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "K Adams"
+   }
+  },
+  {
+   "id": "hinge-bad-u5-13",
+   "file": "hinge-bad-u5-13.jpg",
+   "trade": "hinge",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door hinge installed and in sound condition, with no rust, paint-over or damage",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Rusted strap hinge on a door with flaking paint and lichen.",
+   "unit": null,
+   "source": {
+    "title": "a rusted metal handle on an old door",
+    "page": "https://unsplash.com/photos/a-rusted-metal-handle-on-an-old-door-KBx8Kihq9Z8?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "lionel mermoz"
+   }
+  },
+  {
+   "id": "hinge-bad-u5-29",
+   "file": "hinge-bad-u5-29.jpg",
+   "trade": "hinge",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door hinge installed and in sound condition, with no rust, paint-over or damage",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Hinge painted over in the door colour, paint chipped.",
+   "unit": null,
+   "source": {
+    "title": "A yellow hinge on a yellow and purple wooden surface",
+    "page": "https://unsplash.com/photos/a-yellow-hinge-on-a-yellow-and-purple-wooden-surface-ejqYBhoqtok?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "antonio massara"
+   }
+  },
+  {
+   "id": "drywall-bad-u6-19",
+   "file": "drywall-bad-u6-19.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Large ragged hole through the wall.",
+   "unit": null,
+   "source": {
+    "title": "photo of brown wall",
+    "page": "https://unsplash.com/photos/photo-of-brown-wall-qye8p4clpo0?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Lujia Zhang"
+   }
+  },
+  {
+   "id": "drywall-bad-u6-20",
+   "file": "drywall-bad-u6-20.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Paint and skim coat peeled off in patches.",
+   "unit": null,
+   "source": {
+    "title": "a close up of a white wall with peeling paint",
+    "page": "https://unsplash.com/photos/a-close-up-of-a-white-wall-with-peeling-paint-dCgmbblVLFk?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Krakograff Textures"
+   }
+  },
+  {
+   "id": "drywall-bad-u6-22",
+   "file": "drywall-bad-u6-22.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Board seams taped and mudded but not sanded or painted; wires loose.",
+   "unit": null,
+   "source": {
+    "title": "a wall that has some wires attached to it",
+    "page": "https://unsplash.com/photos/a-wall-that-has-some-wires-attached-to-it-t8qTu1QoFgc?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "jesus arango"
+   }
+  },
+  {
+   "id": "drywall-bad-u6-5",
+   "file": "drywall-bad-u6-5.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Unsanded, unpainted compound patches; scaffold still up.",
+   "unit": null,
+   "source": {
+    "title": "yellow and white wooden cabinet",
+    "page": "https://unsplash.com/photos/yellow-and-white-wooden-cabinet-DH-FZZ7kM5c?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "charlesdeluvio"
+   }
+  },
+  {
+   "id": "drywall-bad-u11-6",
+   "file": "drywall-bad-u11-6.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Ceiling corner with brown water damage and peeling paint.",
+   "unit": null,
+   "source": {
+    "title": "the ceiling of a run down room with peeling paint",
+    "page": "https://unsplash.com/photos/the-ceiling-of-a-run-down-room-with-peeling-paint-aRUdvi4lFC4?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Vero Eve"
+   }
+  },
+  {
+   "id": "drywall-bad-u11-18",
+   "file": "drywall-bad-u11-18.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Ceiling torn open, lath exposed.",
+   "unit": null,
+   "source": {
+    "title": "A room with a ceiling that has been torn off",
+    "page": "https://unsplash.com/photos/a-room-with-a-ceiling-that-has-been-torn-off-CNkOUScVCqE?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Brett Jordan"
+   }
+  },
+  {
+   "id": "drywall-bad-u11-9",
+   "file": "drywall-bad-u11-9.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Black mould and water staining along the ceiling line.",
+   "unit": null,
+   "source": {
+    "title": "white and gray concrete wall",
+    "page": "https://unsplash.com/photos/white-and-gray-concrete-wall-kPK_DjUEJ5U?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Olena Shmahalo"
+   }
+  },
+  {
+   "id": "cleaning-good-u1-6",
+   "file": "cleaning-good-u1-6.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Spotless vanity, toilet and tub; clear surfaces.",
+   "unit": null,
+   "source": {
+    "title": "white ceramic sink beside white ceramic toilet bowl",
+    "page": "https://unsplash.com/photos/white-ceramic-sink-beside-white-ceramic-toilet-bowl-WbmX0pw_AuI?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Point3D Commercial Imaging Ltd."
+   }
+  },
+  {
+   "id": "cleaning-good-u1-9",
+   "file": "cleaning-good-u1-9.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean pedestal sink, toilet and tub; towel hung.",
+   "unit": null,
+   "source": {
+    "title": "white ceramic toilet bowl beside pedestal sink",
+    "page": "https://unsplash.com/photos/white-ceramic-toilet-bowl-beside-pedestal-sink-FX1EbT-jKBQ?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Francesca Tosolini"
+   }
+  },
+  {
+   "id": "cleaning-good-u1-14",
+   "file": "cleaning-good-u1-14.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean wall-hung toilet and tiled floor.",
+   "unit": null,
+   "source": {
+    "title": "white toilet bowl with cistern",
+    "page": "https://unsplash.com/photos/white-toilet-bowl-with-cistern-xXc7zUKIhRw?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Jan Antonin Kolar"
+   }
+  },
+  {
+   "id": "cleaning-good-u1-21",
+   "file": "cleaning-good-u1-21.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean toilet, vanity and floor; nothing left out.",
+   "unit": null,
+   "source": {
+    "title": "a bathroom with a toilet and sink",
+    "page": "https://unsplash.com/photos/a-bathroom-with-a-toilet-and-sink-4F0B0U3nafQ?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Point3D Commercial Imaging Ltd."
+   }
+  },
+  {
+   "id": "cleaning-bad-u4-3",
+   "file": "cleaning-bad-u4-3.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Filthy toilet and sink, debris on the floor.",
+   "unit": null,
+   "source": {
+    "title": "An old, dirty bathroom with a toilet and sink",
+    "page": "https://unsplash.com/photos/an-old-dirty-bathroom-with-a-toilet-and-sink-23v0hlfq__c?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Strange Happenings"
+   }
+  },
+  {
+   "id": "cleaning-bad-u4-2",
+   "file": "cleaning-bad-u4-2.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Grimy, stained walls and sink.",
+   "unit": null,
+   "source": {
+    "title": "white ceramic sink",
+    "page": "https://unsplash.com/photos/white-ceramic-sink-vqLsCa9lby4?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Sebastien LE DEROUT"
+   }
+  },
+  {
+   "id": "cleaning-bad-u4-18",
+   "file": "cleaning-bad-u4-18.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Dingy bathroom; basket and bottles left in the sink.",
+   "unit": null,
+   "source": {
+    "title": "A dingy bathroom with a bathtub and sink",
+    "page": "https://unsplash.com/photos/a-dingy-bathroom-with-a-bathtub-and-sink-M5A8Wg1Wzes?utm_source=punchlist_pay&utm_medium=referral",
+    "license": "Unsplash License",
+    "author": "Anatoly Maltsev"
    }
   }
  ]

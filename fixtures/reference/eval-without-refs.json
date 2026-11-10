@@ -1,9 +1,9 @@
 {
- "ran_at": "2026-11-10T04:07:30.317Z",
+ "ran_at": "2026-11-10T17:46:39.799Z",
  "model": "claude-sonnet-5-5",
  "references": false,
- "correct": 20,
- "total": 24,
+ "correct": 53,
+ "total": 58,
  "rows": [
   {
    "id": "cleaning-bad-6-1",
@@ -12,8 +12,8 @@
    "met": false,
    "confidence": 0.95,
    "verdict": "fail",
-   "evidence": "Countertop around the row of sinks is covered in dust, dirt smudges and debris; red wall panel and white tiles are speckled with grime, so surfaces are not wiped clean. EXIF 03:56 is after check-in 03:06, but the photo shows the bathroom is not clean.",
-   "ms": 3461
+   "evidence": "Countertop around the sinks is covered in dust, dirt and brown debris smudges; tiles and the red backsplash are speckled with grime, so surfaces are not wiped. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the bathroom is visibly not clean.",
+   "ms": 4061
   },
   {
    "id": "cleaning-bad-6-7",
@@ -22,8 +22,8 @@
    "met": false,
    "confidence": 0.9,
    "verdict": "fail",
-   "evidence": "Tile wall above the pedestal sink has visible brown/orange drip stains running down the white tiles, the sink basin has a stain near the left edge, and the door is smudged and dirty; the bathroom does not look wiped or clean. EXIF 03:56 is after check-in 03:06 and before the 07:06 deadline, but no unit placard is visible.",
-   "ms": 3118
+   "evidence": "Tile above the pedestal sink shows orange-brown drip streaks, the sink basin has a brown stain near the left edge, and the door has visible smudges and dirt; the floor tile is dirty. The bathroom does not appear wiped or clean. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the cleanliness criterion is not met.",
+   "ms": 2827
   },
   {
    "id": "cleaning-bad-6-8",
@@ -32,8 +32,8 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "Sink basin is caked with dirt, debris and cobwebs; both taps are grimy and the surrounding counter is covered in dust and soil. Not clean or wiped. EXIF 03:56:38 is after check-in 03:06:38 and before the 07:06:38 deadline, so sequence is fine but the work is not shown.",
-   "ms": 3476
+   "evidence": "After photo shows a sink basin caked with dirt, soil-like debris and cobwebs, grimy taps, and a dusty surround; nothing is wiped or clean. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the cleanliness criterion is clearly unmet.",
+   "ms": 4366
   },
   {
    "id": "cleaning-bad-6-9",
@@ -42,38 +42,108 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "Toilet seat, tank lid and bowl rim are covered in dirt and grime, the sink is caked with dust and stains, peeling paint and debris are on the shelves and floor. The bathroom is clearly not clean. EXIF 03:56 is after check-in 03:06 and before the 07:06 deadline, but that does not make up for the unclean state.",
-   "ms": 3631
+   "evidence": "Toilet seat, lid, tank top and bowl rim are covered in dirt and grime, the sink basin is dusty and stained, and the walls and floor show peeling paint and debris. Nothing is wiped or clean. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, so the timing is fine, but the cleanliness criterion is not met.",
+   "ms": 3165
+  },
+  {
+   "id": "cleaning-bad-u4-18",
+   "trade": "cleaning",
+   "expected": false,
+   "met": false,
+   "confidence": 0.9,
+   "verdict": "fail",
+   "evidence": "Sink basin holds a crushed plastic bottle and wrapper scraps, a loose plastic bottle cap sits on the counter, a basket with a plastic item is on the sink, dark specks/debris are scattered on the counter and floor tiles, and there are stains on the shelf. Not clean, though EXIF 17:18 is after check-in 16:28 and before the 20:28 deadline.",
+   "ms": 10361
+  },
+  {
+   "id": "cleaning-bad-u4-2",
+   "trade": "cleaning",
+   "expected": false,
+   "met": false,
+   "confidence": 0.93,
+   "verdict": "fail",
+   "evidence": "Bathroom is visibly not clean: walls show peeling, flaking paint and grime, debris is on the floor beneath the sink, a used yellowed towel hangs on the rail, and the sink and pipes are dirty. EXIF 17:18:01 is after check-in 16:28:01 and before the deadline, but the cleanliness criterion is not shown.",
+   "ms": 9773
+  },
+  {
+   "id": "cleaning-bad-u4-3",
+   "trade": "cleaning",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "After photo shows a bathroom that is not clean: debris and dirt scattered across the floor, cobwebs on the toilet, sink and window, grime and dirt in the sink basin, and stained walls. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the cleanliness requirement is clearly unmet.",
+   "ms": 10062
   },
   {
    "id": "cleaning-good-7-10",
    "trade": "cleaning",
    "expected": true,
    "met": false,
-   "confidence": 0.55,
+   "confidence": 0.6,
    "verdict": "partial",
-   "evidence": "Toilet, seat and walls look clean, but cleaning bottles and an aerosol can sit on the shelf, a plunger and brush stand on the floor, and there is a brownish stain on the floor tile left of the toilet base. No placard or unit number is visible. After EXIF 03:56 is after the check-in at 03:06 and before the 07:06 deadline.",
-   "ms": 5450
+   "evidence": "Toilet, seat, and walls look clean and the bin is empty of debris, but cleaning supplies (two spray bottles, an aerosol can) sit on the shelf and a plunger stands by the toilet. There is a faint yellowish stain on the floor tiles beside the bowl base and bin. Only the toilet area is shown, with no sink or other surfaces.",
+   "ms": 6793
   },
   {
    "id": "cleaning-good-7-11",
    "trade": "cleaning",
    "expected": true,
    "met": true,
-   "confidence": 0.8,
+   "confidence": 0.82,
    "verdict": "pass",
-   "evidence": "Bathroom photo shows a clean tub/shower with clear glass doors and marble walls, white toilet and vanity, folded towels, bath mats on a tidy floor; no visible grime, debris or clutter. EXIF 03:56:38 is after check-in 03:06:38. No unit placard visible.",
-   "ms": 7727
+   "evidence": "Bathroom shows clean white tub, glass shower door, toilet, vanity and tile floor with no visible grime, debris or clutter. Towels are folded and hung, mats laid flat. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline. No unit placard visible to contradict 4B.",
+   "ms": 8911
   },
   {
    "id": "cleaning-good-7-2",
    "trade": "cleaning",
    "expected": true,
    "met": false,
-   "confidence": 0.55,
+   "confidence": 0.6,
    "verdict": "partial",
-   "evidence": "Sink basin, faucet and granite counter look clean with no visible grime, but the counter holds clutter: a large Fabuloso bottle, a cup of sponges and brushes in a black tub, soap dispensers and an air freshener can. The photographer is visible in the mirror.",
-   "ms": 3135
+   "evidence": "Basin, faucet and counter look clean with no visible grime, but the counter holds clutter: a bucket of sponges and brushes, a large Fabuloso jug, a soap dispenser, an air freshener can. A person is also visible in the mirror. The photo shows no unit number, so location can't be checked.",
+   "ms": 4168
+  },
+  {
+   "id": "cleaning-good-u1-14",
+   "trade": "cleaning",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Wall-hung toilet with lid up, seat and bowl white with no visible stains; tile floor and walls clear of debris or clutter; toilet paper roll and brush holder tidy. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01. No unit placard visible.",
+   "ms": 975507
+  },
+  {
+   "id": "cleaning-good-u1-21",
+   "trade": "cleaning",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Toilet, vanity top, faucet, mirror, shelves and tile floor all visible and clean, with no grime, debris or clutter. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01. No unit number or placard visible to check.",
+   "ms": 7468
+  },
+  {
+   "id": "cleaning-good-u1-6",
+   "trade": "cleaning",
+   "expected": true,
+   "met": true,
+   "confidence": 0.85,
+   "verdict": "pass",
+   "evidence": "Bathroom after photo shows white quartz vanity top, sink, chrome faucet, toilet, tub and tile all clean with no grime, debris or clutter; floor clear. EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01. No unit placard visible to contradict 4B.",
+   "ms": 978447
+  },
+  {
+   "id": "cleaning-good-u1-9",
+   "trade": "cleaning",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Bathroom shows clean white pedestal sink, toilet, tub and subway tile with no visible grime, debris or clutter; towels folded, floor tile clear. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01. No unit placard visible, so no location mismatch.",
+   "ms": 980640
   },
   {
    "id": "door-bad-10-4",
@@ -82,8 +152,8 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "Wall placard reads 217 and the door plaque reads 'The Stephen King Suite'; expected unit 4B (Alder House). Location mismatch. EXIF 03:56:38 is after check-in 03:06:38 and before the 07:06:38 deadline, but the door shown is not unit 4B.",
-   "ms": 9170
+   "evidence": "Door placard reads 217 (plaque also reads 'The Stephen King Suite'), expected unit 4B. After photo EXIF 17:18:01 is after check-in 16:28:01, but the location does not match.",
+   "ms": 10296
   },
   {
    "id": "door-bad-9-4-door-wrong-unit",
@@ -92,8 +162,8 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "Door placard reads 203, expected unit 4B. The door shown is a different unit, so the location does not match the work order.",
-   "ms": 8628
+   "evidence": "Door placard reads 203, expected unit 4B. The photo shows a different unit's door. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, but the location does not match.",
+   "ms": 9328
   },
   {
    "id": "door-good-10-1",
@@ -102,18 +172,18 @@
    "met": true,
    "confidence": 0.85,
    "verdict": "pass",
-   "evidence": "Door on the right has a placard reading 926 beside it with a lever lock and card reader visible; the neighboring door is placard 924. After photo EXIF 03:56:38 is after check-in 03:06:38 and before the 07:06:38 deadline.",
-   "ms": 9423
+   "evidence": "Placard on the wall beside the right-hand door reads 926, with a lock and lever handle visible on that door. The neighboring placard reads 924 for the other door. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 14462
   },
   {
    "id": "door-good-9-4",
    "trade": "door",
    "expected": true,
    "met": true,
-   "confidence": 0.93,
+   "confidence": 0.9,
    "verdict": "pass",
-   "evidence": "Placard beside the door reads 203, matching work order unit 203. The full door with frame, closer, and knob is visible. After photo EXIF 03:56:38Z is after check-in 03:06:38Z and before deadline 07:06:38Z.",
-   "ms": 9727
+   "evidence": "Placard beside the door reads 203, matching unit 203. The full door is visible, with a door closer and knob. After photo EXIF 17:18:01 is later than the check-in at 16:28:01 and before the 20:28 deadline.",
+   "ms": 14632
   },
   {
    "id": "drywall-bad-15-13",
@@ -122,18 +192,18 @@
    "met": false,
    "confidence": 0.9,
    "verdict": "fail",
-   "evidence": "Wall shows uneven, blotchy paint with visibly patchy lighter and darker areas, blue painter's tape still along the top edge and on the floor, a small rectangular cutout/opening on the right side of the wall face, and construction debris. No clear patched hole shown as flush and finished. EXIF 03:56 is after check-in 03:06 and before the deadline.",
-   "ms": 10625
+   "evidence": "Wall is only partly painted with visibly uneven, patchy coverage; blue painter's tape remains on the wall and counter edge, and a square cutout/opening is visible on the wall's right side. Plastic sheeting, tools and bare subfloor show work still in progress. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01, but the finished-drywall criterion is not shown.",
+   "ms": 10847
   },
   {
    "id": "drywall-bad-24-13",
    "trade": "drywall",
    "expected": false,
    "met": false,
-   "confidence": 0.96,
+   "confidence": 0.95,
    "verdict": "fail",
-   "evidence": "Photo shows brownish-yellow water stains across the textured ceiling near the wall junction and a visible peeling/flaking patch of paint at the ceiling edge; no repair or fresh paint visible. EXIF 03:56 is after check-in 03:06 and before deadline 07:06, but the work itself is not done.",
-   "ms": 10063
+   "evidence": "After photo shows brown/yellow water stains on the textured ceiling near the wall line and a visible peeling patch of paint/paper at the ceiling-wall joint; no repair or repaint is visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the work itself is not done.",
+   "ms": 9839
   },
   {
    "id": "drywall-bad-24-4",
@@ -142,8 +212,8 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "After photo shows a ceiling with large areas of peeling, flaking paint and exposed tan/orange stained drywall patches; no repair or repainting is visible. EXIF 03:56:38 is after check-in 03:06:38 and before the 07:06:38 deadline, but the work is not done.",
-   "ms": 10466
+   "evidence": "After photo shows a ceiling with large areas of peeling, flaking paint and exposed orange-brown stained patches; no repair or fresh repaint is visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, but the work shown is unrepaired.",
+   "ms": 10181
   },
   {
    "id": "drywall-bad-24-5",
@@ -152,8 +222,118 @@
    "met": false,
    "confidence": 0.97,
    "verdict": "fail",
-   "evidence": "Ceiling tile still shows a large brown water stain with cracked, peeling, flaking texture. No repair or repaint is visible. After photo EXIF 03:56 is after check-in 03:06, but the work itself is not done.",
-   "ms": 10350
+   "evidence": "After photo shows a large brown water stain with cracked, peeling texture on the ceiling tile above the tiled wall; no repair or repaint visible. EXIF 17:18:01 is after check-in 16:28:01, so sequence is fine, but the work is not done.",
+   "ms": 9894
+  },
+  {
+   "id": "drywall-bad-u11-18",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "After photo shows a large exposed section of ceiling with bare lath visible, torn and peeling plaster/paper around its edges, and a brown water stain at left. The ceiling is not repaired or repainted. EXIF 17:18:01 is after check-in 16:28:01, so sequence is fine, but the work itself is not done.",
+   "ms": 11270
+  },
+  {
+   "id": "drywall-bad-u11-6",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "Ceiling corner shows peeling and flaking plaster along the cornice, exposed brick and crumbling plaster on the right wall, and a cracked, patchy wall on the left. No repair or fresh paint is visible. EXIF 17:18:01 is after the 16:28:01 check-in, so the sequence check passes, but the work itself is not shown.",
+   "ms": 11100
+  },
+  {
+   "id": "drywall-bad-u11-9",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.95,
+   "verdict": "fail",
+   "evidence": "After photo shows a ceiling/wall corner with extensive grey-brown and dark mottled staining, flaking and discoloration along the seam; no clean repainted surface visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the work is not shown as done.",
+   "ms": 981601
+  },
+  {
+   "id": "drywall-bad-u6-19",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "After photo shows a large open hole in the wall with torn drywall edges, exposed studs and cavity, and peeling paint; no patch, tape, or fill is visible. EXIF 17:18:01 is after check-in 16:28:01, but the repair is not done.",
+   "ms": 11916
+  },
+  {
+   "id": "drywall-bad-u6-20",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "After photo shows a large patch of peeled paint with bare gray substrate exposed, plus a second exposed area at lower right and a visible crack across the larger patch. The wall is not patched, flush or painted. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, but the work is not done.",
+   "ms": 11425
+  },
+  {
+   "id": "drywall-bad-u6-22",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "Green drywall shows wide white joint compound/tape in a cross pattern, unpainted and with exposed joints; nearby brick wall has exposed yellow wiring and a coil of white pipe. No finished, painted flush patch visible. No unit placard visible. EXIF 17:18 is after check-in 16:28 and before deadline 20:28.",
+   "ms": 10512
+  },
+  {
+   "id": "drywall-bad-u6-5",
+   "trade": "drywall",
+   "expected": false,
+   "met": false,
+   "confidence": 0.93,
+   "verdict": "fail",
+   "evidence": "Three unpainted gray joint-compound patches with white feathered skim marks are visible on the right wall, and an electrical box opening is exposed in the middle patch. The drywall is not painted, so this is not finished work. Photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, and no unit placard is visible.",
+   "ms": 10992
+  },
+  {
+   "id": "grout-bad-u3-28",
+   "trade": "grout",
+   "expected": false,
+   "met": false,
+   "confidence": 0.95,
+   "verdict": "fail",
+   "evidence": "Photo shows weathered, chipped tiles with missing glaze and dark gaps and cracks between many tiles; grout lines are not even, complete or clean, and the surface looks old and damaged rather than freshly grouted. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the photo does not show the required grout condition.",
+   "ms": 10241
+  },
+  {
+   "id": "grout-bad-u9-18",
+   "trade": "grout",
+   "expected": false,
+   "met": false,
+   "confidence": 0.95,
+   "verdict": "fail",
+   "evidence": "Three hexagonal tiles in the center are missing, leaving bare ridged mortar/adhesive substrate exposed. Surrounding grout lines are dark, but the gap area has no tiles and no grout. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but the grout work is not complete.",
+   "ms": 9574
+  },
+  {
+   "id": "grout-bad-u9-19",
+   "trade": "grout",
+   "expected": false,
+   "met": false,
+   "confidence": 0.95,
+   "verdict": "fail",
+   "evidence": "Photo shows a mortar-covered trowel resting on a loose tile, with stacked tiles at right; no installed tile surface or grout lines are visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, but the photo does not show the work.",
+   "ms": 9391
+  },
+  {
+   "id": "grout-bad-u9-30",
+   "trade": "grout",
+   "expected": false,
+   "met": false,
+   "confidence": 0.88,
+   "verdict": "fail",
+   "evidence": "Surface is wet and glossy with standing water and puddles; grout lines are uneven, patchy and eroded in places, with orange residue/haze across the tiles. Not clean, dry, even grout. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 9877
   },
   {
    "id": "grout-good-17-2",
@@ -162,18 +342,108 @@
    "met": false,
    "confidence": 0.72,
    "verdict": "fail",
-   "evidence": "Photo is a glossy white tile wall at an angle with a strong window reflection and dark, low-light framing; grout lines are faint and not clearly visible as even, complete or clean, and a few lines look uneven. Haze or gaps cannot be ruled out. No unit placard visible. After photo EXIF 03:56:38 is after check-in 03:06:38 and before deadline 07:06:38.",
-   "ms": 10019
+   "evidence": "Wall of small white glossy tiles with thin, faint grout lines. Glare and a window reflection wash out much of the surface. Grout lines are barely distinguishable and look uneven in places, e.g. broken or dark lines near the center and right. Completeness, haze and wetness cannot be confirmed. The peeling dark red paint at the top and the loose fixture at lower left suggest unfinished work. No unit placard is visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 14320
+  },
+  {
+   "id": "grout-good-u9-14",
+   "trade": "grout",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Hexagonal marble mosaic floor shows continuous dark grout lines between all visible tiles, uniform width, no gaps, no white haze on tile faces, no wet sheen on grout. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01. No unit placard visible.",
+   "ms": 9455
+  },
+  {
+   "id": "grout-good-u9-21",
+   "trade": "grout",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Close-up of hexagonal marble tile shows continuous dark grout lines around every visible hex with no gaps or missing sections, no visible haze on tile faces, and no wet sheen. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline. No unit placard visible to contradict 4B.",
+   "ms": 10011
+  },
+  {
+   "id": "grout-good-u9-5",
+   "trade": "grout",
+   "expected": true,
+   "met": true,
+   "confidence": 0.8,
+   "verdict": "pass",
+   "evidence": "Blue beveled subway tile shower wall shows continuous white grout lines on all visible walls, with no gaps, haze or wet patches seen. EXIF 17:18:01 is after check-in 16:28:01, and no unit placard is visible to contradict 4B.",
+   "ms": 9372
+  },
+  {
+   "id": "grout-good-u9-6",
+   "trade": "grout",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Subway tile wall with continuous, evenly wide red grout lines in every row and column, no visible gaps, no haze on tile faces, no wet sheen on grout. After photo EXIF 17:18:01 is after check-in 16:28:01 and before deadline 20:28:01; no unit placard visible.",
+   "ms": 10435
+  },
+  {
+   "id": "hinge-bad-u5-13",
+   "trade": "hinge",
+   "expected": false,
+   "met": false,
+   "confidence": 0.93,
+   "verdict": "fail",
+   "evidence": "Hinge strap is visible but has rust staining along its edges and around the pivot head. It is paint-over with chipped, peeling paint, and the surrounding door is covered in lichen and weathering. This is not sound condition with no rust or damage. EXIF 17:18:01 is after check-in 16:28:01 and before the deadline, but that does not fix the unmet photo criterion.",
+   "ms": 11608
+  },
+  {
+   "id": "hinge-bad-u5-29",
+   "trade": "hinge",
+   "expected": false,
+   "met": false,
+   "confidence": 0.85,
+   "verdict": "fail",
+   "evidence": "Hinge barrel is painted over in the same yellow as the door, with chipped paint and a rust-colored stain below the lower knuckle. No screws or leaves are visible to confirm it is installed. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 11611
+  },
+  {
+   "id": "hinge-bad-u5-9",
+   "trade": "hinge",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "Hinge on weathered wood is heavily rusted (orange-brown corrosion across the strap and knuckle), with empty screw holes and bent or rusty nail heads where fasteners should be. This is not sound and rust-free. No unit number or placard visible. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 10787
   },
   {
    "id": "hinge-good-19-4",
    "trade": "hinge",
    "expected": true,
+   "met": true,
+   "confidence": 0.8,
+   "verdict": "pass",
+   "evidence": "Both hinge leaves sit flush in their mortises with 4 slotted screws in the left leaf and 4 in the right, none missing. A wood filler piece sits below the right leaf. The handwritten \"5?\" on the leaf is not a unit placard. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline.",
+   "ms": 13119
+  },
+  {
+   "id": "hinge-good-u5-10",
+   "trade": "hinge",
+   "expected": true,
    "met": false,
-   "confidence": 0.6,
+   "confidence": 0.55,
    "verdict": "fail",
-   "evidence": "Hinge has 4 screws in left leaf and 3 in right leaf (one near the '5' mark sits at the edge); right leaf has an exposed wood shim/gap strip below the plate at the bottom, so mortise is not clearly flush. A handwritten '57' marking is visible, which does not confirm unit 4B.",
-   "ms": 9787
+   "evidence": "Photo shows a single stainless steel hinge barrel (five knuckles) on a dark wood door edge, with no rust, paint-over or visible damage. Only the barrel is visible, so the leaves and screws cannot be seen and installation is unproven. The check-in photo was not provided, so no room or fixture match is possible. No unit placard or address is visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 10422
+  },
+  {
+   "id": "hinge-good-u5-2",
+   "trade": "hinge",
+   "expected": true,
+   "met": true,
+   "confidence": 0.82,
+   "verdict": "pass",
+   "evidence": "Ornate dark bronze hinge mounted in the mortise between the red door and jamb, with all 8 screws visible and seated. No rust, paint on the hinge leaves, or cracks seen. After photo EXIF 17:18:01 is later than check-in 16:28:01 and before the 20:28 deadline. No unit number is visible in the photo to compare.",
+   "ms": 10383
   },
   {
    "id": "plumbing-bad-1-1",
@@ -182,8 +452,8 @@
    "met": false,
    "confidence": 0.9,
    "verdict": "fail",
-   "evidence": "Photo shows angle stop valves with copper supply lines and a chrome escutcheon; no P-trap is visible. Green corrosion on the upper valve body and brown stains on the pipe near the escutcheon, so dryness cannot be confirmed. EXIF 03:56 is after check-in 03:06 and before the 07:06 deadline.",
-   "ms": 10072
+   "evidence": "Photo shows an angle stop valve with copper supply lines and a small valve behind it, but no P-trap is visible. Green corrosion is on the rear valve body and at the fitting joints of the front valve, and there are spots on the escutcheon. So dry P-trap connections cannot be confirmed. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline.",
+   "ms": 12597
   },
   {
    "id": "plumbing-bad-22-9",
@@ -192,8 +462,8 @@
    "met": false,
    "confidence": 0.96,
    "verdict": "fail",
-   "evidence": "Photo shows removed, heavily rusted cast-iron pipe sections lying on a floor, with black corroded buildup inside the open ends and a broken, jagged metal fragment beside them. No intact, installed drain pipe is visible.",
-   "ms": 9784
+   "evidence": "Photo shows removed, heavily rusted and corroded pipe sections lying on the floor, with a broken fragment of pipe at left and blackened, crusted pipe ends. No intact, sound installed drain pipe is visible. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 12216
   },
   {
    "id": "plumbing-bad-23-1",
@@ -202,8 +472,8 @@
    "met": false,
    "confidence": 0.8,
    "verdict": "fail",
-   "evidence": "Close-up of a single-handle faucet with a braided hose on a granite counter. A wet pool or water film is visible around the faucet base, so it is not shown dry. The spout/aerator is not in frame, so the absence of dripping cannot be confirmed. No unit number is visible. After photo EXIF 03:56 is after check-in 03:06 and before the 07:06 deadline.",
-   "ms": 10296
+   "evidence": "A pooled water ring or wet film is visible on the granite around the base of the faucet body, so the faucet is not shown dry. A still photo also cannot show that dripping has stopped, and no spout is visible. EXIF 17:18:01 is after the 16:28:01 check-in and before the 20:28:01 deadline, but the photo does not show the fix.",
+   "ms": 11868
   },
   {
    "id": "plumbing-bad-3-5",
@@ -212,8 +482,78 @@
    "met": false,
    "confidence": 0.93,
    "verdict": "fail",
-   "evidence": "A person's jeans-clad lower body blocks the cabinet interior; only a small white pipe fragment is visible at the top, with no P-trap or slip-nut connections clearly visible, so dryness cannot be verified. No unit placard is visible. EXIF 03:56 is after check-in 03:06 and before the 07:06 deadline.",
-   "ms": 10030
+   "evidence": "Person's jeans-clad lower body blocks the cabinet interior; only a sliver of white pipe is visible at the top, with no P-trap bend or slip nuts in view, so dryness cannot be verified. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline.",
+   "ms": 12573
+  },
+  {
+   "id": "plumbing-bad-u7-11",
+   "trade": "plumbing",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "Valve handwheel is actively dripping, with a visible water stream running down from the handle. The pipes and fittings are heavily rusted and corroded, with flaking, pitted surfaces. EXIF 17:18:01 is after the 16:28:01 check-in, but the photo shows no sign of a completed repair.",
+   "ms": 10913
+  },
+  {
+   "id": "plumbing-bad-u7-2",
+   "trade": "plumbing",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "After photo shows water actively streaming from the open end of the brass elbow with droplets splashing below, and visible corrosion/tarnish on the brass fittings; not dry or sound. EXIF 17:18:01 is after check-in 16:28:01, so the sequence is fine.",
+   "ms": 10572
+  },
+  {
+   "id": "plumbing-bad-u7-20",
+   "trade": "plumbing",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "Water drops visibly falling from the hose-bib spout (one drop at the nozzle, more drops below), and orange-brown rust is visible on the elbow fitting and the pipe bracket. The fittings are neither dry nor free of corrosion. After photo EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline, so the sequence is fine, but the photo criterion fails.",
+   "ms": 10765
+  },
+  {
+   "id": "plumbing-bad-u7-22",
+   "trade": "plumbing",
+   "expected": false,
+   "met": false,
+   "confidence": 0.96,
+   "verdict": "fail",
+   "evidence": "Water drips are visibly falling from the open pipe end, and the upright pipe has heavy rust and the horizontal pipe has green growth, so it is not dry or free of corrosion. The outdoor setting with sky and fence shows no unit 4B placard. EXIF 17:18:01 is after check-in 16:28:01 and before the deadline, so the sequence is fine.",
+   "ms": 11438
+  },
+  {
+   "id": "plumbing-bad-u7-29",
+   "trade": "plumbing",
+   "expected": false,
+   "met": false,
+   "confidence": 0.97,
+   "verdict": "fail",
+   "evidence": "After photo shows a rusty, corroded pipe elbow with a continuous stream of water pouring from the open end onto wet paving. This is an active flow with visible rust, not a dry and sound fitting. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline, but no unit placard or address is visible.",
+   "ms": 11016
+  },
+  {
+   "id": "plumbing-good-u10-29",
+   "trade": "plumbing",
+   "expected": true,
+   "met": true,
+   "confidence": 0.72,
+   "verdict": "pass",
+   "evidence": "Painted white vertical pipe and tee fitting with small black valve below; no drips, water marks, or puddles visible. Only paint scuffs and wall texture, no rust or corrosion on the valve. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28 deadline. No unit placard visible, so location cannot be cross-checked.",
+   "ms": 9543
+  },
+  {
+   "id": "plumbing-good-u10-5",
+   "trade": "plumbing",
+   "expected": true,
+   "met": false,
+   "confidence": 0.82,
+   "verdict": "fail",
+   "evidence": "Black-and-white photo of white pipe runs and elbows. Several pipes show dark chipped or peeling spots (e.g. dark blotch on the second horizontal run, dark specks along the verticals), and the large dark pipe at top has flaking, cracked surface. Dryness can't be confirmed in a dark monochrome image, and the spotting may be corrosion. No P-trap, slip nuts or joints are clearly shown, and no unit placard is visible. EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline.",
+   "ms": 10263
   },
   {
    "id": "receipt-bad-12-1",
@@ -222,28 +562,28 @@
    "met": false,
    "confidence": 0.93,
    "verdict": "fail",
-   "evidence": "Receipt total reads EUR 38,85 (totaal in EUR 38,85, Totaal: EUR 38,85), above the 20.00 limit. EXIF 03:56 is after check-in 03:06, so sequence is fine.",
-   "ms": 8802
+   "evidence": "Bauhaus receipt reads 'Totaal: EUR 38,85' (also 'totaal in EUR 38,85'), which is above the 20.00 limit. Receipt EXIF 17:18:01 is after check-in 16:28:01, so the sequence check is fine.",
+   "ms": 9488
   },
   {
    "id": "receipt-good-12-10",
    "trade": "receipt",
    "expected": true,
    "met": true,
-   "confidence": 0.88,
+   "confidence": 0.9,
    "verdict": "pass",
-   "evidence": "Receipt line reads 'Totaal: EUR 16,85', which is under the 20.00 limit. Receipt EXIF 2026-11-10T03:56:38Z is after check-in 03:06:38Z.",
-   "ms": 8825
+   "evidence": "Receipt reads 'Totaal: EUR 16,85', which is under the 20.00 limit. Receipt EXIF 17:18:01 is after check-in 16:28:01 and before the 20:28:01 deadline.",
+   "ms": 9171
   },
   {
    "id": "receipt-good-12-9",
    "trade": "receipt",
    "expected": true,
    "met": true,
-   "confidence": 0.88,
+   "confidence": 0.9,
    "verdict": "pass",
-   "evidence": "Receipt shows 'totaal in EUR 16,85' and 'MAESTRO 16,85', which is under the 20.00 limit. Receipt EXIF 03:56:38 is after check-in 03:06:38.",
-   "ms": 8908
+   "evidence": "Receipt 'totaal in EUR' reads 16,85 (Maestro 16,85), under the 20.00 limit. Receipt EXIF 17:18:01 is after check-in 16:28:01.",
+   "ms": 9234
   }
  ]
 }
