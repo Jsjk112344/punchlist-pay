@@ -20,3 +20,17 @@ At **1440×900**: `desktop-switcher.png`, `desktop-dashboard.png`, `desktop-new-
 At **390×844**: `mobile-jobs.png`, `mobile-job-funded.png`, `mobile-proof-upload.png`, `mobile-verifying.png`, `mobile-paid.png`, `mobile-review.png`.
 
 Save into `docs/assets/` using browser screenshots. Do not label any screenshot as route-verified until the Next.js app has been installed, served and clicked through. The provided archive is source-only and has not passed this browser QA in the offline environment.
+
+## Live variant (PayPal sandbox + Claude)
+
+Same flow at `/dashboard?fixture=0` with keys in `.env.local`. Differences from the fixture run:
+
+| Step | What happens live |
+| --- | --- |
+| Negotiation | Real Claude turns, so prices vary (last run: $264 counter → **$250** agreed). The PM approves the order in the PayPal sandbox popup. |
+| Check-in | Real deposit payout to Mike's sandbox account. |
+| Proof | **Use sample** submits the Commons under-sink photos, which have no EXIF. The Verifier reads the receipt ($41.07, met) and sees dry pipes, but can't confirm the unit or the photo sequence, so it returns **FAIL** and the job goes to **Needs review**. Balance stays held. |
+| Review | Say it out loud: "No timestamps, can't prove it's the same cabinet, so it didn't pay itself." Open the job, show the per-criterion evidence, click **Approve anyway**. The balance payout goes out and the ledger records the override with the original verdict. |
+
+The wrong-door job (expected 4B, found 4C) still shows **Request redo** with nothing paid.
+

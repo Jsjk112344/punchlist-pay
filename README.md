@@ -97,7 +97,9 @@ Proof photos are stored under `UPLOAD_DIR` and served from `/api/files/<name>`. 
 
 ## Fixture mode
 
-`?fixture=1` is sandbox demonstration data in the browser, not a PayPal transaction. Seeded database rows use `SEED-` ids for the same reason. The proof images in `public/fixtures/` are vector illustrations with PNG copies for the Verifier. Replace them with real phone photos that keep EXIF for the demo.
+`?fixture=1` is sandbox demonstration data in the browser, not a PayPal transaction. Seeded database rows use `SEED-` ids for the same reason.
+
+The demo proof photos in `public/fixtures/` (`sink-before.jpg`, `sink-after.jpg`) are real under-sink photos from Wikimedia Commons (see `public/fixtures/ATTRIBUTION.md`). They carry no EXIF and the two shots don't obviously show the same cabinet, so in a live run the Verifier will usually not pass them on its own: it says the sequence can't be verified and escalates. That is the intended live demo. The balance stays held, and the PM reviews the evidence and either requests a redo or clicks **Approve anyway**, which pays the balance and logs the override next to the original verdict. Phone photos that keep EXIF, taken in order on the same fixture, pass and pay automatically.
 
 ## License
 
