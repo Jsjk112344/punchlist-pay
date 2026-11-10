@@ -15,7 +15,7 @@ let sdkPromise:Promise<PayPalNamespace>|null=null;
 function loadSdk():Promise<PayPalNamespace>{
  if(window.paypal)return Promise.resolve(window.paypal);
  if(!sdkPromise)sdkPromise=new Promise((resolve,reject)=>{const s=document.createElement("script");
-  s.src=`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(CLIENT_ID)}&intent=authorize&currency=USD&components=buttons`;
+  s.src=`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(CLIENT_ID)}&intent=authorize&currency=USD&components=buttons&disable-funding=paylater,credit,card`;
   s.async=true;s.onload=()=>window.paypal?resolve(window.paypal):reject(new Error("PayPal SDK unavailable"));s.onerror=()=>{sdkPromise=null;reject(new Error("PayPal SDK failed to load"))};document.head.appendChild(s)});
  return sdkPromise;
 }
