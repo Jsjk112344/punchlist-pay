@@ -13,7 +13,8 @@
     "db:seed": "tsx db/seed.ts",
     "smoke:live": "tsx scripts/smoke-backend.ts --live",
     "test:unit": "tsx scripts/paypal-unit.ts && tsx scripts/agents-unit.ts && tsx scripts/db-check.ts",
-    "paypal:smoke": "bash scripts/paypal-smoke.sh"
+    "paypal:smoke": "bash scripts/paypal-smoke.sh",
+    "eval:verifier": "tsx scripts/verifier-eval.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",

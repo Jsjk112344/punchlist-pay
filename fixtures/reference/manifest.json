@@ -1,0 +1,666 @@
+{
+ "version": 1,
+ "about": "Labelled reference photos from Wikimedia Commons. role=reference images are shown to the Verifier as calibration examples; role=eval images are held out for scripts/verifier-eval.ts.",
+ "items": [
+  {
+   "id": "cleaning-good-7-12",
+   "file": "cleaning-good-7-12.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Sink, toilet and floor clean, bin lined, nothing on surfaces but soap.",
+   "unit": null,
+   "source": {
+    "title": "File:Spacious clean bathroom with artwork on walls and two mirrors at the Maplewood Deli & Grille in New Jersey.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Spacious_clean_bathroom_with_artwork_on_walls_and_two_mirrors_at_the_Maplewood_Deli_%26_Grille_in_New_Jersey.JPG",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "cleaning-bad-6-6",
+   "file": "cleaning-bad-6-6.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Tissue piled beside the toilet, cluttered vanity, toilet lid up and stained.",
+   "unit": null,
+   "source": {
+    "title": "File:Dirty residential bathroom in America.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dirty_residential_bathroom_in_America.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Yitzilitt"
+   }
+  },
+  {
+   "id": "cleaning-bad-6-1",
+   "file": "cleaning-bad-6-1.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Counter and basins covered in dust and debris.",
+   "unit": null,
+   "source": {
+    "title": "File:Broken Bathroom (149045862).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Broken_Bathroom_(149045862).jpg",
+    "license": "CC BY-SA 2.0",
+    "author": "phot0geek"
+   }
+  },
+  {
+   "id": "cleaning-bad-6-7",
+   "file": "cleaning-bad-6-7.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Bare bathroom with dirt on the floor and stained grout; borderline at a glance.",
+   "unit": null,
+   "source": {
+    "title": "File:EFTA00002563 - Dirty white pedestal sink in a tiled bathroom with a blue tile band and water stains on the wall.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:EFTA00002563_-_Dirty_white_pedestal_sink_in_a_tiled_bathroom_with_a_blue_tile_band_and_water_stains_on_the_wall.jpg",
+    "license": "Public domain",
+    "author": "Federal Bureau of Investigation"
+   }
+  },
+  {
+   "id": "cleaning-bad-6-8",
+   "file": "cleaning-bad-6-8.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Basin caked in dirt and debris.",
+   "unit": null,
+   "source": {
+    "title": "File:Hoarders House - Abandoned and Dirty (15820379478).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hoarders_House_-_Abandoned_and_Dirty_(15820379478).jpg",
+    "license": "CC BY 2.0",
+    "author": "darkday from Brisbane, Australia"
+   }
+  },
+  {
+   "id": "cleaning-bad-6-9",
+   "file": "cleaning-bad-6-9.jpg",
+   "trade": "cleaning",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Stained toilet, damaged floor, peeling walls.",
+   "unit": null,
+   "source": {
+    "title": "File:Mid-City New Orleans - Dirty Toilet and Sink.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mid-City_New_Orleans_-_Dirty_Toilet_and_Sink.jpg",
+    "license": "CC BY 2.0",
+    "author": "Bart Everson"
+   }
+  },
+  {
+   "id": "cleaning-good-7-2",
+   "file": "cleaning-good-7-2.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean vessel sink and counter; cleaning bottles on the counter.",
+   "unit": null,
+   "source": {
+    "title": "File:A clean bathroom.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:A_clean_bathroom.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "DiegoKR"
+   }
+  },
+  {
+   "id": "cleaning-good-7-10",
+   "file": "cleaning-good-7-10.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Small clean bathroom, empty lined bin, clear floor.",
+   "unit": null,
+   "source": {
+    "title": "File:EFTA00000418 - Small clean bathroom with a toilet shelves holding cleaning supplies a trash can and a toilet brush.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:EFTA00000418_-_Small_clean_bathroom_with_a_toilet_shelves_holding_cleaning_supplies_a_trash_can_and_a_toilet_brush.jpg",
+    "license": "Public domain",
+    "author": "Federal Bureau of Investigation"
+   }
+  },
+  {
+   "id": "cleaning-good-7-11",
+   "file": "cleaning-good-7-11.jpg",
+   "trade": "cleaning",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the bathroom clean: fixtures and surfaces wiped, no grime, debris or clutter",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean shower, folded towels, mat on a clear floor.",
+   "unit": null,
+   "source": {
+    "title": "File:EFTA00000562 - Clean bathroom featuring a marble-tiled shower white toilet and tiled floor with gray bath mat.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:EFTA00000562_-_Clean_bathroom_featuring_a_marble-tiled_shower_white_toilet_and_tiled_floor_with_gray_bath_mat.jpg",
+    "license": "Public domain",
+    "author": "Federal Bureau of Investigation"
+   }
+  },
+  {
+   "id": "plumbing-bad-1-2",
+   "file": "plumbing-bad-1-2.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows dry P-trap and connections with no drips or water marks",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Water dripping from the bottom of the PVC P-trap.",
+   "unit": null,
+   "source": {
+    "title": "File:Leaking PVC Pipe Under Sink - P Trap (52842956605).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Leaking_PVC_Pipe_Under_Sink_-_P_Trap_(52842956605).jpg",
+    "license": "CC BY 2.0",
+    "author": "Tony Webster"
+   }
+  },
+  {
+   "id": "plumbing-bad-1-1",
+   "file": "plumbing-bad-1-1.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows dry P-trap and connections with no drips or water marks",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Corroded, green-crusted shutoff valve with water marks.",
+   "unit": null,
+   "source": {
+    "title": "File:Kitchen renovation leaky valve beneath kitchen sink.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kitchen_renovation_leaky_valve_beneath_kitchen_sink.JPG",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "plumbing-bad-3-5",
+   "file": "plumbing-bad-3-5.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows dry P-trap and connections with no drips or water marks",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Shows a plumber's legs under the sink; the trap is not visible, so not evidence.",
+   "unit": null,
+   "source": {
+    "title": "File:Plumber under kitchen sink.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Plumber_under_kitchen_sink.jpg",
+    "license": "CC BY 2.0",
+    "author": "MoToMo"
+   }
+  },
+  {
+   "id": "plumbing-bad-22-9",
+   "file": "plumbing-bad-22-9.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drain pipe intact and sound, with no corrosion, cracks or breaks",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Corroded, broken cast-iron drain pipe sections.",
+   "unit": null,
+   "source": {
+    "title": "File:Gusseisen Abwasserrohre Bleidichtung Rohrverstopfung.png",
+    "page": "https://commons.wikimedia.org/wiki/File:Gusseisen_Abwasserrohre_Bleidichtung_Rohrverstopfung.png",
+    "license": "CC BY-SA 3.0",
+    "author": "UuMUfQ"
+   }
+  },
+  {
+   "id": "plumbing-bad-23-1",
+   "file": "plumbing-bad-23-1.jpg",
+   "trade": "plumbing",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the faucet no longer dripping",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Water drop at the faucet spout.",
+   "unit": null,
+   "source": {
+    "title": "File:Franke faucet FF 380 kitchen sink showing drip.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Franke_faucet_FF_380_kitchen_sink_showing_drip.jpg",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "drywall-good-15-14",
+   "file": "drywall-good-15-14.jpg",
+   "trade": "drywall",
+   "label": "good",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Smooth, painted wall and soffit with crisp corners and no visible seams.",
+   "unit": null,
+   "source": {
+    "title": "File:Wall Repairs Portland-Cascade Painting and Restoration - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Wall_Repairs_Portland-Cascade_Painting_and_Restoration_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "author": "Carl Nurmi"
+   }
+  },
+  {
+   "id": "drywall-bad-15-8",
+   "file": "drywall-bad-15-8.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Open hole in the ceiling drywall with insulation exposed.",
+   "unit": null,
+   "source": {
+    "title": "File:Drywall repairs Portland-cascade painting and Restoration - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Drywall_repairs_Portland-cascade_painting_and_Restoration_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "author": "Carl Nurmi"
+   }
+  },
+  {
+   "id": "drywall-bad-15-13",
+   "file": "drywall-bad-15-13.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the drywall patched, flush and painted, with no hole, tape or exposed joint",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Room mid-repair: masking tape, unpainted patches, plastic sheeting.",
+   "unit": null,
+   "source": {
+    "title": "File:Portland Drywall Repair-Cascade Painting and Restoration - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Portland_Drywall_Repair-Cascade_Painting_and_Restoration_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "author": "Carl Nurmi"
+   }
+  },
+  {
+   "id": "drywall-bad-24-4",
+   "file": "drywall-bad-24-4.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Peeling paint and brown water stains on the ceiling.",
+   "unit": null,
+   "source": {
+    "title": "File:Ceiling sheetrock damaged by water so paint was peeling.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ceiling_sheetrock_damaged_by_water_so_paint_was_peeling.jpg",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "drywall-bad-24-5",
+   "file": "drywall-bad-24-5.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Large water stain on a ceiling tile.",
+   "unit": null,
+   "source": {
+    "title": "File:Ceiling water damage.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ceiling_water_damage.jpg",
+    "license": "CC BY 3.0",
+    "author": "Atomicdragon136"
+   }
+  },
+  {
+   "id": "drywall-bad-24-13",
+   "file": "drywall-bad-24-13.jpg",
+   "trade": "drywall",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the ceiling repaired and repainted with no water stains or peeling",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Brown water stain along the ceiling edge.",
+   "unit": null,
+   "source": {
+    "title": "File:Water Damage.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Water_Damage.JPG",
+    "license": "CC BY-SA 3.0",
+    "author": "Ed! (Photography Gallery)"
+   }
+  },
+  {
+   "id": "hinge-good-20-1",
+   "file": "hinge-good-20-1.jpg",
+   "trade": "hinge",
+   "label": "good",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the hinge mortised flush and fastened with all screws installed",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Hinge leaf sits flush in a clean mortise with all three screws driven.",
+   "unit": null,
+   "source": {
+    "title": "File:After using a butt marker to chisel out hole for door hinge.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:After_using_a_butt_marker_to_chisel_out_hole_for_door_hinge.JPG",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "hinge-bad-20-4",
+   "file": "hinge-bad-20-4.jpg",
+   "trade": "hinge",
+   "label": "bad",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows the hinge mortised flush and fastened with all screws installed",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Rough, splintered mortise and no hinge installed.",
+   "unit": null,
+   "source": {
+    "title": "File:Chiseling a hole for the door hinge while comparing it to previous door.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Chiseling_a_hole_for_the_door_hinge_while_comparing_it_to_previous_door.JPG",
+    "license": "CC0",
+    "author": "Tomwsulcer"
+   }
+  },
+  {
+   "id": "hinge-good-19-4",
+   "file": "hinge-good-19-4.jpg",
+   "trade": "hinge",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the hinge mortised flush and fastened with all screws installed",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Installed hinge, flush leaves, all screws present.",
+   "unit": null,
+   "source": {
+    "title": "File:Door Hinge.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Door_Hinge.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Gogerr"
+   }
+  },
+  {
+   "id": "grout-good-17-1",
+   "file": "grout-good-17-1.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Even, continuous grout lines between floor tiles.",
+   "unit": null,
+   "source": {
+    "title": "File:Bathroom Floor Tile.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bathroom_Floor_Tile.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Fanti Salms"
+   }
+  },
+  {
+   "id": "grout-bad-16-1",
+   "file": "grout-bad-16-1.jpg",
+   "trade": "grout",
+   "label": "bad",
+   "role": "reference",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Grout float mid-application with wet grout smeared over the tiles.",
+   "unit": null,
+   "source": {
+    "title": "File:Applying grout.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Applying_grout.jpg",
+    "license": "Public domain",
+    "author": "own"
+   }
+  },
+  {
+   "id": "grout-good-17-2",
+   "file": "grout-good-17-2.jpg",
+   "trade": "grout",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows even, complete, clean grout lines with no gaps, haze or wet grout",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Clean white wall tiles with even grout lines.",
+   "unit": null,
+   "source": {
+    "title": "File:Bathroom Tiles.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bathroom_Tiles.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Ameerahraheem"
+   }
+  },
+  {
+   "id": "door-good-9-4",
+   "file": "door-good-9-4.jpg",
+   "trade": "door",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door of unit 203",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Placard reads 203.",
+   "unit": "203",
+   "source": {
+    "title": "File:Hopewell Lofts apartment door.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hopewell_Lofts_apartment_door.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "AgnosticPreachersKid"
+   }
+  },
+  {
+   "id": "door-good-10-1",
+   "file": "door-good-10-1.jpg",
+   "trade": "door",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door of unit 926",
+    "check": "photo"
+   },
+   "expected_met": true,
+   "note": "Placard beside the door reads 926.",
+   "unit": "926",
+   "source": {
+    "title": "File:Crowne Plaza 926.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Crowne_Plaza_926.jpg",
+    "license": "CC BY 4.0",
+    "author": "Praiawart"
+   }
+  },
+  {
+   "id": "door-bad-10-4",
+   "file": "door-bad-10-4.jpg",
+   "trade": "door",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door of unit 4B",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Placard reads 217, not 4B.",
+   "unit": "4B",
+   "source": {
+    "title": "File:Room 217 Stanley Hotel Estes Park Colorado 2024.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Room_217_Stanley_Hotel_Estes_Park_Colorado_2024.jpg",
+    "license": "CC BY 4.0",
+    "author": "Larry D. Moore"
+   }
+  },
+  {
+   "id": "receipt-bad-12-1",
+   "file": "receipt-bad-12-1.jpg",
+   "trade": "receipt",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "Receipt total is 20.00 or less (any currency)",
+    "check": "receipt"
+   },
+   "expected_met": false,
+   "note": "Total EUR 38.85.",
+   "unit": null,
+   "source": {
+    "title": "File:Bauhaus receipt, Oude Pekela (2020) 01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bauhaus_receipt,_Oude_Pekela_(2020)_01.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Donald Trung Quoc Don (Ch\u1eef H\u00e1n: \u5fb5\u570b\u55ae) - Wikimedia Commons - \u00a9 CC BY-SA 4.0 International.(Want to use this image?)Origina"
+   }
+  },
+  {
+   "id": "receipt-good-12-9",
+   "file": "receipt-good-12-9.jpg",
+   "trade": "receipt",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "Receipt total is 20.00 or less (any currency)",
+    "check": "receipt"
+   },
+   "expected_met": true,
+   "note": "Total EUR 16.85.",
+   "unit": null,
+   "source": {
+    "title": "File:Bauhaus receipt, Oude Pekela (2020) 10.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bauhaus_receipt,_Oude_Pekela_(2020)_10.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Donald Trung Quoc Don (Ch\u1eef H\u00e1n: \u5fb5\u570b\u55ae) - Wikimedia Commons - \u00a9 CC BY-SA 4.0 International.(Want to use this image?)Origina"
+   }
+  },
+  {
+   "id": "receipt-good-12-10",
+   "file": "receipt-good-12-10.jpg",
+   "trade": "receipt",
+   "label": "good",
+   "role": "eval",
+   "criterion": {
+    "text": "Receipt total is 20.00 or less (any currency)",
+    "check": "receipt"
+   },
+   "expected_met": true,
+   "note": "Total EUR 18.85.",
+   "unit": null,
+   "source": {
+    "title": "File:Bauhaus receipt, Oude Pekela (2020) 11.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bauhaus_receipt,_Oude_Pekela_(2020)_11.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "Donald Trung Quoc Don (Ch\u1eef H\u00e1n: \u5fb5\u570b\u55ae) - Wikimedia Commons - \u00a9 CC BY-SA 4.0 International.(Want to use this image?)Origina"
+   }
+  },
+  {
+   "id": "door-bad-9-4-door-wrong-unit",
+   "file": "door-bad-9-4.jpg",
+   "trade": "door",
+   "label": "bad",
+   "role": "eval",
+   "criterion": {
+    "text": "After photo shows the door of unit 4B",
+    "check": "photo"
+   },
+   "expected_met": false,
+   "note": "Placard reads 203, not 4B.",
+   "unit": "4B",
+   "source": {
+    "title": "File:Hopewell Lofts apartment door.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hopewell_Lofts_apartment_door.jpg",
+    "license": "CC BY-SA 4.0",
+    "author": "AgnosticPreachersKid"
+   }
+  }
+ ]
+}

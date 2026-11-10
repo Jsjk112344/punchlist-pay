@@ -4,6 +4,10 @@ You are given: the proof images (each introduced by a label stating its kind and
 
 Return only the JSON object the schema asks for.
 
+## Reference examples
+
+The message may begin with labelled reference photos from other jobs (GOOD and BAD, with a note on what makes them so). Use them to calibrate what finished, acceptable work looks like for that trade: a flush, fully screwed hinge versus a rough mortise; dry plumbing versus a drip; continuous clean grout versus wet or missing grout. They are never evidence for this job. Judge only the proof images that follow them, and never quote a reference in your evidence.
+
 ## For every criterion
 
 Produce one entry with the criterion's id, `met` true or false, and `evidence`: a short, specific observation quoted from what you can actually see or read, such as "P-trap and both slip nuts visible, no drips or water marks", "Receipt total reads $41.07", "Door placard reads 4C, expected 4B", "After photo EXIF 15:52, deadline 16:00". Never write generic evidence like "looks fine" or "appears complete".

@@ -3,10 +3,12 @@ import type Anthropic from "@anthropic-ai/sdk";
 import type { Criterion, CriterionResult, ProofKind, Verdict, WorkOrder } from "@/lib/types";
 import { AgentOutputError, callModel, isRecord, parseJsonOutput, readPrompt } from "./client";
 import { verifierOutputSchema } from "./tools";
+import { pickReferences, referenceBlocks } from "./references";
 
 export type VisionMediaType = "image/jpeg" | "image/png" | "image/webp" | "image/gif";
 export interface VerifierImage { kind: ProofKind; data: Buffer; media_type: VisionMediaType; exif_ts: string; exif_missing: boolean }
-export interface VerifierInput { order: WorkOrder; images: VerifierImage[]; checkin_ts?: string; remaining_cents: number; now: string }
+/** `references`: show labelled good/bad example photos for the job's trade first (default on; VERIFIER_REFERENCES=0 disables). */
+export interface VerifierInput { order: WorkOrder; images: VerifierImage[]; checkin_ts?: string; remaining_cents: number; now: string; references?: boolean }
 
 const kindLabel: Record<ProofKind, string> = { checkin: "check-in photo", after: "after photo", receipt: "receipt" };
 
@@ -21,7 +23,9 @@ export function criteriaFor(order: WorkOrder): Criterion[] {
 export async function verifyProofs(input: VerifierInput): Promise<{ verdict: Verdict; raw: unknown }> {
   const criteria = criteriaFor(input.order);
   if (!criteria.length) throw new AgentOutputError("Work order has no acceptance criteria to verify against");
-  const content: Anthropic.Beta.Messages.BetaContentBlockParam[] = [];
+  const useRefs = input.references ?? process.env.VERIFIER_REFERENCES !== "0";
+  const refs = useRefs ? pickReferences([input.order.title, input.order.description, ...criteria.map((c) => c.text)].join(" ")) : [];
+  const content: Anthropic.Beta.Messages.BetaContentBlockParam[] = [...referenceBlocks(refs)];
   for (const img of input.images) {
     content.push({ type: "text", text: `${kindLabel[img.kind]}, ${img.exif_missing ? "EXIF missing (upload time used)" : `EXIF ${img.exif_ts}`}` });
     content.push({ type: "image", source: { type: "base64", media_type: img.media_type, data: img.data.toString("base64") } });
