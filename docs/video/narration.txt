@@ -1,0 +1,27 @@
+[00:00:00] A tenant texts the property manager: the kitchen sink in 4B is leaking.
+
+[00:00:06] Today that means phoning around for a plumber, chasing a photo, and processing an invoice. The manager does the paperwork. The plumber waits weeks to be paid.
+
+[00:00:15] Punchlist Pay pays the contractor the moment the work is proven.
+
+[00:00:21] The manager types the request in plain English. Claude turns it into a work order: the unit, a budget, a deadline, and three criteria that a photo, a receipt or a timestamp can prove.
+
+[00:00:36] Then two Claude agents negotiate. Ours works for the manager. Mike's agent knows his real rates. Ours opens at $220. Mike's agent counters at $245, and ours accepts. Our agent then creates a PayPal order for exactly that amount.
+
+[00:00:58] The manager approves it in PayPal. The money is authorized and held. Not captured, and not yet paid.
+
+[00:01:09] On site, Mike checks in with a photo. That releases the 20% deposit, $49, through PayPal Payouts.
+
+[00:01:22] When he's done, he uploads the after photo and the receipt. Claude's Verifier checks each criterion against the images and quotes what it sees.
+
+[00:01:34] It reads the receipt and sees dry pipes. But these sample photos carry no timestamps, and it can't confirm it's the same cabinet as the check-in. So nothing pays itself. The rules in code hold the balance and send the job to the manager with the evidence.
+
+[00:01:49] The manager approves it. That override is logged next to the original verdict. The authorization is captured, and the $196 balance goes out as a PayPal payout, confirmed by PayPal. Mike sees it on his phone.
+
+[00:02:07] Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo.
+
+[00:02:25] Every payout in the ledger is tied to the proof that released it.
+
+[00:02:35] PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move.
+
+[00:02:45] Punchlist Pay. Promised, proven, paid.

@@ -90,7 +90,12 @@ def facts(take):
 
 def beats(f):
     """Each beat: shots in order, one step label, and narration (each sentence becomes one or more captions)."""
-    neg = f"They settle at {f['price']} in {f['turns']} turns" + (f", after a {f['counter']} counter" if f["counter"] else "") + "."
+    if f["counter"] and f["counter"] == f["price"]:
+        neg = f"Ours opens at {f['first']}. Mike's agent counters at {f['counter']}, and ours accepts."
+    elif f["counter"]:
+        neg = f"Ours opens at {f['first']}, Mike's agent counters at {f['counter']}, and they settle at {f['price']}."
+    else:
+        neg = f"They agree on {f['price']}."
     escalated = f["verdict"] != "pass"
     decide = (
         "It reads the receipt and sees dry pipes. But these sample photos carry no timestamps, and it can't confirm it's the same cabinet as the check-in. "
@@ -104,15 +109,15 @@ def beats(f):
         f"So the authorization is captured, and the {f['balance']} balance goes out as a PayPal payout, confirmed by PayPal. No invoice, no waiting."
     )
     return [
-        dict(label=None, shots=[("card", "hook", 6.5)],
+        dict(label=None, shots=[("card", "hook", 6.0)],
              text="A tenant texts the property manager: the kitchen sink in 4B is leaking."),
-        dict(label=None, shots=[("card", "problem", 11.0)],
+        dict(label=None, shots=[("card", "problem", 9.5)],
              text="Today that means phoning around for a plumber, chasing a photo, and processing an invoice. The manager does the paperwork. The plumber waits weeks to be paid."),
         dict(label=None, shots=[("card", "thesis", 6.0)],
              text="Punchlist Pay pays the contractor the moment the work is proven."),
         dict(label=(1, "Scope the job"), shots=[("desk", "dash", "invite", 1.25)],
              text="The manager types the request in plain English. Claude turns it into a work order: the unit, a budget, a deadline, and three criteria that a photo, a receipt or a timestamp can prove."),
-        dict(label=(2, "Agents negotiate"), shots=[("desk", "invite", "negotiation_page", 3.0), ("desk", "negotiation_page", "paypal_ready", 1.15)],
+        dict(label=(2, "Agents negotiate"), shots=[("desk", "invite", "negotiation_page", 3.0), ("desk", "negotiation_page", "negotiation_done+1.5", 0.55), ("desk", "negotiation_done+1.5", "paypal_ready", 1.15)],
              text=f"Then two Claude agents negotiate. Ours works for the manager. Mike's agent knows his real rates. {neg} Our agent then creates a PayPal order for exactly that amount."),
         dict(label=(3, "Fund with PayPal"), shots=[("desk", "paypal_ready-1", "paypal_popup+1.2", 1.0), ("desk", "funded_view", "funded_view+3", 1.0)],
              text="The manager approves it in PayPal. The money is authorized and held. Not captured, and not yet paid."),
@@ -120,7 +125,7 @@ def beats(f):
              text=f"On site, Mike checks in with a photo. That releases the {f['pct']}% deposit, {f['deposit']}, through PayPal Payouts."),
         dict(label=(5, "Prove it"), shots=[("phone", "deposit_paid+1.5", "verdict+2.5", 1.0, "Mike's phone", "After photo and receipt go to Claude.")],
              text="When he's done, he uploads the after photo and the receipt. Claude's Verifier checks each criterion against the images and quotes what it sees."),
-        dict(label=(6, "Verdict"), shots=[("desk", "review", "approve" if escalated else "paid", 1.15)],
+        dict(label=(6, "Verdict"), shots=[("desk", "review", "approve" if escalated else "paid", 1.0)],
              text=decide),
         dict(label=(6, "Verdict"), shots=[("desk", "approve" if escalated else "paid", "paid", 3.0), ("desk", "paid", "paid_view+4", 1.0), ("phone", "phone_paid", "phone_paid+3.5", 1.0, "Mike's phone", "Paid, to his PayPal.")],
              text=pay + " Mike sees it on his phone."),
@@ -128,7 +133,7 @@ def beats(f):
              text="Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo."),
         dict(label=None, shots=[("desk2", "ledger_final", "end", 1.0)],
              text="Every payout in the ledger is tied to the proof that released it."),
-        dict(label=None, shots=[("card", "arch", 11.0)],
+        dict(label=None, shots=[("card", "arch", 10.0)],
              text="PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move."),
         dict(label=None, shots=[("card", "end", 5.5)],
              text="Punchlist Pay. Promised, proven, paid."),
@@ -201,9 +206,15 @@ def cues_for(text, start, end):
     """Split narration into caption cues (<= 2 lines of 52 chars), timed by length across [start, end]."""
     parts = []
     for sentence in re.split(r"(?<=[.!?])\s+", text.strip()):
-        lines = textwrap.wrap(sentence, 52)
-        for i in range(0, len(lines), 2):
-            parts.append(" ".join(lines[i:i + 2]))
+        # Long sentences break at clause boundaries, never mid-phrase; each cue stays within two lines.
+        cur = ""
+        for clause in re.split(r"(?<=[,:;])\s+", sentence):
+            if cur and len(cur) + 1 + len(clause) > 92:
+                parts.append(cur)
+                cur = clause
+            else:
+                cur = f"{cur} {clause}".strip()
+        parts.append(cur)
     total = sum(len(p) + 12 for p in parts)
     t, out = start + 0.25, []
     usable = end - start - 0.5
@@ -246,8 +257,9 @@ async def main(args):
                     dur = shot[2]
                     ff("-loop", "1", "-framerate", FPS, "-i", png, "-vf", f"fade=t=in:st=0:d=0.35,format=yuv420p", "-t", dur, "-c:v", "libx264", "-preset", "fast", "-crf", "17", seg)
                 elif shot[0] in ("desk", "desk2", "paypal"):
+                    cam = shot[0] if shot[0] in take_json(take)["cams"] else "desk"  # desk2 exists only after --part tail
                     a, b = resolve(marks, shot[1]), resolve(marks, shot[2])
-                    dur = frames_clip(take, shot[0], a, b, shot[3], seg, (W, H))
+                    dur = frames_clip(take, cam, a, b, shot[3], seg, (W, H))
                 else:  # phone on a stage with a side title
                     a, b = resolve(marks, shot[1]), resolve(marks, shot[2])
                     raw = work / f"{name}-raw.mp4"
@@ -277,34 +289,41 @@ async def main(args):
         clean = work / "clean-nolabels.mp4"
         ff("-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", clean)
 
-        # Step labels go on both cuts; captions only on the captioned cut.
-        async def overlays(items, kind):
-            pngs = []
-            for i, it in enumerate(items):
-                png = work / f"{kind}-{i:03d}.png"
-                body = (f'<div class="pill"><em>Step {it["label"][0]}</em>{it["label"][1]}</div>' if kind == "label"
-                        else f'<div class="cap"><div>{it["text"]}</div></div>')
-                await render_png(page, f'<div style="width:{W}px;height:{H}px;position:relative">{body}</div>', png, transparent=True)
-                pngs.append((png, it["start"], it["end"]))
-            return pngs
+        # Step labels go on both cuts; captions only on the captioned cut. Each cut gets ONE overlay track:
+        # a transparent PNG per distinct on-screen state, concatenated with exact durations (fast, single pass).
+        async def track(with_captions, name):
+            spans = [(l["start"], l["end"], "label", l) for l in labels] + ([(c["start"], c["end"], "cap", c) for c in cues] if with_captions else [])
+            cuts = sorted({0.0, pos, *[round(x, 3) for sp in spans for x in sp[:2]]})
+            cache, lines = {}, []
+            for a, b in zip(cuts, cuts[1:]):
+                mid = (a + b) / 2
+                on = [sp for sp in spans if sp[0] <= mid < sp[1]]
+                lab = next((sp[3]["label"] for sp in on if sp[2] == "label"), None)
+                cap = next((sp[3]["text"] for sp in on if sp[2] == "cap"), None)
+                key = (tuple(lab) if lab else None, cap)
+                if key not in cache:
+                    png = work / f"{name}-{len(cache):03d}.png"
+                    body = (f'<div class="pill"><em>Step {lab[0]}</em>{lab[1]}</div>' if lab else "") + (f'<div class="cap"><div>{cap}</div></div>' if cap else "")
+                    await render_png(page, f'<div style="width:{W}px;height:{H}px;position:relative">{body}</div>', png, transparent=True)
+                    cache[key] = png
+                lines += [f"file '{cache[key]}'", f"duration {b - a:.4f}"]
+            lines.append(lines[-2])
+            lst = work / f"{name}.txt"
+            lst.write_text("\n".join(lines) + "\n")
+            return lst
 
-        label_pngs = await overlays(labels, "label")
-        cap_pngs = await overlays(cues, "cap")
+        label_track = await track(False, "labels")
+        caption_track = await track(True, "captions")
         await browser.close()
 
-    def burn(src, items, dst):
-        inputs, chain, last = [], [], "0:v"
-        for i, (png, s, e) in enumerate(items):
-            inputs += ["-i", png]
-            tag = f"v{i}"
-            chain.append(f"[{last}][{i + 1}:v]overlay=0:0:enable='between(t,{s:.2f},{e:.2f})'[{tag}]")
-            last = tag
-        ff("-i", src, *inputs, "-filter_complex", ";".join(chain) + f";[{last}]format=yuv420p[out]", "-map", "[out]",
-           "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-movflags", "+faststart", dst)
+    def burn(src, track_list, dst):
+        ff("-i", src, "-f", "concat", "-safe", "0", "-i", track_list, "-filter_complex",
+           f"[1:v]fps={FPS},format=rgba[o];[0:v][o]overlay=0:0:eof_action=pass,format=yuv420p[out]", "-map", "[out]",
+           "-t", f"{pos:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-movflags", "+faststart", dst)
 
     out.mkdir(parents=True, exist_ok=True)
-    burn(clean, label_pngs, out / "punchlist-pay-clean.mp4")
-    burn(out / "punchlist-pay-clean.mp4", cap_pngs, out / "punchlist-pay.mp4")
+    burn(clean, label_track, out / "punchlist-pay-clean.mp4")
+    burn(clean, caption_track, out / "punchlist-pay.mp4")
     (out / "captions.srt").write_text("\n".join(f"{i + 1}\n{srt_time(c['start'])} --> {srt_time(c['end'])}\n{c['text']}\n" for i, c in enumerate(cues)))
     (out / "narration.txt").write_text("\n\n".join(f"[{srt_time(t['start'])[:8]}] " + b["text"] for b, t in zip(plan, [next(x for x in timeline if x["beat"] == i + 1) for i in range(len(plan))])) + "\n")
     (out / "timeline.json").write_text(json.dumps({"facts": f, "duration": round(pos, 2), "shots": timeline, "labels": labels}, indent=1, default=str))
