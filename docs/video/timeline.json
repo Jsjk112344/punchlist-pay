@@ -10,233 +10,253 @@
   "confidence": 85,
   "turns": 3
  },
- "duration": 171.83,
+ "duration": 175.57,
  "shots": [
   {
    "beat": 1,
    "shot": "card",
    "spec": [
-    "hook",
-    "6.0"
+    "problem",
+    "5.0"
    ],
    "start": 0.0,
-   "end": 6.0
+   "end": 5.0
   },
   {
    "beat": 2,
    "shot": "card",
    "spec": [
-    "problem",
-    "9.5"
+    "stats",
+    "13.0"
    ],
-   "start": 6.0,
-   "end": 15.5
+   "start": 5.0,
+   "end": 18.0
   },
   {
    "beat": 3,
    "shot": "card",
    "spec": [
-    "thesis",
+    "why",
     "6.0"
    ],
-   "start": 15.5,
-   "end": 21.5
+   "start": 18.0,
+   "end": 24.0
   },
   {
    "beat": 4,
+   "shot": "card",
+   "spec": [
+    "hook",
+    "4.5"
+   ],
+   "start": 24.0,
+   "end": 28.5
+  },
+  {
+   "beat": 5,
+   "shot": "card",
+   "spec": [
+    "thesis",
+    "5.0"
+   ],
+   "start": 28.5,
+   "end": 33.5
+  },
+  {
+   "beat": 6,
    "shot": "desk",
    "spec": [
     "dash",
     "invite",
-    "1.25"
+    "1.45"
    ],
-   "start": 21.5,
-   "end": 36.7
+   "start": 33.5,
+   "end": 46.61
   },
   {
-   "beat": 5,
+   "beat": 7,
    "shot": "desk",
    "spec": [
     "invite",
     "negotiation_page",
     "3.0"
    ],
-   "start": 36.7,
-   "end": 44.22
+   "start": 46.61,
+   "end": 54.12
   },
   {
-   "beat": 5,
+   "beat": 7,
    "shot": "desk",
    "spec": [
     "negotiation_page",
     "negotiation_done+1.5",
     "0.55"
    ],
-   "start": 44.22,
-   "end": 51.23
+   "start": 54.12,
+   "end": 61.14
   },
   {
-   "beat": 5,
+   "beat": 7,
    "shot": "desk",
    "spec": [
     "negotiation_done+1.5",
     "paypal_ready",
     "1.15"
    ],
-   "start": 51.23,
-   "end": 58.73
+   "start": 61.14,
+   "end": 68.64
   },
   {
-   "beat": 6,
+   "beat": 8,
    "shot": "desk",
    "spec": [
     "paypal_ready-1",
     "paypal_popup+1.2",
     "1.0"
    ],
-   "start": 58.73,
-   "end": 66.07
+   "start": 68.64,
+   "end": 75.97
   },
   {
-   "beat": 6,
+   "beat": 8,
    "shot": "desk",
    "spec": [
     "funded_view",
     "funded_view+3",
     "1.0"
    ],
-   "start": 66.07,
-   "end": 69.07
+   "start": 75.97,
+   "end": 78.97
   },
   {
-   "beat": 7,
+   "beat": 9,
    "shot": "phone",
    "spec": [
     "phone_jobs",
     "checked_in",
-    "1.1"
+    "1.3"
    ],
-   "start": 69.07,
-   "end": 76.32
+   "start": 78.97,
+   "end": 85.11
   },
   {
-   "beat": 7,
+   "beat": 9,
    "shot": "phone",
    "spec": [
     "checked_in",
     "deposit_paid",
     "4.0"
    ],
-   "start": 76.32,
-   "end": 80.67
+   "start": 85.11,
+   "end": 89.46
   },
   {
-   "beat": 7,
+   "beat": 9,
    "shot": "phone",
    "spec": [
     "deposit_paid",
     "deposit_paid+1.5",
     "1.0"
    ],
-   "start": 80.67,
-   "end": 82.17
+   "start": 89.46,
+   "end": 90.96
   },
   {
-   "beat": 8,
+   "beat": 10,
    "shot": "phone",
    "spec": [
     "deposit_paid+1.5",
     "verdict+2.5",
-    "1.0"
+    "1.15"
    ],
-   "start": 82.17,
-   "end": 94.99
+   "start": 90.96,
+   "end": 102.1
   },
   {
-   "beat": 9,
+   "beat": 11,
    "shot": "desk",
    "spec": [
     "review",
     "approve",
     "1.0"
    ],
-   "start": 94.99,
-   "end": 109.08
+   "start": 102.1,
+   "end": 116.2
   },
   {
-   "beat": 10,
+   "beat": 12,
    "shot": "desk",
    "spec": [
     "approve",
     "paid",
     "3.0"
    ],
-   "start": 109.08,
-   "end": 116.17
+   "start": 116.2,
+   "end": 123.28
   },
   {
-   "beat": 10,
+   "beat": 12,
    "shot": "desk",
    "spec": [
     "paid",
     "paid_view+4",
     "1.0"
    ],
-   "start": 116.17,
-   "end": 123.81
+   "start": 123.28,
+   "end": 130.93
   },
   {
-   "beat": 10,
+   "beat": 12,
    "shot": "phone",
    "spec": [
     "phone_paid",
     "phone_paid+3.5",
     "1.0"
    ],
-   "start": 123.81,
-   "end": 127.31
+   "start": 130.93,
+   "end": 134.43
   },
   {
-   "beat": 11,
+   "beat": 13,
    "shot": "desk2",
    "spec": [
     "ledger",
     "ledger_final",
-    "1.35"
+    "1.6"
    ],
-   "start": 127.31,
-   "end": 143.9
+   "start": 134.43,
+   "end": 148.42
   },
   {
-   "beat": 12,
+   "beat": 14,
    "shot": "desk2",
    "spec": [
     "ledger_final",
     "end",
-    "1.3"
+    "1.45"
    ],
-   "start": 143.9,
-   "end": 156.33
+   "start": 148.42,
+   "end": 159.57
   },
   {
-   "beat": 13,
+   "beat": 15,
    "shot": "card",
    "spec": [
     "arch",
-    "10.0"
+    "10.5"
    ],
-   "start": 156.33,
-   "end": 166.33
+   "start": 159.57,
+   "end": 170.07
   },
   {
-   "beat": 14,
+   "beat": 16,
    "shot": "card",
    "spec": [
     "end",
     "5.5"
    ],
-   "start": 166.33,
-   "end": 171.83
+   "start": 170.07,
+   "end": 175.57
   }
  ],
  "labels": [
@@ -245,56 +265,56 @@
     1,
     "Scope the job"
    ],
-   "start": 21.5,
-   "end": 36.704
+   "start": 33.5,
+   "end": 46.60689655172414
   },
   {
    "label": [
     2,
     "Agents negotiate"
    ],
-   "start": 36.704,
-   "end": 58.734920948616605
+   "start": 46.60689655172414,
+   "end": 68.63781750034074
   },
   {
    "label": [
     3,
     "Fund with PayPal"
    ],
-   "start": 58.734920948616605,
-   "end": 69.06892094861661
+   "start": 68.63781750034074,
+   "end": 78.97181750034075
   },
   {
    "label": [
     4,
     "Check in"
    ],
-   "start": 69.06892094861661,
-   "end": 82.16989822134374
+   "start": 78.97181750034075,
+   "end": 90.95699057726371
   },
   {
    "label": [
     5,
     "Prove it"
    ],
-   "start": 82.16989822134374,
-   "end": 94.98589822134377
+   "start": 90.95699057726371,
+   "end": 102.1013384033507
   },
   {
    "label": [
     6,
     "Verdict"
    ],
-   "start": 94.98589822134377,
-   "end": 127.3128982213437
+   "start": 102.1013384033507,
+   "end": 134.4283384033506
   },
   {
    "label": [
     7,
     "Wrong unit, nothing paid"
    ],
-   "start": 127.3128982213437,
-   "end": 143.89734266578824
+   "start": 134.4283384033506,
+   "end": 148.42146340335069
   }
  ]
 }

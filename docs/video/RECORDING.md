@@ -1,6 +1,6 @@
 # Demo video
 
-Cut: **2:52**, 1920×1080, 30 fps, silent (voice-over goes on top). Recorded live on Nov 11, 2026 against PayPal sandbox and Claude: work order wo-1043, $220 offer, $245 counter accepted, $49 deposit and $196 balance paid by PayPal Payouts after a logged PM override (the Verifier failed the sample proof at 85%: no EXIF, cabinet not confirmed).
+Cut: **2:56**, 1920×1080, 30 fps, silent (voice-over goes on top). Opens with the problem and three sourced statistics (Rabbet 2024 and 2025 Construction Payments Reports: 82% of contractors wait 30+ days, 88% declined to bid for slow payers, $299B cost in 2025). The walkthrough was recorded live on Nov 11, 2026 against PayPal sandbox and Claude: work order wo-1043, $220 offer, $245 counter accepted, $49 deposit and $196 balance paid by PayPal Payouts after a logged PM override (the Verifier failed the sample proof at 85%: no EXIF, cabinet not confirmed).
 
 - `punchlist-pay.mp4`: step labels and guide captions burned in
 - `punchlist-pay-clean.mp4`: step labels only, for a cut with your own captions

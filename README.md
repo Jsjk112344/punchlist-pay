@@ -2,6 +2,10 @@
 
 A property manager's work-order desk where Claude agents scope a job, negotiate it with the contractor's agent, verify photo proof, and pay the contractor through PayPal within seconds of a pass. Built for the PayPal AI Hackathon 2026.
 
+**Live demo:** https://punchlist-pay.onrender.com (PayPal sandbox + Claude, on Render; the free instance sleeps when idle, so the first load can take about a minute) · **Video:** [`docs/video/punchlist-pay.mp4`](docs/video/punchlist-pay.mp4)
+
+**Why:** 82% of US contractors wait more than 30 days to get paid, and slow payments cost US construction an estimated $299B in 2025 ([Rabbet 2024 and 2025 Construction Payments Reports](https://rabbet.com/reports/construction-payments-2025)). Payment is slow because proof is slow. Punchlist Pay makes the proof the trigger.
+
 **Promised → proven → paid:** request → work order → agent negotiation → PM funds with PayPal → check-in (deposit payout) → after-photo + receipt → Claude vision verdict → capture + balance payout. Fail or low confidence escalates to the PM, and nothing is paid.
 
 ## Reproduce in 10 minutes
@@ -75,6 +79,20 @@ The leash, enforced in code regardless of what the model says:
 - A partial payout can never exceed the remaining balance. A deposit must equal the agreed percentage and needs a check-in photo.
 - Verdicts are cached by a hash of the proof set, so re-running verify never re-bills or flips a result.
 - Money only moves after a human funded the order. "Approve anyway" is an explicit PM override that is logged with the original verdict.
+
+## AG Grid and Render
+
+**AG Grid** (`ag-grid-react` 33, Community) is the ledger on the dashboard (`components/ledger-grid.tsx`), where every payout meets its proof:
+
+- **Proof column:** after-photo thumbnail plus the Verifier's verdict and confidence (a PM override shows as "PM OK").
+- **Proof → pay column:** seconds from proof upload to the PayPal-confirmed payout, sortable.
+- **Pinned bottom row:** live totals of agreed, held and paid, and the average proof → pay, following the filters and search.
+- **Quick filter search** across unit, job, contractor and property; status chips; CSV export.
+- **Cell flash:** when a 3-second poll or webhook sees PayPal confirm a payout, the status and paid cells flash green in place (row ids are stable).
+- **Expandable rows and grouping:** full-width rows expand a job into its check-in, after and receipt photos, the per-criterion evidence and the payout timeline. "Group by property" builds collapsible property groups on the same grid.
+- Custom cell renderers throughout, on a Quartz theme matched to the app.
+
+**Render** hosts the whole app from `render.yaml`, a Blueprint with a Node web service (Next.js) and a Render Postgres database. Drizzle migrations and the demo seed run at boot, `APP_URL` falls back to Render's `RENDER_EXTERNAL_URL`, and `/api/health` is the health check. The same code runs on embedded PGlite locally, so `npm run dev` needs no database.
 
 ## Architecture
 

@@ -1,27 +1,31 @@
-[00:00:00] A tenant texts the property manager: the kitchen sink in 4B is leaking.
+[00:00:00] Contractors do the work. Then they wait to get paid.
 
-[00:00:06] Today that means phoning around for a plumber, chasing a photo, and processing an invoice. The manager does the paperwork. The plumber waits weeks to be paid.
+[00:00:05] In Rabbet's 2024 survey, 82% of US contractors waited more than 30 days for payment. In 2025, 88% declined to bid for clients with a slow-pay reputation. Slow payments cost US construction an estimated 299 billion dollars in 2025.
 
-[00:00:15] Punchlist Pay pays the contractor the moment the work is proven.
+[00:00:18] Payment is slow because proof is slow: photos, invoices, and someone checking them before any money moves.
 
-[00:00:21] The manager types the request in plain English. Claude turns it into a work order: the unit, a budget, a deadline, and three criteria that a photo, a receipt or a timestamp can prove.
+[00:00:24] Take one leak. The kitchen sink in unit 4B.
 
-[00:00:36] Then two Claude agents negotiate. Ours works for the manager. Mike's agent knows his real rates. Ours opens at $220. Mike's agent counters at $245, and ours accepts. Our agent then creates a PayPal order for exactly that amount.
+[00:00:28] Punchlist Pay pays the contractor the moment the work is proven.
 
-[00:00:58] The manager approves it in PayPal. The money is authorized and held. Not captured, and not yet paid.
+[00:00:33] The manager types the request in plain English. Claude turns it into a work order: the unit, a budget, a deadline, and three criteria that a photo, a receipt or a timestamp can prove.
 
-[00:01:09] On site, Mike checks in with a photo. That releases the 20% deposit, $49, through PayPal Payouts.
+[00:00:46] Then two Claude agents negotiate. Ours works for the manager. Mike's agent knows his real rates. Ours opens at $220. Mike's agent counters at $245, and ours accepts. Our agent then creates a PayPal order for exactly that amount.
 
-[00:01:22] When he's done, he uploads the after photo and the receipt. Claude's Verifier checks each criterion against the images and quotes what it sees.
+[00:01:08] The manager approves it in PayPal. The money is authorized and held. Not captured, and not yet paid.
 
-[00:01:34] It reads the receipt and sees dry pipes. But these sample photos carry no timestamps, and it can't confirm it's the same cabinet as the check-in. So nothing pays itself. The rules in code hold the balance and send the job to the manager with the evidence.
+[00:01:18] On site, Mike checks in with a photo. That releases the 20% deposit, $49, through PayPal Payouts.
 
-[00:01:49] The manager approves it. That override is logged next to the original verdict. The authorization is captured, and the $196 balance goes out as a PayPal payout, confirmed by PayPal. Mike sees it on his phone.
+[00:01:30] When he's done, he uploads the after photo and the receipt. Claude's Verifier checks each criterion against the images and quotes what it sees.
 
-[00:02:07] Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo.
+[00:01:42] It reads the receipt and sees dry pipes. But these sample photos carry no timestamps, and it can't confirm it's the same cabinet as the check-in. So nothing pays itself. The rules in code hold the balance and send the job to the manager with the evidence.
 
-[00:02:23] The ledger is an AG Grid. Every row carries its proof, the verdict, and how fast the money moved, with live totals of what's held and what's paid.
+[00:01:56] The manager approves it. That override is logged next to the original verdict. The authorization is captured, and the $196 balance goes out as a PayPal payout, confirmed by PayPal. Mike sees it on his phone.
 
-[00:02:36] PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move.
+[00:02:14] Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo.
 
-[00:02:46] Punchlist Pay. Promised, proven, paid.
+[00:02:28] The ledger is an AG Grid. Every row carries its proof, the verdict, and how fast the money moved, with live totals of what's held and what's paid.
+
+[00:02:39] PayPal Orders, Payments and Payouts move the money. Claude scopes, negotiates and verifies. The ledger is AG Grid, and the whole app runs on Render with Render Postgres. Hard rules in code decide when money moves.
+
+[00:02:50] Punchlist Pay. Promised, proven, paid. Try it at punchlist-pay dot onrender dot com.

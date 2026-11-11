@@ -42,10 +42,15 @@ h2{{font-size:64px;line-height:1.15;letter-spacing:-.045em;font-weight:680;margi
 .msg{{display:inline-block;background:#fff;border:1px solid #E5EAF0;border-radius:28px 28px 28px 8px;padding:34px 44px;font-size:52px;letter-spacing:-.03em;font-weight:560;box-shadow:0 20px 50px rgba(23,35,54,.08);margin-top:24px}}
 .flow{{display:flex;align-items:center;gap:26px;margin-top:70px;font-size:44px;font-weight:680;letter-spacing:-.03em}}
 .flow span.arrow{{color:#2259D5}}.paid{{color:#16804C}}
-.grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}}
-.box{{border:1px solid #2E3E57;border-radius:22px;padding:34px 34px 38px}}
-.box b{{display:block;font-size:34px;letter-spacing:-.03em;margin-bottom:16px}}
-.box p{{margin:0;font-size:25px;line-height:1.55;color:#A9B6C8}}
+.grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}}
+.box{{border:1px solid #2E3E57;border-radius:22px;padding:26px 30px 28px}}
+.box b{{display:block;font-size:30px;letter-spacing:-.03em;margin-bottom:10px}}
+.box p{{margin:0;font-size:23px;line-height:1.5;color:#A9B6C8}}
+.stats{{display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-top:20px}}
+.stat strong{{display:block;font-size:150px;line-height:1;letter-spacing:-.06em;font-weight:760;color:#8DB0FF}}
+.stat p{{font-size:34px;line-height:1.35;margin:22px 0 14px;color:#F8FAFC}}
+.stat small{{font-size:22px;color:#A9B6C8}}
+.source{{position:absolute;left:170px;bottom:110px;font-size:22px;color:#A9B6C8}}
 .pill{{position:absolute;left:44px;top:40px;background:#172336;color:#fff;border-radius:999px;padding:14px 26px;font-size:24px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 10px 30px rgba(23,35,54,.25)}}
 .pill em{{font-style:normal;color:#8DB0FF;margin-right:12px}}
 .cap{{position:absolute;left:0;right:0;bottom:64px;display:flex;justify-content:center}}
@@ -109,47 +114,56 @@ def beats(f):
         f"So the authorization is captured, and the {f['balance']} balance goes out as a PayPal payout, confirmed by PayPal. No invoice, no waiting."
     )
     return [
-        dict(label=None, shots=[("card", "hook", 6.0)],
-             text="A tenant texts the property manager: the kitchen sink in 4B is leaking."),
-        dict(label=None, shots=[("card", "problem", 9.5)],
-             text="Today that means phoning around for a plumber, chasing a photo, and processing an invoice. The manager does the paperwork. The plumber waits weeks to be paid."),
-        dict(label=None, shots=[("card", "thesis", 6.0)],
+        dict(label=None, shots=[("card", "problem", 5.0)],
+             text="Contractors do the work. Then they wait to get paid."),
+        dict(label=None, shots=[("card", "stats", 13.0)],
+             text="In Rabbet's 2024 survey, 82% of US contractors waited more than 30 days for payment. In 2025, 88% declined to bid for clients with a slow-pay reputation. Slow payments cost US construction an estimated 299 billion dollars in 2025."),
+        dict(label=None, shots=[("card", "why", 6.0)],
+             text="Payment is slow because proof is slow: photos, invoices, and someone checking them before any money moves."),
+        dict(label=None, shots=[("card", "hook", 4.5)],
+             text="Take one leak. The kitchen sink in unit 4B."),
+        dict(label=None, shots=[("card", "thesis", 5.0)],
              text="Punchlist Pay pays the contractor the moment the work is proven."),
-        dict(label=(1, "Scope the job"), shots=[("desk", "dash", "invite", 1.25)],
+        dict(label=(1, "Scope the job"), shots=[("desk", "dash", "invite", 1.45)],
              text="The manager types the request in plain English. Claude turns it into a work order: the unit, a budget, a deadline, and three criteria that a photo, a receipt or a timestamp can prove."),
         dict(label=(2, "Agents negotiate"), shots=[("desk", "invite", "negotiation_page", 3.0), ("desk", "negotiation_page", "negotiation_done+1.5", 0.55), ("desk", "negotiation_done+1.5", "paypal_ready", 1.15)],
              text=f"Then two Claude agents negotiate. Ours works for the manager. Mike's agent knows his real rates. {neg} Our agent then creates a PayPal order for exactly that amount."),
         dict(label=(3, "Fund with PayPal"), shots=[("desk", "paypal_ready-1", "paypal_popup+1.2", 1.0), ("desk", "funded_view", "funded_view+3", 1.0)],
              text="The manager approves it in PayPal. The money is authorized and held. Not captured, and not yet paid."),
-        dict(label=(4, "Check in"), shots=[("phone", "phone_jobs", "checked_in", 1.1, "Mike's phone", "On site, Mike checks in with a photo."), ("phone", "checked_in", "deposit_paid", 4.0, "Mike's phone", "20% deposit, paid by PayPal Payouts."), ("phone", "deposit_paid", "deposit_paid+1.5", 1.0, "Mike's phone", "20% deposit, paid by PayPal Payouts.")],
+        dict(label=(4, "Check in"), shots=[("phone", "phone_jobs", "checked_in", 1.3, "Mike's phone", "On site, Mike checks in with a photo."), ("phone", "checked_in", "deposit_paid", 4.0, "Mike's phone", "20% deposit, paid by PayPal Payouts."), ("phone", "deposit_paid", "deposit_paid+1.5", 1.0, "Mike's phone", "20% deposit, paid by PayPal Payouts.")],
              text=f"On site, Mike checks in with a photo. That releases the {f['pct']}% deposit, {f['deposit']}, through PayPal Payouts."),
-        dict(label=(5, "Prove it"), shots=[("phone", "deposit_paid+1.5", "verdict+2.5", 1.0, "Mike's phone", "After photo and receipt go to Claude.")],
+        dict(label=(5, "Prove it"), shots=[("phone", "deposit_paid+1.5", "verdict+2.5", 1.15, "Mike's phone", "After photo and receipt go to Claude.")],
              text="When he's done, he uploads the after photo and the receipt. Claude's Verifier checks each criterion against the images and quotes what it sees."),
         dict(label=(6, "Verdict"), shots=[("desk", "review", "approve" if escalated else "paid", 1.0)],
              text=decide),
         dict(label=(6, "Verdict"), shots=[("desk", "approve" if escalated else "paid", "paid", 3.0), ("desk", "paid", "paid_view+4", 1.0), ("phone", "phone_paid", "phone_paid+3.5", 1.0, "Mike's phone", "Paid, to his PayPal.")],
              text=pay + " Mike sees it on his phone."),
-        dict(label=(7, "Wrong unit, nothing paid"), shots=[("desk2", "ledger", "ledger_final", 1.35)],
+        dict(label=(7, "Wrong unit, nothing paid"), shots=[("desk2", "ledger", "ledger_final", 1.6)],
              text="Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo."),
-        dict(label=None, shots=[("desk2", "ledger_final", "end", 1.3)],
+        dict(label=None, shots=[("desk2", "ledger_final", "end", 1.45)],
              text="The ledger is an AG Grid. Every row carries its proof, the verdict, and how fast the money moved, with live totals of what's held and what's paid."),
-        dict(label=None, shots=[("card", "arch", 10.0)],
-             text="PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move."),
+        dict(label=None, shots=[("card", "arch", 10.5)],
+             text="PayPal Orders, Payments and Payouts move the money. Claude scopes, negotiates and verifies. The ledger is AG Grid, and the whole app runs on Render with Render Postgres. Hard rules in code decide when money moves."),
         dict(label=None, shots=[("card", "end", 5.5)],
-             text="Punchlist Pay. Promised, proven, paid."),
+             text="Punchlist Pay. Promised, proven, paid. Try it at punchlist-pay dot onrender dot com."),
     ]
 
 
 CARDS = {
     "hook": f'<div class="card">{"<div class=brand>" + LOGO + "Punchlist Pay</div>"}<div class="kicker">Alder House · Unit 4B · 2:14 PM</div><div><span class="msg">The kitchen sink is leaking under the cabinet 💧</span></div></div>',
-    "problem": f'<div class="card dark"><div class=brand>{LOGO}Punchlist Pay</div><div class="kicker">Today</div><h2>Phone around for a plumber.<br>Chase a photo. Process an invoice.</h2><div class="sub">The manager does the paperwork. The plumber waits weeks to be paid.</div></div>',
+    "problem": f'<div class="card dark"><div class=brand>{LOGO}Punchlist Pay</div><h1>Contractors do the work.<br><span style="color:#8DB0FF">Then they wait to get paid.</span></h1></div>',
+    "stats": f'<div class="card dark"><div class=brand>{LOGO}Punchlist Pay</div><div class="kicker">The cost of slow pay · US construction</div><div class="stats"><div class="stat"><strong>82%</strong><p>of contractors wait more than<br>30 days to get paid</p><small>2024 · up from 49% in 2022</small></div><div class="stat"><strong>88%</strong><p>turned down bids because of<br>a slow-pay reputation</p><small>2025</small></div><div class="stat"><strong>$299B</strong><p>cost of slow payments<br>to US construction</p><small>2025 · a hidden 14% tax</small></div></div><div class="source">Source: Rabbet, 2024 and 2025 Construction Payments Reports · rabbet.com/reports</div></div>',
+    "why": f'<div class="card dark"><div class=brand>{LOGO}Punchlist Pay</div><div class="kicker">Why</div><h2>Payment is slow because proof is slow.</h2><div class="sub">Photos, invoices, and someone checking them before any money moves.</div></div>',
     "thesis": f'<div class="card"><div class=brand>{LOGO}Punchlist Pay</div><h1>Pay the contractor the moment<br>the work is proven.</h1><div class="flow"><span>Promised</span><span class="arrow">→</span><span>Proven</span><span class="arrow">→</span><span class="paid">Paid</span></div></div>',
     "arch": f'<div class="card dark"><div class=brand>{LOGO}Punchlist Pay</div><div class="kicker">How it works</div><h2>Agents decide. PayPal moves the money.<br>Code holds the leash.</h2><div class="grid">'
-            '<div class="box"><b>PayPal</b><p>Orders v2 with AUTHORIZE intent holds the funds. Capture on the first release. Payouts for the deposit and the balance. Idempotent request ids.</p></div>'
-            '<div class="box"><b>Claude</b><p>Dispatcher scopes the job. Two agents negotiate with tool calls. The Verifier reads the photos and receipt and quotes its evidence.</p></div>'
+            '<div class="box"><b>PayPal</b><p>Orders v2 with AUTHORIZE intent holds the funds. Capture on the first release. Payouts for the deposit and the balance.</p></div>'
+            '<div class="box"><b>Claude</b><p>Dispatcher scopes the job. Two agents negotiate with tool calls. The Verifier reads photos and receipts and quotes its evidence.</p></div>'
             '<div class="box"><b>Hard rules</b><p>No pay on a fail or below 0.8 confidence. Photos must postdate check-in. A human funds every order. Overrides are logged.</p></div>'
+            '<div class="box"><b>AG Grid</b><p>The ledger: proof and verdict per row, proof-to-pay timing, pinned live totals, quick search, grouping, cells that flash when PayPal confirms.</p></div>'
+            '<div class="box"><b>Render</b><p>One Blueprint: the Next.js web service plus Render Postgres. Migrations and seed run at boot. Live at punchlist-pay.onrender.com.</p></div>'
+            '<div class="box"><b>Live, not mocked</b><p>The walkthrough is one real run: PayPal sandbox transactions and live Claude calls. Older ledger rows are seeded demo data.</p></div>'
             '</div></div>',
-    "end": f'<div class="card"><div class=brand>{LOGO}Punchlist Pay</div><h1>Promised. Proven. <span class="paid">Paid.</span></h1><div class="sub">github.com/Jsjk112344/punchlist-pay · PayPal sandbox + Claude</div></div>',
+    "end": f'<div class="card"><div class=brand>{LOGO}Punchlist Pay</div><h1>Promised. Proven. <span class="paid">Paid.</span></h1><div class="sub">punchlist-pay.onrender.com<br>github.com/Jsjk112344/punchlist-pay</div></div>',
 }
 
 

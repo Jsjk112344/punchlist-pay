@@ -1,171 +1,199 @@
 1
-00:00:00,250 --> 00:00:05,670
-A tenant texts the property manager: the kitchen sink in 4B is leaking.
+00:00:00,250 --> 00:00:02,330
+Contractors do the work.
 
 2
-00:00:06,250 --> 00:00:10,950
-Today that means phoning around for a plumber, chasing a photo, and processing an invoice.
+00:00:02,410 --> 00:00:04,670
+Then they wait to get paid.
 
 3
-00:00:11,030 --> 00:00:12,970
-The manager does the paperwork.
+00:00:05,250 --> 00:00:09,720
+In Rabbet's 2024 survey, 82% of US contractors waited more than 30 days for payment.
 
 4
-00:00:13,050 --> 00:00:15,170
-The plumber waits weeks to be paid.
+00:00:09,800 --> 00:00:13,500
+In 2025, 88% declined to bid for clients with a slow-pay reputation.
 
 5
-00:00:15,750 --> 00:00:21,170
-Punchlist Pay pays the contractor the moment the work is proven.
+00:00:13,580 --> 00:00:17,670
+Slow payments cost US construction an estimated 299 billion dollars in 2025.
 
 6
-00:00:21,750 --> 00:00:25,670
-The manager types the request in plain English.
+00:00:18,250 --> 00:00:21,070
+Payment is slow because proof is slow: photos, invoices,
 
 7
-00:00:25,750 --> 00:00:30,950
-Claude turns it into a work order: the unit, a budget, a deadline,
+00:00:21,150 --> 00:00:23,670
+and someone checking them before any money moves.
 
 8
-00:00:31,030 --> 00:00:36,370
-and three criteria that a photo, a receipt or a timestamp can prove.
+00:00:24,250 --> 00:00:25,750
+Take one leak.
 
 9
-00:00:36,950 --> 00:00:40,160
-Then two Claude agents negotiate.
+00:00:25,830 --> 00:00:28,170
+The kitchen sink in unit 4B.
 
 10
-00:00:40,240 --> 00:00:43,000
-Ours works for the manager.
+00:00:28,750 --> 00:00:33,170
+Punchlist Pay pays the contractor the moment the work is proven.
 
 11
-00:00:43,080 --> 00:00:46,360
-Mike's agent knows his real rates.
+00:00:33,750 --> 00:00:37,100
+The manager types the request in plain English.
 
 12
-00:00:46,440 --> 00:00:48,620
-Ours opens at $220.
+00:00:37,180 --> 00:00:41,630
+Claude turns it into a work order: the unit, a budget, a deadline,
 
 13
-00:00:48,700 --> 00:00:53,000
-Mike's agent counters at $245, and ours accepts.
+00:00:41,710 --> 00:00:46,280
+and three criteria that a photo, a receipt or a timestamp can prove.
 
 14
-00:00:53,080 --> 00:00:58,400
-Our agent then creates a PayPal order for exactly that amount.
+00:00:46,860 --> 00:00:50,060
+Then two Claude agents negotiate.
 
 15
-00:00:58,980 --> 00:01:02,280
-The manager approves it in PayPal.
+00:00:50,140 --> 00:00:52,910
+Ours works for the manager.
 
 16
-00:01:02,360 --> 00:01:05,580
-The money is authorized and held.
+00:00:52,990 --> 00:00:56,270
+Mike's agent knows his real rates.
 
 17
-00:01:05,660 --> 00:01:08,740
-Not captured, and not yet paid.
+00:00:56,350 --> 00:00:58,530
+Ours opens at $220.
 
 18
-00:01:09,320 --> 00:01:14,380
-On site, Mike checks in with a photo.
+00:00:58,610 --> 00:01:02,910
+Mike's agent counters at $245, and ours accepts.
 
 19
-00:01:14,460 --> 00:01:21,840
-That releases the 20% deposit, $49, through PayPal Payouts.
+00:01:02,990 --> 00:01:08,310
+Our agent then creates a PayPal order for exactly that amount.
 
 20
-00:01:22,420 --> 00:01:27,610
-When he's done, he uploads the after photo and the receipt.
+00:01:08,890 --> 00:01:12,180
+The manager approves it in PayPal.
 
 21
-00:01:27,690 --> 00:01:34,660
-Claude's Verifier checks each criterion against the images and quotes what it sees.
+00:01:12,260 --> 00:01:15,490
+The money is authorized and held.
 
 22
-00:01:35,240 --> 00:01:37,430
-It reads the receipt and sees dry pipes.
+00:01:15,570 --> 00:01:18,640
+Not captured, and not yet paid.
 
 23
-00:01:37,510 --> 00:01:39,880
-But these sample photos carry no timestamps,
+00:01:19,220 --> 00:01:23,830
+On site, Mike checks in with a photo.
 
 24
-00:01:39,960 --> 00:01:42,980
-and it can't confirm it's the same cabinet as the check-in.
+00:01:23,910 --> 00:01:30,630
+That releases the 20% deposit, $49, through PayPal Payouts.
 
 25
-00:01:43,060 --> 00:01:44,510
-So nothing pays itself.
+00:01:31,210 --> 00:01:35,680
+When he's done, he uploads the after photo and the receipt.
 
 26
-00:01:44,590 --> 00:01:48,750
-The rules in code hold the balance and send the job to the manager with the evidence.
+00:01:35,760 --> 00:01:41,770
+Claude's Verifier checks each criterion against the images and quotes what it sees.
 
 27
-00:01:49,330 --> 00:01:51,680
-The manager approves it.
+00:01:42,350 --> 00:01:44,550
+It reads the receipt and sees dry pipes.
 
 28
-00:01:51,760 --> 00:01:56,060
-That override is logged next to the original verdict.
+00:01:44,630 --> 00:01:46,990
+But these sample photos carry no timestamps,
 
 29
-00:01:56,140 --> 00:02:02,260
-The authorization is captured, and the $196 balance goes out as a PayPal payout,
+00:01:47,070 --> 00:01:50,100
+and it can't confirm it's the same cabinet as the check-in.
 
 30
-00:02:02,340 --> 00:02:04,420
-confirmed by PayPal.
+00:01:50,180 --> 00:01:51,630
+So nothing pays itself.
 
 31
-00:02:04,500 --> 00:02:06,980
-Mike sees it on his phone.
+00:01:51,710 --> 00:01:55,870
+The rules in code hold the balance and send the job to the manager with the evidence.
 
 32
-00:02:07,560 --> 00:02:10,340
-Here's a job that failed.
+00:01:56,450 --> 00:01:58,800
+The manager approves it.
 
 33
-00:02:10,420 --> 00:02:15,680
-A cleaner sent a photo of unit 4C, taken before check-in.
+00:01:58,880 --> 00:02:03,180
+That override is logged next to the original verdict.
 
 34
-00:02:15,760 --> 00:02:18,540
-The Verifier caught both.
+00:02:03,260 --> 00:02:09,380
+The authorization is captured, and the $196 balance goes out as a PayPal payout,
 
 35
-00:02:18,620 --> 00:02:23,570
-Nothing was paid, and the manager can request a redo.
+00:02:09,460 --> 00:02:11,540
+confirmed by PayPal.
 
 36
-00:02:24,150 --> 00:02:26,520
-The ledger is an AG Grid.
+00:02:11,620 --> 00:02:14,100
+Mike sees it on his phone.
 
 37
-00:02:26,600 --> 00:02:32,020
-Every row carries its proof, the verdict, and how fast the money moved,
+00:02:14,680 --> 00:02:17,000
+Here's a job that failed.
 
 38
-00:02:32,100 --> 00:02:36,000
-with live totals of what's held and what's paid.
+00:02:17,080 --> 00:02:21,470
+A cleaner sent a photo of unit 4C, taken before check-in.
 
 39
-00:02:36,580 --> 00:02:39,490
-PayPal Orders, Payments and Payouts move the money.
+00:02:21,550 --> 00:02:23,870
+The Verifier caught both.
 
 40
-00:02:39,570 --> 00:02:42,580
-Claude scopes the job, negotiates it and verifies it.
+00:02:23,950 --> 00:02:28,090
+Nothing was paid, and the manager can request a redo.
 
 41
-00:02:42,660 --> 00:02:46,000
-And hard rules in code decide when money is allowed to move.
+00:02:28,670 --> 00:02:30,780
+The ledger is an AG Grid.
 
 42
-00:02:46,580 --> 00:02:48,630
-Punchlist Pay.
+00:02:30,860 --> 00:02:35,690
+Every row carries its proof, the verdict, and how fast the money moved,
 
 43
-00:02:48,710 --> 00:02:51,500
+00:02:35,770 --> 00:02:39,240
+with live totals of what's held and what's paid.
+
+44
+00:02:39,820 --> 00:02:42,180
+PayPal Orders, Payments and Payouts move the money.
+
+45
+00:02:42,260 --> 00:02:44,160
+Claude scopes, negotiates and verifies.
+
+46
+00:02:44,240 --> 00:02:47,610
+The ledger is AG Grid, and the whole app runs on Render with Render Postgres.
+
+47
+00:02:47,690 --> 00:02:49,740
+Hard rules in code decide when money moves.
+
+48
+00:02:50,320 --> 00:02:51,340
+Punchlist Pay.
+
+49
+00:02:51,420 --> 00:02:52,820
 Promised, proven, paid.
+
+50
+00:02:52,900 --> 00:02:55,240
+Try it at punchlist-pay dot onrender dot com.
