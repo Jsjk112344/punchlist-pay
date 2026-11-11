@@ -11,7 +11,8 @@ services:
     name: punchlist-pay
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run build
+    # NODE_ENV=production would make npm ci skip devDependencies, but the build needs Tailwind/PostCSS/TypeScript.
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm run start -- -p $PORT
     healthCheckPath: /api/health
     envVars:
@@ -38,8 +39,6 @@ services:
       - key: CONTRACTOR_EMAIL_SARA
         sync: false
       - key: CONTRACTOR_EMAIL_LEO
-        sync: false
-      - key: APP_URL
         sync: false
       # Free plan has no persistent disk; proof photos live on the instance and vanish on redeploy.
       # On a paid plan add a disk mounted at /var/data/uploads and point UPLOAD_DIR at it.

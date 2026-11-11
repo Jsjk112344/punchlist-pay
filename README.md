@@ -93,7 +93,7 @@ Proof photos are stored under `UPLOAD_DIR` and served from `/api/files/<name>`. 
 
 ## Deploy on Render
 
-`render.yaml` creates the web service and a Postgres database. Set the `sync: false` secrets in the dashboard and `APP_URL` to the service URL. Migrations and the seed run at boot. On the free plan, uploaded photos live on the instance and disappear on redeploy.
+`render.yaml` is a Blueprint: a Node web service plus a free Render Postgres. In the Render dashboard choose **New → Blueprint**, pick this repo, and paste the `sync: false` values (PayPal sandbox keys, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `ANTHROPIC_API_KEY`, the three contractor emails; `PAYPAL_WEBHOOK_ID` is optional). Migrations and the seed run at boot. `APP_URL` defaults to Render's `RENDER_EXTERNAL_URL`. The free plan sleeps when idle (the first request takes about a minute) and uploaded photos live on the instance, so they vanish on redeploy.
 
 ## Fixture mode
 

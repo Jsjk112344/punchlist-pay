@@ -6,7 +6,8 @@ import path from "node:path";
 function str(name: string, fallback = ""): string { const v = process.env[name]; return v === undefined || v === "" ? fallback : v; }
 
 export const env = {
-  appUrl: str("APP_URL", "http://localhost:3000"),
+  // Render sets RENDER_EXTERNAL_URL on every web service, so APP_URL is optional there.
+  appUrl: str("APP_URL", str("RENDER_EXTERNAL_URL", "http://localhost:3000")),
   paypal: {
     env: (str("PAYPAL_ENV", "sandbox") === "live" ? "live" : "sandbox") as "sandbox" | "live",
     clientId: str("PAYPAL_CLIENT_ID"),
