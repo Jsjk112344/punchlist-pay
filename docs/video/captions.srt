@@ -123,41 +123,49 @@ confirmed by PayPal.
 Mike sees it on his phone.
 
 32
-00:02:07,560 --> 00:02:10,710
+00:02:07,560 --> 00:02:10,340
 Here's a job that failed.
 
 33
-00:02:10,790 --> 00:02:16,720
+00:02:10,420 --> 00:02:15,680
 A cleaner sent a photo of unit 4C, taken before check-in.
 
 34
-00:02:16,800 --> 00:02:19,940
+00:02:15,760 --> 00:02:18,540
 The Verifier caught both.
 
 35
-00:02:20,020 --> 00:02:25,610
+00:02:18,620 --> 00:02:23,570
 Nothing was paid, and the manager can request a redo.
 
 36
-00:02:26,190 --> 00:02:35,370
-Every payout in the ledger is tied to the proof that released it.
+00:02:24,150 --> 00:02:26,520
+The ledger is an AG Grid.
 
 37
-00:02:35,950 --> 00:02:38,860
-PayPal Orders, Payments and Payouts move the money.
+00:02:26,600 --> 00:02:32,020
+Every row carries its proof, the verdict, and how fast the money moved,
 
 38
-00:02:38,940 --> 00:02:41,950
-Claude scopes the job, negotiates it and verifies it.
+00:02:32,100 --> 00:02:36,000
+with live totals of what's held and what's paid.
 
 39
-00:02:42,030 --> 00:02:45,370
-And hard rules in code decide when money is allowed to move.
+00:02:36,580 --> 00:02:39,490
+PayPal Orders, Payments and Payouts move the money.
 
 40
-00:02:45,950 --> 00:02:48,000
-Punchlist Pay.
+00:02:39,570 --> 00:02:42,580
+Claude scopes the job, negotiates it and verifies it.
 
 41
-00:02:48,080 --> 00:02:50,870
+00:02:42,660 --> 00:02:46,000
+And hard rules in code decide when money is allowed to move.
+
+42
+00:02:46,580 --> 00:02:48,630
+Punchlist Pay.
+
+43
+00:02:48,710 --> 00:02:51,500
 Promised, proven, paid.

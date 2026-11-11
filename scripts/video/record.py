@@ -415,11 +415,17 @@ async def tail(T, d, pd, out, base, wid, cam="desk"):
     await d.wait_for_load_state("networkidle")
     await pd.wake()
     T.mark("ledger_final")
+    await asyncio.sleep(1.5)
+    await scroll_to(d, d.get_by_text("Ledger", exact=True).first, "start")
+    await pd.at(d.locator(".ag-center-cols-container [col-id='proof']").first, duration=0.8)  # proof thumbnail + verdict
     await asyncio.sleep(2.0)
-    await pd.at(d.get_by_text("Avg. proof").first, duration=0.8)
+    await pd.at(d.get_by_text("Proof → pay", exact=True), click=True, duration=0.8)  # sort by speed of payment
+    T.mark("ledger_sorted")
+    await asyncio.sleep(2.5)
+    await pd.at(d.get_by_text("Total", exact=True).last, duration=0.8)
     await asyncio.sleep(2.0)
     await pd.at(d.get_by_text("Group by property").first, click=True)
-    await asyncio.sleep(3.5)
+    await asyncio.sleep(3.0)
     T.mark("end")
     (out / "order.json").write_text(json.dumps(order(base, wid), indent=1))
 

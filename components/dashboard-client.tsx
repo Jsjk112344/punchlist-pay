@@ -5,7 +5,7 @@ import {useOrders,resetDemo} from "@/lib/store";
 import {getLedger} from "@/lib/api";
 import {properties} from "@/lib/fixtures";
 import type {WorkOrder} from "@/lib/types";
-import {money,paidCents,fixtureLink} from "@/lib/format";
+import {money,paidCents,fixtureLink,proofToPaySeconds} from "@/lib/format";
 import {NewRequestDialog} from "./new-request-dialog";
 import {LedgerGrid} from "./ledger-grid";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export function DashboardClient({fixture}:{fixture:boolean}){
  const review=orders.filter(o=>["escalated","under_review","disputed"].includes(o.status)).length;
  const[today,setToday]=useState("");useEffect(()=>setToday(new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})),[]);
  // Proof submitted (after photo uploaded) to balance payout confirmed by PayPal, averaged over paid jobs.
- const gaps=orders.flatMap(o=>{const after=o.proofs.find(p=>p.kind==="after");const paid=o.payouts.filter(p=>p.kind!=="deposit"&&p.status==="paid"&&p.paid_at).map(p=>Date.parse(p.paid_at!)).sort().pop();return after&&paid&&paid>=Date.parse(after.uploaded_at)?[(paid-Date.parse(after.uploaded_at))/1000]:[]});
+ const gaps=orders.map(proofToPaySeconds).filter((v):v is number=>v!==null);
  const avg=gaps.length?gaps.reduce((a,b)=>a+b,0)/gaps.length:null;
  return <div className="min-h-screen pb-14"><header className="border-b border-border bg-white"><div className="shell flex h-[76px] items-center justify-between gap-4"><div className="flex items-center gap-7"><Link href={fixtureLink("/",fixture)} aria-label="Punchlist Pay home" className="flex items-center gap-2.5 font-bold tracking-[-.04em] text-ink"><span className="flex h-8 w-8 items-center justify-center rounded-[9px] bg-accent text-white"><CheckCircle2 size={19} strokeWidth={2.5}/></span><span className="hidden text-[17px] sm:block">Punchlist Pay</span></Link><div className="relative"><select aria-label="Property" value={property} onChange={e=>setProperty(e.target.value)} className="h-10 appearance-none rounded-[9px] border border-border bg-white py-2 pl-3 pr-8 text-[13px] font-semibold text-ink outline-none focus:border-accent">{properties.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select><ChevronDown size={14} className="pointer-events-none absolute right-3 top-[13px] text-muted"/></div></div><NewRequestDialog fixture={fixture}/></div></header>
  <main className="shell pt-9"><div className="mb-7 flex items-baseline justify-between"><div><div className="min-h-[18px] text-[12px] font-semibold text-muted">{today}</div><h1 className="mt-1 text-[30px] font-bold tracking-[-.06em]">Work orders</h1></div>{fixture&&<button type="button" onClick={resetDemo} className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] text-muted hover:bg-white" title="Reset fixture data"><RotateCcw size={13}/>Reset demo</button>}</div>

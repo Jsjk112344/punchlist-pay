@@ -20,8 +20,8 @@
 
 [00:02:07] Here's a job that failed. A cleaner sent a photo of unit 4C, taken before check-in. The Verifier caught both. Nothing was paid, and the manager can request a redo.
 
-[00:02:25] Every payout in the ledger is tied to the proof that released it.
+[00:02:23] The ledger is an AG Grid. Every row carries its proof, the verdict, and how fast the money moved, with live totals of what's held and what's paid.
 
-[00:02:35] PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move.
+[00:02:36] PayPal Orders, Payments and Payouts move the money. Claude scopes the job, negotiates it and verifies it. And hard rules in code decide when money is allowed to move.
 
-[00:02:45] Punchlist Pay. Promised, proven, paid.
+[00:02:46] Punchlist Pay. Promised, proven, paid.

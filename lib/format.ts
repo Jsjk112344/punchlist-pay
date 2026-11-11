@@ -8,3 +8,6 @@ export function agreedCents(o:WorkOrder){return o.contract?.price_cents??o.budge
 export function heldCents(o:WorkOrder){return Math.max(0,agreedCents(o)-paidCents(o))}
 export function labelForStatus(s:WorkOrderStatus){if(s==="paid")return "Paid";if(s==="funded")return "Funded";if(s==="in_progress")return "In progress";if(["under_review","escalated","disputed"].includes(s))return "Needs review"; if(s==="redo_requested")return "In progress";if(s==="negotiating")return "Awaiting funding";if(s==="draft")return "Draft";return "In progress"}
 export function fixtureLink(path:string,fixture:boolean){return `${path}${path.includes("?")?"&":"?"}fixture=${fixture?"1":"0"}`}
+/** Seconds from the after photo being uploaded to the balance payout confirmed by PayPal; null until paid. */
+export function proofToPaySeconds(o:WorkOrder):number|null{const after=o.proofs.find(p=>p.kind==="after");const paid=o.payouts.filter(p=>p.kind!=="deposit"&&p.status==="paid"&&p.paid_at).map(p=>Date.parse(p.paid_at!)).sort().pop();if(!after||!paid)return null;const s=(paid-Date.parse(after.uploaded_at))/1000;return s>=0?s:null}
+export function shortDuration(s:number|null){if(s===null)return "—";return s<120?`${Math.round(s)}s`:`${(s/60).toFixed(1)} min`}
