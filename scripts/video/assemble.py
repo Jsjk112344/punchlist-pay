@@ -161,7 +161,6 @@ CARDS = {
             '<div class="box"><b>Hard rules</b><p>No pay on a fail or below 0.8 confidence. Photos must postdate check-in. A human funds every order. Overrides are logged.</p></div>'
             '<div class="box"><b>AG Grid</b><p>The ledger: proof and verdict per row, proof-to-pay timing, pinned live totals, quick search, grouping, cells that flash when PayPal confirms.</p></div>'
             '<div class="box"><b>Render</b><p>One Blueprint: the Next.js web service plus Render Postgres. Migrations and seed run at boot. Live at punchlist-pay.onrender.com.</p></div>'
-            '<div class="box"><b>Live, not mocked</b><p>The walkthrough is one real run: PayPal sandbox transactions and live Claude calls. Older ledger rows are seeded demo data.</p></div>'
             '</div></div>',
     "end": f'<div class="card"><div class=brand>{LOGO}Punchlist Pay</div><h1>Promised. Proven. <span class="paid">Paid.</span></h1><div class="sub">punchlist-pay.onrender.com<br>github.com/Jsjk112344/punchlist-pay</div></div>',
 }
