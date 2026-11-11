@@ -57,7 +57,7 @@ npm run smoke:live    # same story against PayPal sandbox + Claude from .env.loc
 | API | Used for |
 |---|---|
 | Orders v2, intent `AUTHORIZE` | The Dispatcher agent creates the order at the agreed price. The PM approves it in the PayPal button, so funds are held, not taken. |
-| Payments v2 authorize / capture / void | Authorize on approval. Capture once, right before the first non-deposit payout. |
+| Payments v2 authorize / capture | Authorize on approval. Capture once, right before the first non-deposit payout. |
 | Payouts v1 | Deposit on check-in, balance or partial after a passing verdict. `sender_batch_id` is `<work order>:<kind>`, so a retry can never pay twice. |
 | Webhooks + verify-webhook-signature | `CHECKOUT.ORDER.APPROVED`, `PAYMENT.AUTHORIZATION.CREATED`, `PAYMENT.CAPTURE.COMPLETED`, `PAYMENT.PAYOUTSBATCH.SUCCESS`, `PAYMENT.PAYOUTS-ITEM.SUCCEEDED/FAILED`. Unsigned requests get a 400 and change nothing. Events are de-duplicated by id. |
 | JS SDK Buttons | The PM's funding step on the work-order page. |
