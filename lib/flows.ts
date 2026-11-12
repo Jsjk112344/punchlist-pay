@@ -63,11 +63,24 @@ export async function negotiateWorkOrder(id: string, contractor_id: string, onTu
   };
   const rail = moneyRail();
   let created: CreateOrderResult | undefined;
+  // A PayPal failure is not an agent failure: keep the real transcript, never replay a scripted one over it.
+  let paypalError: unknown;
+  const createOrder = async (args: Parameters<typeof rail.createOrder>[0]) => {
+    try { return await rail.createOrder(args); } catch (e) { paypalError = e; throw e; }
+  };
+  const failOnPaypal = async (e: unknown): Promise<never> => {
+    console.error("[negotiation] PayPal order failed:", errMsg(e));
+    await emit(systemTurn("Couldn't create the PayPal order · nothing was charged · retry"));
+    await repo.saveNegotiation(id, transcript, "pending");
+    await repo.updateWorkOrder(id, { status: "draft" });
+    await repo.addEvent(id, "paypal.order.failed", { error: errMsg(e) });
+    throw new FlowError(`Couldn't create the PayPal order: ${errMsg(e)}`, 502);
+  };
   const hooks: NegotiationHooks = {
     onTurn: emit,
     createAuthorizeOrder: async ({ amount_cents, description }) => {
       if (created) return { order_id: created.order_id, approve_url: created.approve_url, status: created.status }; // idempotent within one negotiation
-      created = await rail.createOrder({ work_order_id: id, amount_cents, description });
+      created = await createOrder({ work_order_id: id, amount_cents, description });
       await repo.addEvent(id, "paypal.order.created", { order_id: created.order_id, amount_cents, mode: rail.mode, by: "dispatcher-agent" });
       return { order_id: created.order_id, approve_url: created.approve_url, status: created.status };
     },
@@ -78,11 +91,12 @@ export async function negotiateWorkOrder(id: string, contractor_id: string, onTu
   if (claudeConfigured()) {
     try { run = await runNegotiation(ctx, hooks); agent = "claude"; }
     catch (e) {
+      if (paypalError) await failOnPaypal(paypalError);
       console.error("[negotiation] falling back:", errMsg(e));
       await emit(systemTurn("Agent unavailable · replaying scripted negotiation"));
-      run = await fallbackNegotiation(ctx, hooks); agent = "fixture/after-error";
+      run = await fallbackNegotiation(ctx, hooks).catch(err => paypalError ? failOnPaypal(paypalError) : Promise.reject(err)); agent = "fixture/after-error";
     }
-  } else run = await fallbackNegotiation(ctx, hooks);
+  } else run = await fallbackNegotiation(ctx, hooks).catch(e => paypalError ? failOnPaypal(paypalError) : Promise.reject(e));
 
   if (run.outcome === "walked_away") {
     await emit(systemTurn(`No agreement · ${run.reason}`));
@@ -92,7 +106,7 @@ export async function negotiateWorkOrder(id: string, contractor_id: string, onTu
     return { contract: null, outcome: "walked_away", reason: run.reason, work_order: await mustGet(id), agent };
   }
   if (!created) { // the agent agreed but never called the tool; the Dispatcher is still accountable for funding
-    created = await rail.createOrder({ work_order_id: id, amount_cents: run.price_cents, description: `${order.title} · Unit ${order.unit} · ${order.property_name}` });
+    created = await createOrder({ work_order_id: id, amount_cents: run.price_cents, description: `${order.title} · Unit ${order.unit} · ${order.property_name}` }).catch(failOnPaypal);
     await repo.addEvent(id, "paypal.order.created", { order_id: created.order_id, amount_cents: run.price_cents, mode: rail.mode, by: "code" });
   }
   const authorized = created.authorized && Boolean(created.authorization_id);
