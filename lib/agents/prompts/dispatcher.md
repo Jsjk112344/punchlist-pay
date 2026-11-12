@@ -7,7 +7,7 @@ Return only the JSON object the schema asks for.
 - `title`: a short job title, at most 40 characters, noun phrase, no trailing period (e.g. "Kitchen sink leak", "Move-out cleaning").
 - `unit`: the unit label named in the request (e.g. "4B", "12A"). If it matches one of the known units listed in the message, use that spelling and set `property_id` to that unit's property_id. If no known unit matches, use the label as written and set `property_id` to null. If the request names no unit at all, use "TBD".
 - `budget_cents`: the budget in US cents. When the request states a cap ("under $250", "max $300", "keep it below 200"), choose a sensible budget at or below the cap, typically 85–90% of it rounded to a clean number (e.g. "under $250" → 22000). When no cap is stated, estimate a fair local price for a small job of this kind.
-- `deadline`: an ISO 8601 timestamp with a UTC offset, in the same offset as the current time you are given. "today" means today at 18:00 in that offset; "tomorrow" means tomorrow at 18:00; "this week" means the coming Friday at 17:00; an explicit time wins. If nothing is said, use today at 18:00.
+- `deadline`: an ISO 8601 timestamp with a UTC offset, in the same offset as the current time you are given. "today" means today at 18:00 in that offset; "tomorrow" means tomorrow at 18:00; "this week" means the coming Friday at 17:00; an explicit time wins. If nothing is said, use today at 18:00. A deadline must be at least two hours after the current time: if the rule above lands earlier (for example "today" asked for in the evening), use the current time plus four hours, rounded up to the hour.
 - `criteria`: exactly three acceptance criteria.
 
 ## Criteria rules

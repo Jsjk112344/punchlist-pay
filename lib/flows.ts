@@ -6,12 +6,21 @@ import * as repo from "@/lib/db/repo";
 import { ensureDb } from "@/lib/db/client";
 import { moneyRail, depositCents, type CreateOrderResult } from "@/lib/money";
 import { draftWorkOrder, type DispatcherDraft } from "@/lib/agents/dispatcher";
-import { runNegotiation, type NegotiationHooks, type NegotiationRun } from "@/lib/agents/negotiation";
+import { runNegotiation, rewriteTimeCriteria, type NegotiationHooks, type NegotiationRun } from "@/lib/agents/negotiation";
 import { verifyProofs, type VerifierImage, type VerifierInput } from "@/lib/agents/verifier";
 import { fallbackDraft, fallbackNegotiation, fallbackVerdict } from "@/lib/fallbacks";
 import { saveUpload, loadImageForVision } from "@/lib/uploads";
 import { money } from "@/lib/format";
 import type { Contract, Payout, PayoutKind, PayoutStatus, Proof, ProofKind, TranscriptTurn, Verdict, WorkOrder } from "@/lib/types";
+
+/** "Today, 6 PM" asked for at 7 PM is already late: give the job a reachable deadline (4h out, on the hour) and say so in the time criterion. */
+function keepDeadlineAhead(draft: DispatcherDraft, now = Date.now()): DispatcherDraft {
+  const due = Date.parse(draft.deadline);
+  if (Number.isFinite(due) && due - now >= 2 * 3600_000) return draft;
+  const next = new Date(Math.ceil((now + 4 * 3600_000) / 3600_000) * 3600_000);
+  const deadline = localNowIso(next);
+  return { ...draft, deadline, criteria: rewriteTimeCriteria(draft.criteria, deadline) };
+}
 
 export class FlowError extends Error { constructor(message: string, public status = 400) { super(message); this.name = "FlowError"; } }
 
@@ -39,6 +48,7 @@ export async function createWorkOrderFromText(text: string): Promise<WorkOrder> 
     try { draft = await draftWorkOrder(text, ctx); agent = "claude"; }
     catch (e) { console.error("[dispatcher] falling back:", errMsg(e)); draft = fallbackDraft(text, ctx); agent = `fixture/after-error`; }
   } else draft = fallbackDraft(text, ctx);
+  draft = keepDeadlineAhead(draft);
   const wo = await repo.createWorkOrder({ title: draft.title, description: draft.description || text, unit: draft.unit, property_id: draft.property_id ?? "p-1", budget_cents: draft.budget_cents, criteria: draft.criteria, deadline: draft.deadline, created_by: "pm-1" });
   await repo.addEvent(wo.id, "work_order.created", { agent, budget_cents: wo.budget_cents, criteria: wo.criteria.length });
   return wo;
