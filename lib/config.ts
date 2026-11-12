@@ -3,7 +3,8 @@
 // responses carry X-Punchlist-Mode so the UI and smoke tests can tell which one answered.
 import path from "node:path";
 
-function str(name: string, fallback = ""): string { const v = process.env[name]; return v === undefined || v === "" ? fallback : v; }
+// Values are trimmed: a secret pasted into a dashboard with a trailing space or newline fails auth invisibly.
+function str(name: string, fallback = ""): string { const v = process.env[name]?.trim(); return v === undefined || v === "" ? fallback : v; }
 
 export const env = {
   // Render sets RENDER_EXTERNAL_URL on every web service, so APP_URL is optional there.
