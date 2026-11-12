@@ -10,7 +10,7 @@ I'm from Singapore, where almost everyone has a renovation or repair story, and 
 
 The other side is just as broken. Good contractors finish the job properly and then wait to be paid, chasing invoices and arguing over whether the work was "done". Singapore even has a law for it, the Security of Payment Act, because contractors not getting paid on time is common enough to need one.
 
-I'm now in the US on a short-term programme, so I looked at the same problem here, and found it from the contractor's side. Rabbet's 2024 survey found **82% of US contractors wait more than 30 days to get paid**, 88% have declined to bid for clients with a slow-pay reputation, and slow payments cost US construction an estimated **\$299B in 2025**. That's why Punchlist Pay is built for US property managers and contractors first, with PayPal's sandbox in US dollars.
+I'm now in the US on a short-term programme, so I looked at the same problem here, and found it from the contractor's side. In Rabbet's 2024 survey, **82% of US contractors waited more than 30 days to get paid**. Its 2025 report found 88% had declined to bid for clients with a slow-pay reputation, and that slow payments cost US construction an estimated **\$299B** that year. That's why Punchlist Pay is built for US property managers and contractors first, with PayPal's sandbox in US dollars.
 
 Both problems come from the same gap: **nobody agrees on what "done" means before the work starts, and nobody checks the proof when it ends.** So homeowners pay for bad work, and contractors wait for good work to be believed.
 
